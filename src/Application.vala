@@ -111,7 +111,8 @@ There is NO WARRANTY, to the extent permitted by law.""";
             if (!launched_with_file) {
                 // Person likely launched the app via the desktop.
                 // TODO: Show the welcome/configuration screen.
-                print (@"TODO: Show welcome screen.\n");
+                WelcomeWindow window = new WelcomeWindow (this);
+                window.show();
                 return;
             }
             MainWindow window = new MainWindow (this);
