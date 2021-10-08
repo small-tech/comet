@@ -8,4 +8,8 @@
       <file>custom-icon.png</file>
     </gresource>
   -->
+
+  <gresource prefix="/com/github/small_tech/comet">
+    <file compressed="true" preprocess="xml-stripblanks">comet-128.svg</file>
+  </gresource>
 </gresources>
