@@ -98,7 +98,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
                     return;
                 }
 
-
+                launched_with_file = true;
                 commit_message_file = files[0];
                 commit_message_file_path = commit_message_file.get_path ();
                 print (@"File path: $(commit_message_file_path)\n");
