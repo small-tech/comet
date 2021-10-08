@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name={APP.NAME}
+GenericName={APP.GENERIC_NAME}
+Comment={APP.COMMENT}
+Categories={APP.CATEGORIES}
+Exec=com.github.{GITHUB.ORG}.{GITHUB.APP}
+Icon=com.github.{GITHUB.ORG}.{GITHUB.APP}
+Terminal=false
+Keywords={APP.KEYWORDS}
+X-GNOME-UsesNotifications=true
