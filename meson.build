@@ -1,9 +1,24 @@
-project('com.github.small_tech.comet', 'vala', 'c')
+project(
+    'com.github.small_tech.comet',
+    'vala',
+    'c',
+    version: '1.0.0'
+)
 
 i18n = import('i18n')
 gnome = import('gnome')
 
 add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format(meson.project_name()), language: 'c')
+
+conf_data = configuration_data()
+conf_data.set_quoted('PROJECT_NAME', meson.project_name())
+conf_data.set_quoted('GETTEXT_PACKAGE', meson.project_name())
+conf_data.set_quoted('VERSION', meson.project_version())
+config_header = configure_file(
+    input : 'src' / 'config.vala.in',
+    output : 'config.vala',
+    configuration : conf_data
+)
 
 # Custom resource support.
 # Place custom icons, etc. in the data/ directory
@@ -20,6 +35,7 @@ executable(
     'src' / 'Application.vala',
     'src' / 'MainWindow.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
+    config_header,
     dependencies: [
       dependency('granite', version: '>=5.2.4'),
       dependency('gtk+-3.0'),

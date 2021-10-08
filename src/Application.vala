@@ -62,7 +62,28 @@ There is NO WARRANTY, to the extent permitted by law.""";
                 "Show version number and exit",
                 null
             );
+
+            //
+            // Signal: Handle local options.
+            //
+
+            handle_local_options.connect((application, options) => {
+                // Handle option: --version, -v:
+                //
+                // Print a minimal version string based on the GNU coding standards.
+                // https://www.gnu.org/prep/standards/standards.html#g_t_002d_002dversion
+                if (options.contains("version")) {
+                    print(@"Comet $(Constants.VERSION)");
+
+                    // OK.
+                    return 0;
+                }
+
+                // Let the system handle any other command-line options.
+                return -1;
+            });
         }
+
 
         protected override void activate () {
             MainWindow window = new MainWindow (this);
