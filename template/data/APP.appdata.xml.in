@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright ⓒ {COPYRIGHT.YEAR} to present, {COPYRIGHT.NAME} <{COPYRIGHT.EMAIL}> -->
+<!-- Copyright ⓒ 2021 to present, Aral Balkan <mail@ar.al> -->
 <component type="desktop">
-  <id>com.github.{GITHUB.ORG}.{GITHUB.APP}</id>
+  <id>com.github.small_tech.comet</id>
   <metadata_license>CC0</metadata_license>
   <!--
     To update the content rating data of your app, you can
@@ -9,9 +9,9 @@
     https://hughsie.github.io/oars/generate.html
   -->
   <content_rating type="oars-1.1" />
-  <name>{APP.NAME}</name>
-  <summary>{APP.DESCRIPTION}</summary>
+  <name>Comet</name>
+  <summary>A beautiful git commit message editor for elementary OS. </summary>
   <description>
-    <p>{APP.DESCRIPTION}</p>
+    <p>A beautiful git commit message editor for elementary OS. </p>
   </description>
 </component>

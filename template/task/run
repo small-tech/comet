@@ -5,4 +5,4 @@ set -eu -o pipefail
 pushd build
 ninja
 popd
-build/com.github.{GITHUB.ORG}.{GITHUB.APP}
+build/com.github.small_tech.comet

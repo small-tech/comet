@@ -126,6 +126,6 @@ popd
 # Clear icon caches.
 sudo update-icon-caches /usr/share/icons/*
 
-echo '{APP.NAME} is installed.'
+echo 'Comet is installed.'
 echo ''
 echo 'You can run it from the Applications Menu or using the task/run script.'

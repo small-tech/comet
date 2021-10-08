@@ -1,10 +1,10 @@
-app-id: com.github.{GITHUB.ORG}.{GITHUB.APP}
+app-id: com.github.small_tech.comet
 
 runtime: io.elementary.Platform
 runtime-version: '6'
 sdk: io.elementary.Sdk
 
-command: com.github.{GITHUB.ORG}.{GITHUB.APP}
+command: com.github.small_tech.comet
 
 finish-args:
   - '--share=ipc'
@@ -15,7 +15,7 @@ finish-args:
   - '--system-talk-name=org.freedesktop.Accounts'
 
 modules:
-  - name: {GITHUB.APP}
+  - name: comet
     buildsystem: meson
     sources:
       - type: dir

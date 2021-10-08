@@ -1,9 +1,9 @@
-namespace {APP.NAMESPACE} {
+namespace Comet {
     public class MainWindow : Hdy.ApplicationWindow {
-        public weak {APP.NAMESPACE}.Application app { get; construct; }
+        public weak Comet.Application app { get; construct; }
 
         // Widgets
-        public {APP.NAMESPACE}.Widgets.HeaderBar toolbar;
+        public Comet.Widgets.HeaderBar toolbar;
 
         public const string ACTION_PREFIX = "win.";
         public const string ACTION_FULLSCREEN = "action_fullscreen";
@@ -29,7 +29,7 @@ namespace {APP.NAMESPACE} {
             action_accelerators.set (ACTION_QUIT, "<Control>q");
         }
 
-        public MainWindow ({APP.NAMESPACE}.Application application) {
+        public MainWindow (Comet.Application application) {
             Object (
                 // We must set the inherited application property for Hdy.ApplicationWindow
                 // to initialise properly. However, this is not a set-type property (get; set;)
@@ -45,7 +45,7 @@ namespace {APP.NAMESPACE} {
                 height_request: 420,
                 width_request: 420,
                 hide_titlebar_when_maximized: true,          // FIXME: This does not seem to have an effect. Why not?
-                icon_name: "com.github.{GITHUB.ORG}.{GITHUB.APP}"
+                icon_name: "com.github.small_tech.comet"
             );
         }
 
@@ -90,7 +90,7 @@ namespace {APP.NAMESPACE} {
         private void create_layout () {
             // Unlike GTK, in Handy, the header bar is added to the window’s content area.
             // See https://gnome.pages.gitlab.gnome.org/libhandy/doc/1-latest/HdyHeaderBar.html
-            toolbar = new {APP.NAMESPACE}.Widgets.HeaderBar ();
+            toolbar = new Comet.Widgets.HeaderBar ();
             var grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
@@ -116,12 +116,12 @@ namespace {APP.NAMESPACE} {
 
         private void restore_window_state () {
             var rect = Gdk.Rectangle ();
-            {APP.NAMESPACE}.saved_state.get ("window-size", "(ii)", out rect.width, out rect.height);
+            Comet.saved_state.get ("window-size", "(ii)", out rect.width, out rect.height);
 
             default_width = rect.width;
             default_height = rect.height;
 
-            var window_state = {APP.NAMESPACE}.saved_state.get_enum ("window-state");
+            var window_state = Comet.saved_state.get_enum ("window-state");
             switch (window_state) {
                 case WindowState.MAXIMIZED:
                     maximize ();
@@ -130,7 +130,7 @@ namespace {APP.NAMESPACE} {
                     fullscreen ();
                     break;
                 default:
-                    {APP.NAMESPACE}.saved_state.get ("window-position", "(ii)", out rect.x, out rect.y);
+                    Comet.saved_state.get ("window-position", "(ii)", out rect.x, out rect.y);
                     if (rect.x != -1 && rect.y != -1) {
                         move (rect.x, rect.y);
                     }
@@ -142,20 +142,20 @@ namespace {APP.NAMESPACE} {
             // Persist window dimensions and location.
             var state = get_window ().get_state ();
             if (Gdk.WindowState.MAXIMIZED in state) {
-                {APP.NAMESPACE}.saved_state.set_enum ("window-state", WindowState.MAXIMIZED);
+                Comet.saved_state.set_enum ("window-state", WindowState.MAXIMIZED);
             } else if (Gdk.WindowState.FULLSCREEN in state) {
-                {APP.NAMESPACE}.saved_state.set_enum ("window-state", WindowState.FULLSCREEN);
+                Comet.saved_state.set_enum ("window-state", WindowState.FULLSCREEN);
             } else {
-                {APP.NAMESPACE}.saved_state.set_enum ("window-state", WindowState.NORMAL);
+                Comet.saved_state.set_enum ("window-state", WindowState.NORMAL);
                 // Save window size
                 int width, height;
                 get_size (out width, out height);
-                {APP.NAMESPACE}.saved_state.set ("window-size", "(ii)", width, height);
+                Comet.saved_state.set ("window-size", "(ii)", width, height);
             }
 
             int x, y;
             get_position (out x, out y);
-            {APP.NAMESPACE}.saved_state.set ("window-position", "(ii)", x, y);
+            Comet.saved_state.set ("window-position", "(ii)", x, y);
         }
 
         // Color scheme.

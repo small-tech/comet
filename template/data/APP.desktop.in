@@ -1,12 +1,12 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name={APP.NAME}
-GenericName={APP.GENERIC_NAME}
-Comment={APP.COMMENT}
-Categories={APP.CATEGORIES}
-Exec=com.github.{GITHUB.ORG}.{GITHUB.APP}
-Icon=com.github.{GITHUB.ORG}.{GITHUB.APP}
+Name=Comet
+GenericName=Git Commit Message Editor
+Comment=Git commit message editor
+Categories=Development;Utility
+Exec=com.github.small_tech.comet
+Icon=com.github.small_tech.comet
 Terminal=false
-Keywords={APP.KEYWORDS}
+Keywords=git;commit;message;editor
 X-GNOME-UsesNotifications=true

@@ -17,7 +17,7 @@
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/build/com.github.{GITHUB.ORG}.{GITHUB.APP}",
+      "program": "${workspaceFolder}/build/com.github.small_tech.comet",
       "args": [],
       "cwd": "${workspaceFolder}"
     }
