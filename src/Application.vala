@@ -108,6 +108,9 @@ There is NO WARRANTY, to the extent permitted by law.""";
 
 
         protected override void activate () {
+            // Custom icon
+            Gtk.IconTheme.get_default ().add_resource_path ("/com/github/small_tech/comet");
+
             if (!launched_with_file) {
                 // Person likely launched the app via the desktop.
                 // TODO: Show the welcome/configuration screen.
