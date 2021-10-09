@@ -1,10 +1,10 @@
 namespace Comet.Widgets {
     public class Welcome : Granite.Widgets.Welcome {
 
-        public string status { get; construct; }
+        public bool comet_is_enabled { get; construct; }
 
-        public Welcome (string title_text, string subtitle_text, string status_text) {
-            Object (title: title_text, subtitle: subtitle_text, status: status_text);
+        public Welcome (string title_text, string subtitle_text, bool comet_is_enabled) {
+            Object (title: title_text, subtitle: subtitle_text, comet_is_enabled: comet_is_enabled);
         }
 
         construct {
@@ -16,14 +16,20 @@ namespace Comet.Widgets {
             status_grid.margin_bottom = 12;
 
             // Insert the status text into the view.
-            var status_label = new Gtk.Label (status);
+            var status_message = comet_is_enabled ?
+                _("Comet is enabled as your editor for git commit messages.")
+                : _("Comet is disabled.");
+
+            var status_icon_name = comet_is_enabled ? "process-completed" : "process-stop";
+
+            var status_label = new Gtk.Label (status_message);
             status_label.justify = Gtk.Justification.LEFT;
             status_label.wrap = true;
             status_label.wrap_mode = Pango.WrapMode.WORD;
             status_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
             status_label.margin_end = 12;
 
-            var status_icon = new Gtk.Image.from_icon_name ("process-completed", Gtk.IconSize.DND);
+            var status_icon = new Gtk.Image.from_icon_name (status_icon_name, Gtk.IconSize.DND);
             status_icon.margin_start = 12;
             status_icon.margin_top = 12;
             status_icon.margin_bottom = 12;

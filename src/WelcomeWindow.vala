@@ -52,12 +52,52 @@ namespace Comet {
             var grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
+            var comet_is_enabled = is_comet_enabled ();
+
+            if (!comet_is_enabled) {
+                // If Comet is not enabled, enable it so the person does not
+                // have to do this manually (reduce effort).
+                if ( enable_comet () ) {
+                    // Enabled Comet.
+                    comet_is_enabled = true;
+                }
+            }
+
             var welcome = new Comet.Widgets.Welcome (
                 "Comet",
                 "A beautiful git commit message editor.",
-                "Comet is enabled as your editor for git commit messages."
+                comet_is_enabled
             );
 
+            welcome.append ("comet-128", "Enable Comet", "Use Comet as the default editor for commit messages.");
+            welcome.append ("help-faq", "Help", "Having trouble? Get help and report issues.");
+
+            welcome.set_size_request (560, 380);
+
+            grid.attach (welcome, 0, 1);
+
+            add (grid);
+
+            show_all ();
+
+            welcome.activated.connect ((index) => {
+                switch (index) {
+                    case 0:
+                        enable_comet ();
+                    break;
+
+                    case 1:
+                        try {
+                            AppInfo.launch_default_for_uri ("https://github.com/small-tech/comet#readme", null);
+                        } catch (Error error) {
+                            warning (error.message);
+                        }
+                    break;
+                }
+            });
+        }
+
+        private bool is_comet_enabled () {
             // Check if Comet is the default git editor and create the first option accordingly
             // (either to set Comet as the default editor or to restore the previously-set editor).
             string git_config_stdout;
@@ -79,48 +119,24 @@ namespace Comet {
                 print (@"stderr: $(git_config_stderr)");
                 print (@"exit status: $(git_config_exit_status)");
 
-                if (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.Comet") {
-                    print ("=== ALREADY CONFIGURED!!!! :) ===\n");
-                }
+                return (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.Comet");
             } catch (SpawnError error) {
                 warning (error.message);
+                return false;
             }
+        }
 
-            welcome.append ("comet-128", "Enable Comet", "Use Comet as the default editor for commit messages.");
-            welcome.append ("help-faq", "Help", "Having trouble? Get help and report issues.");
+        private bool enable_comet () {
+            // TODO: Also handle spawn without Flatpak so app functions properly
+            // ===== when testing via task/run too.
 
-            welcome.set_size_request (560, 380);
-
-            grid.attach (welcome, 0, 1);
-
-            add (grid);
-
-            show_all ();
-
-            welcome.activated.connect ((index) => {
-                switch (index) {
-                    case 0:
-                        try {
-                            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
-                            if (result == 0) {
-                                print("Git configured :)");
-                            } else {
-                                print("Git configuration failed.");
-                            }
-                        } catch (Error error) {
-                            warning (error.message);
-                        }
-                    break;
-
-                    case 1:
-                        try {
-                            AppInfo.launch_default_for_uri ("https://github.com/small-tech/comet#readme", null);
-                        } catch (Error error) {
-                            warning (error.message);
-                        }
-                    break;
-                }
-            });
+            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
+            if (result == 0) {
+                print("Git configured :)\n");
+            } else {
+                print("Git configuration failed.\n");
+            }
+            return result == 0;
         }
     }
 }
