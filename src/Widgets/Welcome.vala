@@ -21,10 +21,10 @@ namespace Comet.Widgets {
             status_label.wrap = true;
             status_label.wrap_mode = Pango.WrapMode.WORD;
             status_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
-            status_label.margin_right = 12;
+            status_label.margin_end = 12;
 
             var status_icon = new Gtk.Image.from_icon_name ("process-completed", Gtk.IconSize.DND);
-            status_icon.margin_left = 12;
+            status_icon.margin_start = 12;
             status_icon.margin_top = 12;
             status_icon.margin_bottom = 12;
 
