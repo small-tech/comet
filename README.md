@@ -1,10 +1,10 @@
 # Comet
 
-![Comet icon](./data/128.svg)
+![Comet icon](./data/comet-128.svg)
 
 A beautiful git commit message editor for elementary OS. 
 
-[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.small_tech.comet])
+[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.small_tech.comet)
 
 ## System requirements
 
@@ -42,7 +42,7 @@ To get your system ready to develop for elementary OS, please see the [Basic Set
 
 #### Install
 
-Configures and runs the build, installing settings-relateds features and also refreshing the icon cache.
+Configures and runs the build, installing settings-related features and also refreshing the icon cache.
 
 Run this after you clone this repository to get a working build.
 
@@ -67,12 +67,20 @@ Builds and runs the executable.
 task/run
 ```
 
-#### Pack
+#### Package
 
-Creates a Flatpak distribution.
+Creates a Flatpak package.
 
 ```shell
-task/pack
+task/package
+```
+
+#### Run Package
+
+Creates and runs a Flatpak package.
+
+```shell
+task/run-package
 ```
 
 ### VSCodium
