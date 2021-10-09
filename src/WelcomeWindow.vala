@@ -68,7 +68,7 @@ namespace Comet {
                 switch (index) {
                     case 0:
                         try {
-                            var result = Posix.system ("git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
+                            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
                             if (result == 0) {
                                 print("Git configured :)");
                             } else {
