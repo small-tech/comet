@@ -13,6 +13,7 @@ namespace Comet.Widgets {
             status_grid.halign = Gtk.Align.CENTER;
             status_grid.row_spacing = 12;
             status_grid.margin_top = 24;
+            status_grid.margin_bottom = 12;
 
             // Insert the status text into the view.
             var status_label = new Gtk.Label (status);
