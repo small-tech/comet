@@ -1,8 +1,12 @@
+// TODO: This shouldn’t be its own window, it should be a conditional
+// ===== view in the main window.
 namespace Comet {
     public class WelcomeWindow : Hdy.ApplicationWindow {
 
         public weak Comet.Application app { get; construct; }
-        public Comet.Widgets.HeaderBar toolbar;
+        private Comet.Widgets.HeaderBar toolbar;
+        private bool comet_is_enabled;
+        private Granite.Widgets.WelcomeButton enable_disable_button;
 
         public WelcomeWindow (Comet.Application application) {
             Object (
@@ -52,12 +56,12 @@ namespace Comet {
             var grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
-            var comet_is_enabled = is_comet_enabled ();
+            comet_is_enabled = is_comet_enabled ();
 
             if (!comet_is_enabled) {
                 // If Comet is not enabled, enable it so the person does not
                 // have to do this manually (reduce effort).
-                if ( enable_comet () ) {
+                if (enable_comet ()) {
                     // Enabled Comet.
                     comet_is_enabled = true;
                 }
@@ -69,21 +73,29 @@ namespace Comet {
                 comet_is_enabled
             );
 
-            welcome.append ("comet-128", "Enable Comet", "Use Comet as the default editor for commit messages.");
-            welcome.append ("help-faq", "Help", "Having trouble? Get help and report issues.");
+            int enable_disable_button_index;
+            if (comet_is_enabled) {
+                enable_disable_button_index = welcome.append ("comet-disable", _("Disable Comet"), _("Revert to using your previous editor for git commit messages."));
+            } else {
+                enable_disable_button_index = welcome.append ("comet-128", _("Enable Comet"), _("Use Comet as the default editor for git commit messages."));
+            }
+            enable_disable_button = welcome.get_button_from_index (enable_disable_button_index);
 
+            welcome.append ("help-faq", _("Help"), _("Having trouble? Get help and report issues."));
             welcome.set_size_request (560, 380);
-
             grid.attach (welcome, 0, 1);
-
             add (grid);
-
             show_all ();
 
             welcome.activated.connect ((index) => {
                 switch (index) {
                     case 0:
-                        enable_comet ();
+                        if (comet_is_enabled) {
+                            disable_comet ();
+                        } else {
+                            enable_comet ();
+                        }
+                        update_enable_disable_button ();
                     break;
 
                     case 1:
@@ -121,6 +133,7 @@ namespace Comet {
 
                 return (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.Comet");
             } catch (SpawnError error) {
+                // TODO: Expose this error better.
                 warning (error.message);
                 return false;
             }
@@ -132,11 +145,42 @@ namespace Comet {
 
             var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
             if (result == 0) {
-                print("Git configured :)\n");
+                // Comet is enabled.
+                comet_is_enabled = true;
+            } else {
+                // Comet configuration failed.
+                print("Git configuration failed.\n");
+            }
+            return result == 0;
+        }
+
+        private bool disable_comet () {
+            // TODO: Also handle spawn without Flatpak so app functions properly
+            // ===== when testing via task/run too.
+
+            // TODO: Do not harcode to Gnomit ;)
+            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run org.small_tech.Gnomit\"");
+            if (result == 0) {
+                // Comet is disabled.
+                comet_is_enabled = false;
             } else {
                 print("Git configuration failed.\n");
             }
             return result == 0;
         }
+
+        private void update_enable_disable_button () {
+            // TODO: Remove repitition in title, description and icon from when first created.
+            if (comet_is_enabled) {
+                enable_disable_button.title = _("Disable Comet");
+                enable_disable_button.description = _("Revert to using your previous editor for git commit messages.");
+                enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-disable", Gtk.IconSize.DIALOG);
+            } else {
+                enable_disable_button.title = _("Enable Comet");
+                enable_disable_button.description = _("Use Comet as the default editor for git commit messages.");
+                enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-128", Gtk.IconSize.DIALOG);
+            }
+        }
+
     }
 }

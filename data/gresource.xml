@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <!--
-    Put any custom resources in the data directory and declare
-    them here. e.g.
-
-    <gresource prefix="/com/github/small_tech/comet">
-      <file>custom-icon.png</file>
-    </gresource>
-  -->
-
   <gresource prefix="/com/github/small_tech/comet">
     <file compressed="true" preprocess="xml-stripblanks">comet-128.svg</file>
+  </gresource>
+  <gresource prefix="/com/github/small_tech/comet">
+    <file compressed="true" preprocess="xml-stripblanks">comet-disable.svg</file>
   </gresource>
 </gresources>
