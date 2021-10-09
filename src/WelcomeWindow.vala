@@ -171,6 +171,8 @@ namespace Comet {
 
         private void update_enable_disable_button () {
             // TODO: Remove repitition in title, description and icon from when first created.
+            // TODO: Looks like setting the icon fails. Perhaps it’d be easier to just create the whole Welcome view again.
+            // ===== Try that and see if it flickers or works.
             if (comet_is_enabled) {
                 enable_disable_button.title = _("Disable Comet");
                 enable_disable_button.description = _("Revert to using your previous editor for git commit messages.");
@@ -181,6 +183,5 @@ namespace Comet {
                 enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-128", Gtk.IconSize.DIALOG);
             }
         }
-
     }
 }
