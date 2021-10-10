@@ -113,7 +113,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
 
             if (!launched_with_file) {
                 // Person likely launched the app via the desktop.
-                // TODO: Show the welcome/configuration screen.
+                // Show the welcome/configuration screen.
                 WelcomeWindow window = new WelcomeWindow (this);
                 window.show();
                 return;
