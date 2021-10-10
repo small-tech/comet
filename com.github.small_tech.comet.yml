@@ -14,6 +14,9 @@ finish-args:
   # Needed to read prefer-color-scheme with Granite.Settings
   - '--system-talk-name=org.freedesktop.Accounts'
 
+  # Needed to read the commit message files.
+  - '--filesystem=home'
+
   # Necessary to configure git from the welcome screen
   # using flatpak-spawn --host.
   - '--talk-name=org.freedesktop.Flatpak'

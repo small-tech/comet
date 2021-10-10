@@ -3,16 +3,20 @@ namespace Comet {
         public weak Comet.Application app { get; construct; }
 
         // Widgets
-        public Comet.Widgets.HeaderBar toolbar;
+        private Comet.Widgets.HeaderBar toolbar;
+        private Gtk.TextView comment_view;
+        private Gtk.TextBuffer comment_view_buffer;
+        private Gtk.TextView message_view;
+        private Gtk.TextBuffer message_view_buffer;
 
-        public const string ACTION_PREFIX = "win.";
-        public const string ACTION_FULLSCREEN = "action_fullscreen";
-        public const string ACTION_QUIT = "action_quit";
+        private const string ACTION_PREFIX = "win.";
+        private const string ACTION_FULLSCREEN = "action_fullscreen";
+        private const string ACTION_QUIT = "action_quit";
 
-        public SimpleActionGroup actions { get; set; }
-        public static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
+        private SimpleActionGroup actions { get; set; }
+        private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
-        public enum WindowState {
+        private enum WindowState {
             NORMAL = 0,
             MAXIMIZED = 1,
             FULLSCREEN = 2
@@ -94,7 +98,19 @@ namespace Comet {
             var grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
-            // Add other components to go under the toolbar here.
+            // Add a scrollable text view.
+            var scrolled_window = new Gtk.ScrolledWindow (null, null);
+            scrolled_window.vexpand = true;
+            comment_view = new Gtk.TextView ();
+            comment_view_buffer = comment_view.get_buffer ();
+
+            Gtk.TextIter comment_view_iterator;
+            comment_view_buffer.get_start_iter (out comment_view_iterator);
+            comment_view_buffer.insert_markup (ref comment_view_iterator, app.comment, -1);
+
+            scrolled_window.add (comment_view);
+
+            grid.attach (scrolled_window, 0, 1);
 
             add (grid);
         }
