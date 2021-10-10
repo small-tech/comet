@@ -148,7 +148,7 @@ namespace Comet {
                 print (@"stderr: $(git_config_stderr)");
                 print (@"exit status: $(git_config_exit_status)");
 
-                return (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.Comet");
+                return (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.comet");
             } catch (SpawnError error) {
                 // TODO: Expose this error better.
                 warning (error.message);
@@ -160,7 +160,7 @@ namespace Comet {
             // TODO: Also handle spawn without Flatpak so app functions properly
             // ===== when testing via task/run too.
 
-            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.Comet\"");
+            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.comet\"");
             if (result == 0) {
                 // Comet is enabled.
                 comet_is_enabled = true;
