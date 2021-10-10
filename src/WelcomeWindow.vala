@@ -7,6 +7,8 @@ namespace Comet {
         private Comet.Widgets.HeaderBar toolbar;
         private bool comet_is_enabled;
         private Granite.Widgets.WelcomeButton enable_disable_button;
+        private Gtk.Grid grid;
+        private Comet.Widgets.Welcome welcome;
 
         public WelcomeWindow (Comet.Application application) {
             Object (
@@ -53,21 +55,35 @@ namespace Comet {
             // See https://gnome.pages.gitlab.gnome.org/libhandy/doc/1-latest/HdyHeaderBar.html
             toolbar = new Comet.Widgets.HeaderBar ();
             toolbar.title = "";
-            var grid = new Gtk.Grid ();
+            grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
+            create_view ();
+            add (grid);
+            show_all ();
+        }
+
+        private void create_view () {
             comet_is_enabled = is_comet_enabled ();
 
-            if (!comet_is_enabled) {
-                // If Comet is not enabled, enable it so the person does not
-                // have to do this manually (reduce effort).
-                if (enable_comet ()) {
-                    // Enabled Comet.
-                    comet_is_enabled = true;
+            if (welcome == null) {
+                // This is the first time the view is being created. Enable
+                // Comet if it’s not enabled to save the person some work.
+                if (!comet_is_enabled) {
+                    // If Comet is not enabled, enable it so the person does not
+                    // have to do this manually (reduce effort).
+                    if (enable_comet ()) {
+                        // Enabled Comet.
+                        comet_is_enabled = true;
+                    }
                 }
+            } else {
+                // This is not the first time the view is being created.
+                // Remove the old view.
+                grid.remove(welcome);
             }
 
-            var welcome = new Comet.Widgets.Welcome (
+            welcome = new Comet.Widgets.Welcome (
                 "Comet",
                 "A beautiful git commit message editor.",
                 comet_is_enabled
@@ -83,9 +99,6 @@ namespace Comet {
 
             welcome.append ("help-faq", _("Help"), _("Having trouble? Get help and report issues."));
             welcome.set_size_request (560, 380);
-            grid.attach (welcome, 0, 1);
-            add (grid);
-            show_all ();
 
             welcome.activated.connect ((index) => {
                 switch (index) {
@@ -95,7 +108,7 @@ namespace Comet {
                         } else {
                             enable_comet ();
                         }
-                        update_enable_disable_button ();
+                        create_view ();
                     break;
 
                     case 1:
@@ -107,6 +120,10 @@ namespace Comet {
                     break;
                 }
             });
+
+            welcome.show_all ();
+            grid.attach (welcome, 0, 1);
+            enable_disable_button.grab_focus ();
         }
 
         private bool is_comet_enabled () {
@@ -169,19 +186,22 @@ namespace Comet {
             return result == 0;
         }
 
-        private void update_enable_disable_button () {
-            // TODO: Remove repitition in title, description and icon from when first created.
-            // TODO: Looks like setting the icon fails. Perhaps it’d be easier to just create the whole Welcome view again.
-            // ===== Try that and see if it flickers or works.
-            if (comet_is_enabled) {
-                enable_disable_button.title = _("Disable Comet");
-                enable_disable_button.description = _("Revert to using your previous editor for git commit messages.");
-                enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-disable", Gtk.IconSize.DIALOG);
-            } else {
-                enable_disable_button.title = _("Enable Comet");
-                enable_disable_button.description = _("Use Comet as the default editor for git commit messages.");
-                enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-128", Gtk.IconSize.DIALOG);
-            }
-        }
+        // Changing the icon of a WelcomeButton doesn’t work currently so we can’t do this.
+        // See https://github.com/elementary/granite/issues/530
+
+        //  private void update_enable_disable_button () {
+        //      // TODO: Remove repitition in title, description and icon from when first created.
+        //      // TODO: Looks like setting the icon fails. Perhaps it’d be easier to just create the whole Welcome view again.
+        //      // ===== Try that and see if it flickers or works.
+        //      if (comet_is_enabled) {
+        //          enable_disable_button.title = _("Disable Comet");
+        //          enable_disable_button.description = _("Revert to using your previous editor for git commit messages.");
+        //          enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-disable", Gtk.IconSize.DIALOG);
+        //      } else {
+        //          enable_disable_button.title = _("Enable Comet");
+        //          enable_disable_button.description = _("Use Comet as the default editor for git commit messages.");
+        //          enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-128", Gtk.IconSize.DIALOG);
+        //      }
+        //  }
     }
 }
