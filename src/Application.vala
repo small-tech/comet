@@ -116,7 +116,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
                 print (@"File path: $(commit_message_file_path)\n");
                 print (@"Contents: \n\n $(commit_message_file_contents)\n");
 
-                comment = commit_message_file_contents;
+                comment = commit_message_file_contents.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
                 activate ();
             });
         }
