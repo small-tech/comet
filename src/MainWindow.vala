@@ -112,6 +112,18 @@ namespace Comet {
 
             grid.attach (scrolled_window, 0, 1);
 
+            // Add the action buttons.
+            var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
+            button_box.margin = 12;
+            //  button_box.spacing = 6;
+            button_box.layout_style = Gtk.ButtonBoxStyle.EDGE;
+            var cancel_button = new Gtk.Button.with_label (_("Cancel"));
+            var commit_button = new Gtk.Button.with_label (_("Commit"));
+            button_box.add (cancel_button);
+            button_box.add (commit_button);
+
+            grid.attach (button_box, 0, 2);
+
             add (grid);
         }
 
