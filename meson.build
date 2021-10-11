@@ -35,6 +35,7 @@ executable(
     'src' / 'Application.vala',
     'src' / 'BaseWindow.vala',
     'src' / 'MainWindow.vala',
+    'src' / 'Model.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
     'src' / 'Widgets' / 'Welcome.vala',
     'src' / 'WelcomeWindow.vala',

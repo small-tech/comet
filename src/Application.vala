@@ -27,10 +27,7 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.""";
 
         private bool launched_with_file = false;
-        private File commit_message_file;
-        private string commit_message_file_path;
-
-        public string comment;
+        public File commit_message_file;
 
         public Application () {
             Object(
@@ -100,23 +97,9 @@ There is NO WARRANTY, to the extent permitted by law.""";
                     return;
                 }
 
-                launched_with_file = true;
                 commit_message_file = files[0];
-                commit_message_file_path = commit_message_file.get_path ();
 
-                string commit_message_file_contents;
-                size_t commit_message_file_length;
-
-                try {
-                    FileUtils.get_contents (commit_message_file_path, out commit_message_file_contents, out commit_message_file_length);
-                } catch (Error error) {
-                    warning (error.message);
-                }
-
-                print (@"File path: $(commit_message_file_path)\n");
-                print (@"Contents: \n\n $(commit_message_file_contents)\n");
-
-                comment = commit_message_file_contents.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
+                launched_with_file = true;
                 activate ();
             });
         }
@@ -133,6 +116,11 @@ There is NO WARRANTY, to the extent permitted by law.""";
                 window.show();
                 return;
             }
+            // Note: we would ideally pass a reference to commit_message_file
+            // ===== here but it doesn’t appear that we can add a construct-only
+            //       property in the GObject constructor of a subclass in Vala.
+            //       TODO: Confirm: is this really true? I have a hard time
+            //       ----- believing such a simple thing is impossible.
             MainWindow window = new MainWindow (this);
             window.show ();
         }

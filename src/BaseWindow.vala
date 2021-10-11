@@ -1,6 +1,7 @@
 namespace Comet {
     public abstract class BaseWindow : Hdy.ApplicationWindow {
         public weak Comet.Application app { get; construct; }
+        public Object data { get; construct; }
 
         // Widgets
         protected Gtk.Grid grid;
@@ -30,7 +31,7 @@ namespace Comet {
             action_accelerators.set (ACTION_QUIT, "<Control>q");
         }
 
-        protected BaseWindow (Comet.Application application) {
+        protected BaseWindow (Comet.Application application, Object data = new Object ()) {
             Object (
                 // We must set the inherited application property for Hdy.ApplicationWindow
                 // to initialise properly. However, this is not a set-type property (get; set;)
