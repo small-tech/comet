@@ -98,19 +98,39 @@ namespace Comet {
             var grid = new Gtk.Grid ();
             grid.attach (toolbar, 0, 0);
 
-            // Add a scrollable text view.
-            var scrolled_window = new Gtk.ScrolledWindow (null, null);
-            scrolled_window.vexpand = true;
+            // Add a scrollable text view for the message.
+            var message_scrolled_window = new Gtk.ScrolledWindow (null, null);
+            message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
+            message_scrolled_window.vexpand = true;
+
+            message_view = new Gtk.TextView ();
+            message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
+            message_view.wrap_mode = Gtk.WrapMode.WORD;
+            message_view.margin = 12;
+            message_view_buffer = message_view.get_buffer ();
+
+            Gtk.TextIter message_view_iterator;
+            message_view_buffer.get_start_iter (out message_view_iterator);
+
+            message_scrolled_window.add (message_view);
+
+            grid.attach (message_scrolled_window, 0, 1);
+
+            // Add a scrollable text view for the comment.
+            //  var comment_scrolled_window = new Gtk.ScrolledWindow (null, null);
+            //  comment_scrolled_window.vexpand = true;
+
             comment_view = new Gtk.TextView ();
+            comment_view.margin = 12;
             comment_view_buffer = comment_view.get_buffer ();
 
             Gtk.TextIter comment_view_iterator;
             comment_view_buffer.get_start_iter (out comment_view_iterator);
             comment_view_buffer.insert_markup (ref comment_view_iterator, app.comment, -1);
 
-            scrolled_window.add (comment_view);
+            //  comment_scrolled_window.add (comment_view);
 
-            grid.attach (scrolled_window, 0, 1);
+            grid.attach (comment_view, 0, 2);
 
             // Add the action buttons.
             var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
@@ -122,7 +142,7 @@ namespace Comet {
             button_box.add (cancel_button);
             button_box.add (commit_button);
 
-            grid.attach (button_box, 0, 2);
+            grid.attach (button_box, 0, 3);
 
             add (grid);
         }
