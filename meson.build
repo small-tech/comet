@@ -33,6 +33,7 @@ executable(
     meson.project_name(),
     gresource,
     'src' / 'Application.vala',
+    'src' / 'BaseWindow.vala',
     'src' / 'MainWindow.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
     'src' / 'Widgets' / 'Welcome.vala',
