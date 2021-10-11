@@ -109,6 +109,56 @@ There is NO WARRANTY, to the extent permitted by law.""";
             // Custom icon
             Gtk.IconTheme.get_default ().add_resource_path ("/com/github/small_tech/comet");
 
+            ////////////////////////////
+            //
+            // TODO: Clean this up.
+            //
+            // LEFT OFF HERE.
+            //
+            ////////////////////////////
+
+            // Set color scheme of app based on person’s preference.
+            var granite_settings = Granite.Settings.get_default ();
+            var gtk_settings = Gtk.Settings.get_default ();
+            gtk_settings.gtk_application_prefer_dark_theme
+                = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+
+            // Listen for changes in person’s color scheme settings
+            // and update color scheme of app accordingly.
+            granite_settings.notify["prefers-color-scheme"].connect (() => {
+                gtk_settings.gtk_application_prefer_dark_theme
+                    = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            });
+
+            var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                "Basic information and a suggestion",
+                "Further details, including information that explains any unobvious consequences of actions.",
+                "comet-128",
+                Gtk.ButtonsType.CLOSE
+            );
+            message_dialog.badge_icon = new ThemedIcon("dialog-error");
+
+            var suggested_button = new Gtk.Button.with_label ("Suggested Action");
+            suggested_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+            message_dialog.add_action_widget (suggested_button, Gtk.ResponseType.ACCEPT);
+
+            var custom_widget = new Gtk.CheckButton.with_label ("Custom widget");
+
+            message_dialog.show_error_details ("The details of a possible error.");
+            message_dialog.custom_bin.add (custom_widget);
+
+            //  message_dialog.show_all ();
+            message_dialog.response.connect ((response_id) => {
+               if (response_id == Gtk.ResponseType.ACCEPT) {
+                  // noop
+
+               }
+               quit ();
+            });
+            message_dialog.run ();
+
+            ////
+
             if (!launched_with_file) {
                 // Person likely launched the app via the desktop.
                 // Show the welcome/configuration screen.
