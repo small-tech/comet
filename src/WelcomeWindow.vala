@@ -1,69 +1,17 @@
 // TODO: This shouldn’t be its own window, it should be a conditional
 // ===== view in the main window.
 namespace Comet {
-    public class WelcomeWindow : Hdy.ApplicationWindow {
+    public class WelcomeWindow : Comet.BaseWindow {
 
-        public weak Comet.Application app { get; construct; }
-        private Comet.Widgets.HeaderBar toolbar;
         private bool comet_is_enabled;
         private Granite.Widgets.WelcomeButton enable_disable_button;
-        private Gtk.Grid grid;
         private Comet.Widgets.Welcome welcome;
 
         public WelcomeWindow (Comet.Application application) {
-            Object (
-                // We must set the inherited application property for Hdy.ApplicationWindow
-                // to initialise properly. However, this is not a set-type property (get; set;)
-                // so the assignment is made after construction, which means that we cannot
-                // reference the application during the construct method. This is why we also
-                // declare a property called app that is construct-type (get; construct;) which
-                // is assigned before the constructors are run.
-                //
-                // So use the app property when referencing the application instance from
-                // the constructors. Anywhere else, they can be used interchangably.
-                app: application,
-                application: application,                    // DON’T use in constructors; won’t have been assigned yet.
-                hide_titlebar_when_maximized: true,          // FIXME: This does not seem to have an effect. Why not?
-                icon_name: "com.github.small_tech.comet"
-            );
+            base (application);
         }
 
-        // This constructor is guaranteed to be run only once during the lifetime of the application.
-        static construct {
-            // Initialise the Handy library.
-            // https://gnome.pages.gitlab.gnome.org/libhandy/
-            // (Apps in elementary OS 6 use the Handy library extensions
-            // instead of GTKApplicationWindow, etc., directly.)
-            Hdy.init();
-        }
-
-        construct {
-            // Set color scheme of app based on person’s preference.
-            var granite_settings = Granite.Settings.get_default ();
-            var gtk_settings = Gtk.Settings.get_default ();
-            gtk_settings.gtk_application_prefer_dark_theme
-                = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
-
-            // Listen for changes in person’s color scheme settings
-            // and update color scheme of app accordingly.
-            granite_settings.notify["prefers-color-scheme"].connect (() => {
-                gtk_settings.gtk_application_prefer_dark_theme
-                    = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
-            });
-
-            // Unlike GTK, in Handy, the header bar is added to the window’s content area.
-            // See https://gnome.pages.gitlab.gnome.org/libhandy/doc/1-latest/HdyHeaderBar.html
-            toolbar = new Comet.Widgets.HeaderBar ();
-            toolbar.title = "";
-            grid = new Gtk.Grid ();
-            grid.attach (toolbar, 0, 0);
-
-            create_view ();
-            add (grid);
-            show_all ();
-        }
-
-        private void create_view () {
+        protected override void create_layout () {
             comet_is_enabled = is_comet_enabled ();
 
             if (welcome == null) {
@@ -108,7 +56,7 @@ namespace Comet {
                         } else {
                             enable_comet ();
                         }
-                        create_view ();
+                        create_layout ();
                     break;
 
                     case 1:
