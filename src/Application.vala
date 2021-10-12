@@ -39,7 +39,6 @@ There is NO WARRANTY, to the extent permitted by law.""";
                     /* We can have more than one instance active at once. */
                     | ApplicationFlags.NON_UNIQUE
             );
-
             saved_state = new GLib.Settings ("com.github.small_tech.comet.saved-state");
 
             //
@@ -105,10 +104,15 @@ There is NO WARRANTY, to the extent permitted by law.""";
             });
         }
 
-
         protected override void activate () {
             // Custom icon
             Gtk.IconTheme.get_default ().add_resource_path ("/com/github/small_tech/comet");
+
+            // Use the person’s preferred color scheme.
+            // See: https://docs.elementary.io/develop/apis/color-scheme
+            // (We’re setting this up here instead of in the base window class
+            // in case the Application class needs to show an error dialog, etc.)
+            use_preferred_color_scheme ();
 
             if (!launched_with_file) {
                 // Person likely launched the app via the desktop.
@@ -136,27 +140,24 @@ There is NO WARRANTY, to the extent permitted by law.""";
             }
         }
 
-        private void show_commit_message_file_error (FileError error) {
-            // TODO: Remove redundancy. The colour scheme code is replicated
-            // from BaseWindow. Pull out to a common utility class.
 
-            // ===
-
-            // Set colour scheme of app based on person’s preference.
+        private void use_preferred_color_scheme () {
+            // Set color scheme of app based on person’s preference.
             var granite_settings = Granite.Settings.get_default ();
             var gtk_settings = Gtk.Settings.get_default ();
             gtk_settings.gtk_application_prefer_dark_theme
                 = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
-            // Listen for changes in person’s colour scheme settings
+            // Listen for changes in person’s color scheme settings
             // and update color scheme of app accordingly.
             granite_settings.notify["prefers-color-scheme"].connect (() => {
                 gtk_settings.gtk_application_prefer_dark_theme
                     = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
             });
+        }
 
-            // ===
 
+        private void show_commit_message_file_error (FileError error) {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
                 "Comet can’t read the git commit message.",
                 "The Report Error button will take you to a pre-filled issue on GitHub that you can submit to help improve Comet.",
