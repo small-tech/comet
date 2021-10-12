@@ -158,7 +158,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
             // ===
 
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                "Error: Comet can’t read the git commit message.",
+                "Comet can’t read the git commit message.",
                 "The Report Error button will take you to a pre-filled issue on GitHub that you can submit to help improve Comet.",
                 "process-stop",
                 Gtk.ButtonsType.CLOSE
