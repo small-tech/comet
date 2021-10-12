@@ -36,8 +36,12 @@ namespace Comet {
 
             Gtk.TextIter message_view_iterator;
             message_view_buffer.get_start_iter (out message_view_iterator);
-
+            message_view_buffer.insert_text (ref message_view_iterator, model.message, -1);
             message_scrolled_window.add (message_view);
+
+            Gtk.TextIter start_of_message;
+            message_view_buffer.get_start_iter (out start_of_message);
+            message_view_buffer.place_cursor (start_of_message);
 
             grid.attach (message_scrolled_window, 0, 1);
 
@@ -62,8 +66,6 @@ namespace Comet {
             button_box.add (commit_button);
 
             grid.attach (button_box, 0, 3);
-
-            show_all ();
         }
     }
 }

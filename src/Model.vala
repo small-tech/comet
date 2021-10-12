@@ -15,6 +15,43 @@ namespace Comet {
         public bool initialise_with_commit_message_file (File commit_message_file) throws FileError {
             commit_message_file_path = commit_message_file.get_path ();
 
+            //
+            // Ascertain type of git message from its file path.
+            //
+
+            // Generic commit message.
+            var is_git_commit_message = commit_message_file_path.index_of ("COMMIT_EDITMSG") > -1;
+            var is_test_commit_message = commit_message_file_path.index_of ("tests/message-with-body") > -1
+                || commit_message_file_path.index_of ("tests/message-without-body") > -1;
+            var is_commit_message = is_git_commit_message || is_test_commit_message;
+
+            // Git merge message.
+            var is_git_merge_message = commit_message_file_path.index_of ("MERGE_MSG") > -1;
+            var is_test_merge_message = commit_message_file_path.index_of ("tests/merge") > -1;
+            var is_merge_message = is_git_merge_message || is_test_merge_message;
+
+            // Git tag message.
+            var is_git_tag_message  = commit_message_file_path.index_of ("TAG_EDITMSG") > -1;
+            var is_test_tag_message = commit_message_file_path.index_of ("tests/tag-message") > -1;
+            var is_tag_message = is_git_tag_message || is_test_tag_message;
+
+            // AddP Hunk Edit message.
+            var is_git_add_p_hunk_edit_message = commit_message_file_path.index_of ("addp-hunk-edit.diff") > -1;
+            var is_test_add_p_hunk_edit_message = commit_message_file_path.index_of ("tests/add-p-edit-hunk") > -1;
+            var is_add_p_hunk_edit_message = is_git_add_p_hunk_edit_message || is_test_add_p_hunk_edit_message;
+
+            // Rebase message.
+            var is_git_rebase_message = commit_message_file_path.index_of ("rebase-merge/git-rebase-todo") > -1;
+            var is_test_rebase_message = commit_message_file_path.index_of ("tests/rebase") > -1;
+            var is_rebase_message = is_git_rebase_message || is_test_rebase_message;
+
+            var is_test = is_test_commit_message || is_test_tag_message || is_test_add_p_hunk_edit_message || is_test_rebase_message || is_test_merge_message;
+
+
+            print (@"Is git commit message: $(is_git_commit_message)");
+            print (@"Is test commit message: $(is_test_commit_message)");
+            print (@"Is commit message: $(is_commit_message)");
+
             string commit_message_file_contents;
             size_t commit_message_file_length;
 
@@ -25,9 +62,39 @@ namespace Comet {
 
             original_text = commit_message_file_contents;
 
-            // Parse the original message from git to populate the model.
-            message = "";
-            comment = original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
+            var text = original_text;
+
+            // Escape tag start/end as we will be using markup to populate the buffer.
+            // (Otherwise, rebase -i commit messages fail, as they contain the strings
+            // <commit>, <label>, etc.
+            try {
+                var all_left_angular_brackets = new Regex (Regex.escape_string ("<"));
+                var all_right_angular_brackets = new Regex ( Regex.escape_string (">"));
+                text = all_left_angular_brackets.replace_literal (text, -1, 0, "&lt;");
+                text = all_right_angular_brackets.replace_literal (text, -1, 0, "&gt;");
+            } catch (RegexError e) {
+                assert_not_reached ();
+            }
+
+            // If this is a git add -p hunk edit message, then we cannot
+            // split at the first comment as the message starts with a comment.
+            // Remove that comment and instead display that info in the instructions.
+            if (is_add_p_hunk_edit_message) {
+                text = text.substring (text.index_of ("\n")+1);
+            }
+
+            var first_comment_index = text.index_of ("#");
+
+            message = text.slice (0, first_comment_index - 1);
+
+            while (message.length > 0 && message[message.length -1] == '\n') {
+                message = message.slice (0, message.length - 1);
+            }
+
+            comment = text.slice (first_comment_index - 1, -1);
+
+
+            // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;
         }
     }
