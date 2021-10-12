@@ -44,7 +44,6 @@ executable(
       dependency('granite', version: '>=5.2.4'),
       dependency('gtk+-3.0'),
       dependency('libhandy-1', version: '>=0.90.0'),
-      dependency('camel-1.2', version: '>= 3.28'),
       meson.get_compiler('vala').find_library('posix')
     ],
     install: true

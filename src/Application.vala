@@ -174,8 +174,10 @@ There is NO WARRANTY, to the extent permitted by law.""";
             message_dialog.response.connect ((response_id) => {
                if (response_id == Gtk.ResponseType.ACCEPT) {
                     try {
-                        var title = Camel.URL.encode ("Error: Cannot read git commit message file", ":;@/");
-                        var body = Camel.URL.encode (@"Comet could not read the git commit message file on launch and failed with the following error:\n\n```\n$(error.message)\n```\n\nWould appreciate it if you could look into it.\n\nThanks!", ":;@/");
+                        var title = Uri.escape_string ("Error: Cannot read git commit message file");
+                        var body = Uri.escape_string (@"Comet could not read the git commit message file on launch and failed with the following error:\n\n```\n$(error.message)\n```\n\nWould appreciate it if you could look into it.\n\nThanks!");
+                        print (title);
+                        print (body);
                         AppInfo.launch_default_for_uri (@"https://github.com/small-tech/comet/issues/new/?title=$(title)&body=$(body)", null);
                     } catch (Error error) {
                         warning (error.message);
