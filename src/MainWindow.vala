@@ -96,9 +96,7 @@ namespace Comet {
             button_box.add (cancel_button);
             button_box.add (commit_button);
 
-            cancel_button.clicked.connect (() => {
-                app.quit ();
-            });
+            cancel_button.clicked.connect (app.quit);
 
             commit_button.clicked.connect (() => {
                 try {
@@ -115,20 +113,11 @@ namespace Comet {
             grid.attach (button_box, 0, 3);
 
             // Highlight colour.
-            style_updated.connect (() => {
-                set_highlight_colour ();
-            });
-
-            message_view_buffer.changed.connect (() => {
-                highlight_text ();
-            });
-
-            message_view_buffer.paste_done.connect (() => {
-                highlight_text ();
-            });
+            style_updated.connect (set_highlight_colour);
+            message_view_buffer.changed.connect (highlight_text);
+            message_view_buffer.paste_done.connect (highlight_text);
 
             // Exit via escape key.
-            //  add_events (Gdk.EventMask.KEY_PRESS_MASK);
             key_press_event.connect ((widget, event) => {
                 uint keyValue;
                 event.get_keyval (out keyValue);
