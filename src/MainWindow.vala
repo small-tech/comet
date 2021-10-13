@@ -41,11 +41,9 @@ namespace Comet {
                 Gtk.InputHints.WORD_COMPLETION |
                 Gtk.InputHints.EMOJI |
                 Gtk.InputHints.UPPERCASE_SENTENCES;
+            message_view.set_buffer (model.message_buffer);
             message_view_buffer = message_view.get_buffer ();
 
-            Gtk.TextIter message_view_iterator;
-            message_view_buffer.get_start_iter (out message_view_iterator);
-            message_view_buffer.insert_text (ref message_view_iterator, model.message, -1);
             message_scrolled_window.add (message_view);
 
             Gtk.TextIter start_of_message;
@@ -61,13 +59,8 @@ namespace Comet {
             // Create simple text view for comment.
             comment_view = new Gtk.TextView ();
             comment_view.margin = 12;
+            comment_view.buffer = model.comment_buffer;
             comment_view_buffer = comment_view.get_buffer ();
-
-            Gtk.TextIter comment_view_iterator;
-            comment_view_buffer.get_start_iter (out comment_view_iterator);
-            comment_view_buffer.insert_markup (ref comment_view_iterator, model.comment, -1);
-
-            // Note: the comment_view_iterator now points to the end of the buffer.
 
             // Mark the comment area as non-editable.
             comment_view.editable = false;
@@ -82,6 +75,20 @@ namespace Comet {
             var commit_button = new Gtk.Button.with_label (_("Commit"));
             button_box.add (cancel_button);
             button_box.add (commit_button);
+
+            cancel_button.clicked.connect (() => {
+                app.quit ();
+            });
+
+            commit_button.clicked.connect (() => {
+                try {
+                    model.save ();
+                    app.quit ();
+                } catch (FileError error) {
+                    // TODO: Handle this better.
+                    warning ("Could not save commit message.");
+                }
+            });
 
             grid.attach (button_box, 0, 3);
         }

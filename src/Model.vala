@@ -102,6 +102,17 @@ namespace Comet {
             // and dark schemes.
             comment = @"<span foreground=\"#959595\">$(comment)</span>";
 
+            // Populate the initial buffers.
+            comment_buffer = new Gtk.TextBuffer (null);
+
+            // Unfortunately, there’s no set_markup method like there is for
+            // set_text so we have to use an iterator and the insert method.
+            Gtk.TextIter comment_buffer_start_iterator;
+            comment_buffer.get_start_iter (out comment_buffer_start_iterator);
+            comment_buffer.insert_markup (ref comment_buffer_start_iterator, comment, -1);
+            message_buffer = new Gtk.TextBuffer (null);
+            message_buffer.set_text (message);
+
             // Split the comment
             var comment_lines = new Gee.ArrayList<string>.wrap (comment.split ("\n"));
             var number_of_lines_in_comment = comment_lines.size;
@@ -168,6 +179,13 @@ namespace Comet {
 
             // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;
+        }
+
+        public void save () throws FileError {
+            FileUtils.set_contents (
+                commit_message_file_path,
+                message_buffer.text
+            );
         }
     }
 }
