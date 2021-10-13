@@ -10,6 +10,9 @@ namespace Comet {
         public string comment { get; private set; }
         public Gtk.TextBuffer comment_buffer { get; private set; }
 
+        public string action { get; private set; }
+        public string detail { get; private set; }
+
         private string commit_message_file_path;
 
         public bool initialise_with_commit_message_file (File commit_message_file) throws FileError {
@@ -94,6 +97,10 @@ namespace Comet {
 
             comment = text.slice (first_comment_index - 1, -1);
 
+            // Split the comment
+            var comment_lines = new Gee.ArrayList<string>.wrap (comment.split ("\n"));
+            var number_of_lines_in_comment = comment_lines.size;
+
             // The commit message is always in the .git directory in the
             // project directory. Get the project directory’s name by using this.
             string project_directory_name;
@@ -112,6 +119,47 @@ namespace Comet {
                     project_directory_name = commit_message_file_path;
                 }
             }
+
+            // The action and detail strings explain the type of commit action
+            // that is about to be performed.
+
+            action = "n/a";
+            detail = "n/a";
+
+            if (is_commit_message) {
+                // Try to get the branch name via a method that relies on
+                // positional aspect of the branch name so it should work with
+                // other languages.
+                var words_on_branch_line = comment_lines[4].split (" ");
+                var branch_name = words_on_branch_line[words_on_branch_line.length - 1];
+                action = "commit";
+                detail = branch_name;
+              } else if (is_merge_message) {
+                // Display the branch name
+                action = "merge";
+                detail = @"branch $(comment.split ("'")[1])";
+              } else if (is_tag_message) {
+                // Get the version number from the message
+                var version = comment_lines[3].slice (1, -1).strip ();
+                action = "tag";
+                detail = version;
+              } else if (is_add_p_hunk_edit_message) {
+                // git add -p: edit hunk message
+                action = "add -p";
+                detail = "manual hunk edit mode";
+              } else if (is_rebase_message) {
+                action = "rebase";
+                var _detail = comment_lines[1].replace ("# ", "");
+                var _detailChunks = _detail.split (" ");
+                detail = @"$(_detailChunks[1]) → $(_detailChunks[3])";
+              } else {
+                // This should not happen.
+                // TODO: Ensure this results in the ability to easily report this issue.
+                warning ("Warning: unknown Git commit type encountered in: ${commitMessageFilePath}");
+              }
+
+              print (@"\nAction: $(action)");
+              print (@"\nDetail: $(detail)");
 
             // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;

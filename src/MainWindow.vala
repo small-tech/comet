@@ -23,6 +23,10 @@ namespace Comet {
             // Save a local reference to the model for easier use.
             model = app.model;
 
+            var title_string = @"Comet: $(model.action) ($(model.detail))";
+            title = title_string;           // Window title, used in task switcher, etc.
+            toolbar.title = title_string;   // Toolbar title, displayed in app.
+
             // Create scrollable text view for the message.
             var message_scrolled_window = new Gtk.ScrolledWindow (null, null);
             message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
