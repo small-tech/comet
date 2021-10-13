@@ -102,7 +102,7 @@ fi
 # https://github.com/elementary/metapackages/blob/master/elementary-sdk-arm64
 # https://github.com/elementary/metapackages/blob/master/elementary-sdk-armhf
 
-sudo apt install libcamel1.2-dev
+sudo apt install libgspell-1-dev
 
 # Configure build.
 meson build --prefix=/usr

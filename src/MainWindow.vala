@@ -36,6 +36,11 @@ namespace Comet {
             message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
             message_view.wrap_mode = Gtk.WrapMode.WORD;
             message_view.margin = 12;
+            message_view.input_hints =
+                Gtk.InputHints.SPELLCHECK |
+                Gtk.InputHints.WORD_COMPLETION |
+                Gtk.InputHints.EMOJI |
+                Gtk.InputHints.UPPERCASE_SENTENCES;
             message_view_buffer = message_view.get_buffer ();
 
             Gtk.TextIter message_view_iterator;
@@ -46,6 +51,10 @@ namespace Comet {
             Gtk.TextIter start_of_message;
             message_view_buffer.get_start_iter (out start_of_message);
             message_view_buffer.place_cursor (start_of_message);
+
+            // Set up spell checking for the text view.
+            var g_spell_text_view = Gspell.TextView.get_from_gtk_text_view (message_view);
+            g_spell_text_view.basic_setup ();
 
             grid.attach (message_scrolled_window, 0, 1);
 
