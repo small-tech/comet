@@ -87,12 +87,31 @@ namespace Comet {
 
             message = text.slice (0, first_comment_index - 1);
 
+            // Trim any newlines there may be at the end of the commit body
             while (message.length > 0 && message[message.length -1] == '\n') {
                 message = message.slice (0, message.length - 1);
             }
 
             comment = text.slice (first_comment_index - 1, -1);
 
+            // The commit message is always in the .git directory in the
+            // project directory. Get the project directory’s name by using this.
+            string project_directory_name;
+            if (is_test) {
+                project_directory_name = "test";
+            } else {
+                var path_components = new Gee.ArrayList<string>.wrap (commit_message_file_path.split ("/"));
+                var project_directory_name_index = path_components.index_of (".git");
+                if (project_directory_name_index > 0) {
+                    project_directory_name = path_components[project_directory_name_index - 1];
+                } else {
+                    // Comet was launche with a reference to a file that’s not in a .git
+                    // folder or our test folder. This shouldn’t happen but it’s not really an
+                    // error so we’ll allow it with a warning.
+                    warning (@"$(commit_message_file_path) is not a git commit message.");
+                    project_directory_name = commit_message_file_path;
+                }
+            }
 
             // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;
