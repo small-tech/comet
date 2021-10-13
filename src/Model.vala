@@ -181,6 +181,7 @@ namespace Comet {
             return true;
         }
 
+
         public void save () throws FileError {
             FileUtils.set_contents (
                 commit_message_file_path,
