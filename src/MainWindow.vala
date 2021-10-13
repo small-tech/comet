@@ -19,10 +19,12 @@ namespace Comet {
         private string HIGHLIGHT_BACKGROUND_TAG_NAME = "highlight-background";
 
         // TODO: Make this configurable.
-        private int FIRST_LINE_CHARACTER_LIMIT = 10;
+        private int FIRST_LINE_CHARACTER_LIMIT = 69;
 
         private Gtk.TextTag highlight_background_tag;
 
+        // Actions
+        private const string ACTION_COMMIT = "action_commit";
 
         public MainWindow (Comet.Application application) {
             base (application);
@@ -34,9 +36,19 @@ namespace Comet {
             //       alongside base () works.
         }
 
+        protected override void define_action_accelerators () {
+            action_accelerators.set (ACTION_COMMIT, "<Control>Return");
+        }
+
         protected override void create_layout () {
             // Save a local reference to the model for easier use.
             model = app.model;
+
+            // Define action entries. These will be used by the base class
+            // when setting up accelerators.
+            ACTION_ENTRIES = {
+                {ACTION_COMMIT, action_commit}
+            };
 
             var title_string = @"Comet: $(model.action) ($(model.detail))";
             title = title_string;           // Window title, used in task switcher, etc.
@@ -50,6 +62,8 @@ namespace Comet {
             message_view = new Gtk.TextView ();
             message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
             message_view.wrap_mode = Gtk.WrapMode.WORD;
+            message_view.can_default = true;
+            message_view.has_default = true;
             message_view.margin = 12;
             message_view.input_hints =
                 Gtk.InputHints.SPELLCHECK |
@@ -97,16 +111,7 @@ namespace Comet {
             button_box.add (commit_button);
 
             cancel_button.clicked.connect (app.quit);
-
-            commit_button.clicked.connect (() => {
-                try {
-                    model.save ();
-                    app.quit ();
-                } catch (FileError error) {
-                    // TODO: Handle this better.
-                    warning ("Could not save commit message.");
-                }
-            });
+            commit_button.clicked.connect (save_commit_message_and_exit);
 
             validate_commit_button ();
 
@@ -137,14 +142,37 @@ namespace Comet {
         }
 
 
-        private void validate_commit_button () {
-            var lines = app.model.message_buffer.text.strip ().split ("\n");
-            var number_of_lines_in_message = lines.length;
-            commit_button.set_sensitive (number_of_lines_in_message > 0);
+        private void action_commit () {
+            print ("MainWindow: Action commit");
+            if (validate_commit_button ()) {
+                print ("Commiting via action.");
+                save_commit_message_and_exit ();
+            }
         }
 
 
-        public void set_highlight_colour () {
+        private void save_commit_message_and_exit () {
+            try {
+                app.model.save ();
+                app.quit ();
+            } catch (FileError error) {
+                // TODO: Handle this better.
+                warning ("Could not save commit message.");
+            }
+        }
+
+
+        private bool validate_commit_button () {
+            var lines = app.model.message_buffer.text.strip ().split ("\n");
+            var number_of_lines_in_message = lines.length;
+            var commit_is_valid = number_of_lines_in_message > 0;
+            commit_button.set_sensitive (commit_is_valid);
+
+            return commit_is_valid;
+        }
+
+
+        private void set_highlight_colour () {
             // Set the overflow text background highlight colour based on the
             // colour of the foreground text.
 

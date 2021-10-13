@@ -12,7 +12,7 @@ namespace Comet {
         private const string ACTION_QUIT = "action_quit";
 
         private SimpleActionGroup actions { get; set; }
-        private static Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
+        protected Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
 
         private enum WindowState {
             NORMAL = 0,
@@ -20,15 +20,24 @@ namespace Comet {
             FULLSCREEN = 2
         }
 
-        private const ActionEntry[] ACTION_ENTRIES = {
+        protected ActionEntry[] _ACTION_ENTRIES = {
             { ACTION_FULLSCREEN, action_fullscreen },
-            { ACTION_QUIT, action_quit },
+            { ACTION_QUIT, action_quit }
         };
 
-        private static void define_action_accelerators () {
+        protected ActionEntry [] ACTION_ENTRIES;
+
+        protected void _define_action_accelerators () {
             // Define action accelerators (keyboard shortcuts).
             action_accelerators.set (ACTION_FULLSCREEN, "F11");
             action_accelerators.set (ACTION_QUIT, "<Control>q");
+
+            // Template hook method.
+            define_action_accelerators ();
+        }
+
+        protected virtual void define_action_accelerators () {
+            // no-op
         }
 
         protected BaseWindow (Comet.Application application, Object data = new Object ()) {
@@ -58,13 +67,15 @@ namespace Comet {
             // (Apps in elementary OS 6 use the Handy library extensions
             // instead of GTKApplicationWindow, etc., directly.)
             Hdy.init();
-
-            // Define acclerators (keyboard shortcuts) for actions.
-            BaseWindow.define_action_accelerators ();
         }
 
         // This constructor will be called every time an instance of this class is created.
         construct {
+            // Define acclerators (keyboard shortcuts) for actions.
+            // You can extend this by implementing a concrete define_action_accelerators ()
+            // method in your subclasses.
+            _define_action_accelerators ();
+
             // State preservation: save window dimensions and location on window close.
             // See: https://docs.elementary.io/hig/user-workflow/closing
             set_up_state_preservation ();
@@ -165,7 +176,12 @@ namespace Comet {
         private void set_up_actions () {
             // Setup actions and their accelerators.
             actions = new SimpleActionGroup ();
-            actions.add_action_entries (ACTION_ENTRIES, this);
+            actions.add_action_entries (_ACTION_ENTRIES, this);
+
+            // To enable subclasses to define action entries.
+            if (ACTION_ENTRIES != null) {
+                actions.add_action_entries (ACTION_ENTRIES, this);
+            }
             insert_action_group ("win", actions);
 
             foreach (var action in action_accelerators.get_keys ()) {
