@@ -97,6 +97,11 @@ namespace Comet {
 
             comment = text.slice (first_comment_index - 1, -1);
 
+            // Add Pango markup to make the commented area appear lighter.
+            // TODO: Rewrite to make this work with adequate contrast under both light
+            // and dark schemes.
+            comment = @"<span foreground=\"#959595\">$(comment)</span>";
+
             // Split the comment
             var comment_lines = new Gee.ArrayList<string>.wrap (comment.split ("\n"));
             var number_of_lines_in_comment = comment_lines.size;

@@ -58,6 +58,11 @@ namespace Comet {
             comment_view_buffer.get_start_iter (out comment_view_iterator);
             comment_view_buffer.insert_markup (ref comment_view_iterator, model.comment, -1);
 
+            // Note: the comment_view_iterator now points to the end of the buffer.
+
+            // Mark the comment area as non-editable.
+            comment_view.editable = false;
+
             grid.attach (comment_view, 0, 2);
 
             // Add the action buttons.
