@@ -5,8 +5,11 @@ namespace Comet {
 
         // Widgets
         private Gtk.TextView comment_view;
-        private Gtk.TextBuffer comment_view_buffer;
         private Gtk.TextView message_view;
+        private Gtk.Button commit_button;
+
+        // Buffers
+        private Gtk.TextBuffer comment_view_buffer;
         private Gtk.TextBuffer message_view_buffer;
 
         public MainWindow (Comet.Application application) {
@@ -72,7 +75,9 @@ namespace Comet {
             button_box.margin = 12;
             button_box.layout_style = Gtk.ButtonBoxStyle.EDGE;
             var cancel_button = new Gtk.Button.with_label (_("Cancel"));
-            var commit_button = new Gtk.Button.with_label (_("Commit"));
+
+            commit_button = new Gtk.Button.with_label (_("Commit"));
+
             button_box.add (cancel_button);
             button_box.add (commit_button);
 
@@ -90,7 +95,21 @@ namespace Comet {
                 }
             });
 
+            validate_commit_button ();
+
             grid.attach (button_box, 0, 3);
+
+            // Handle message buffer signals.
+
+            message_view_buffer.end_user_action.connect (() => {
+                validate_commit_button ();
+            });
+        }
+
+        private void validate_commit_button () {
+            var lines = app.model.message_buffer.text.strip ().split ("\n");
+            var number_of_lines_in_message = lines.length;
+            commit_button.set_sensitive (number_of_lines_in_message > 0);
         }
     }
 }
