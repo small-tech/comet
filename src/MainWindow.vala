@@ -99,6 +99,19 @@ namespace Comet {
 
             grid.attach (button_box, 0, 3);
 
+            // Exit via escape key.
+            //  add_events (Gdk.EventMask.KEY_PRESS_MASK);
+            key_press_event.connect ((widget, event) => {
+                uint keyValue;
+                event.get_keyval (out keyValue);
+                if (keyValue == Gdk.Key.Escape) {
+                    app.quit();
+                    return true;
+                }
+                return false;
+            });
+
+
             // Handle message buffer signals.
 
             message_view_buffer.end_user_action.connect (() => {
