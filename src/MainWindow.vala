@@ -26,6 +26,7 @@ namespace Comet {
         // Actions
         private const string ACTION_COMMIT = "action_commit";
 
+
         public MainWindow (Comet.Application application) {
             base (application);
             // Note: we would ideally be accepting the commit_message_file reference
@@ -36,9 +37,11 @@ namespace Comet {
             //       alongside base () works.
         }
 
+
         protected override void define_action_accelerators () {
             action_accelerators.set (ACTION_COMMIT, "<Control>Return");
         }
+
 
         protected override void create_layout () {
             // Save a local reference to the model for easier use.
@@ -131,9 +134,7 @@ namespace Comet {
                 return false;
             });
 
-
-            // Handle message buffer signals.
-
+            // Validate the commit button whenever the person updates the message.
             message_view_buffer.end_user_action.connect (() => {
                 validate_commit_button ();
             });
