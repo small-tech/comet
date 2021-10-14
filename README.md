@@ -129,6 +129,45 @@ To test the Welcome screen, either launch Comet from the Applications Menu or, v
 flatpak run com.github.small_tech.comet
 ```
 
+### Debugging
+
+In [VSCodium](#vscodium), press <kbd>Control</kbd> + <kbd>Shift</kbd> + B → _Build all targets_ to build and <kbd>F5</kbd> to run and debug.
+
+To pass a test commit message to Comet to debug with, edit the _.vscode/launch.json_ file and add the argument to the array referenced by the `args` property.
+
+For example, to debug with a standard git commit message without a body:
+
+```json
+{
+  // To launch and debug your app in VSCodium, press F5
+  // (or press the start debugging/play button on
+  // the Run and Debug view.)
+  //
+  // Note: you must install the CodeLLDB VSCodium
+  // ===== extension and have run the Meson: Build task
+  //       for this to work. (To install all necessary
+  //       extensions, including Meson and Vala, run the
+  //       tasks/setup-vscodium task.)
+  //
+  // For more information on Launch configurations, see:
+  // https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug",
+      "program": "${workspaceFolder}/build/com.github.small_tech.comet",
+      "args": ["tests/message-without-body"],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```
+
+If you do not pass an argument (if `"args": []`), Comet will launch in the debugger with the Welcome screen.
+
 ### VSCodium
 
 You do _not_ need to use [VSCodium](https://vscodium.com) to hack on Comet.
