@@ -62,8 +62,6 @@ namespace Comet {
             message_view = new Gtk.TextView ();
             message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
             message_view.wrap_mode = Gtk.WrapMode.WORD;
-            message_view.can_default = true;
-            message_view.has_default = true;
             message_view.margin = 12;
             message_view.input_hints =
                 Gtk.InputHints.SPELLCHECK |
