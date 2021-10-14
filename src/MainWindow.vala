@@ -201,6 +201,12 @@ namespace Comet {
             var text = message_view_buffer.text;
             var lines = text.split ("\n");
             var first_line = lines[0];
+
+            if (first_line == null) {
+                // No characters in message; nothing to do.
+                return;
+            }
+
             var first_line_length = first_line.length;
 
             // Get bounding iterators for the first line.
