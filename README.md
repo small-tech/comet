@@ -139,18 +139,6 @@ For example, to debug with a standard git commit message without a body:
 
 ```json
 {
-  // To launch and debug your app in VSCodium, press F5
-  // (or press the start debugging/play button on
-  // the Run and Debug view.)
-  //
-  // Note: you must install the CodeLLDB VSCodium
-  // ===== extension and have run the Meson: Build task
-  //       for this to work. (To install all necessary
-  //       extensions, including Meson and Vala, run the
-  //       tasks/setup-vscodium task.)
-  //
-  // For more information on Launch configurations, see:
-  // https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
 
