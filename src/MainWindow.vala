@@ -219,9 +219,9 @@ namespace Comet {
 
             // Highlight the overflow area, if any.
             if (first_line_length > FIRST_LINE_CHARACTER_LIMIT) {
-            Gtk.TextIter start_of_overflow_iterator;
-            message_view_buffer.get_iter_at_offset (out start_of_overflow_iterator, FIRST_LINE_CHARACTER_LIMIT);
-            message_view_buffer.apply_tag (highlight_background_tag, start_of_overflow_iterator, end_of_first_line_iterator);
+                Gtk.TextIter start_of_overflow_iterator;
+                message_view_buffer.get_iter_at_offset (out start_of_overflow_iterator, FIRST_LINE_CHARACTER_LIMIT);
+                message_view_buffer.apply_tag (highlight_background_tag, start_of_overflow_iterator, end_of_first_line_iterator);
             }
         }
     }
