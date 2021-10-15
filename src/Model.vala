@@ -115,7 +115,7 @@ namespace Comet {
 
             // Split the comment
             var comment_lines = new Gee.ArrayList<string>.wrap (comment.split ("\n"));
-            var number_of_lines_in_comment = comment_lines.size;
+            //  var number_of_lines_in_comment = comment_lines.size;
 
             // The commit message is always in the .git directory in the
             // project directory. Get the project directory’s name by using this.

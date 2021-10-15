@@ -7,6 +7,10 @@ namespace Comet {
         private Granite.Widgets.WelcomeButton enable_disable_button;
         private Comet.Widgets.Welcome welcome;
 
+        private string GIT_CONFIG_GLOBAL_CORE_EDITOR = "git config --global core.editor";
+        private string FLATPAK_SPAWN_HOST = "flatpak-spawn --host";
+        private string FLATPAK_RUN = "flatpak run";
+
         public WelcomeWindow (Comet.Application application) {
             base (application);
         }
@@ -74,6 +78,7 @@ namespace Comet {
             enable_disable_button.grab_focus ();
         }
 
+
         private bool is_comet_enabled () {
             // Check if Comet is the default git editor and create the first option accordingly
             // (either to set Comet as the default editor or to restore the previously-set editor).
@@ -81,12 +86,20 @@ namespace Comet {
             string git_config_stderr;
             int git_config_exit_status;
 
-            // TODO: Also handle spawn without Flatpak so app functions properly
-            // ===== when testing via task/run too.
+            string command;
+            string comet_launch_path;
+
+            if (app.is_running_as_flatpak) {
+                command = @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR)";
+                comet_launch_path = @"$(FLATPAK_RUN) $(app.flatpak_id)";
+            } else {
+                command = GIT_CONFIG_GLOBAL_CORE_EDITOR;
+                comet_launch_path = Application.binary_path;
+            }
 
             try {
                 Process.spawn_command_line_sync (
-                    "flatpak-spawn --host git config --global core.editor",
+                    command,
                     out git_config_stdout,
                     out git_config_stderr,
                     out git_config_exit_status
@@ -96,7 +109,7 @@ namespace Comet {
                 print (@"stderr: $(git_config_stderr)");
                 print (@"exit status: $(git_config_exit_status)");
 
-                return (git_config_stdout.replace ("\n", "") == "flatpak run com.github.small_tech.comet");
+                return (git_config_stdout.replace ("\n", "") == comet_launch_path);
             } catch (SpawnError error) {
                 // TODO: Expose this error better.
                 warning (error.message);
@@ -104,11 +117,13 @@ namespace Comet {
             }
         }
 
-        private bool enable_comet () {
-            // TODO: Also handle spawn without Flatpak so app functions properly
-            // ===== when testing via task/run too.
 
-            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run com.github.small_tech.comet\"");
+        private bool enable_comet () {
+            var command = app.is_running_as_flatpak ?
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(app.flatpak_id)\""
+                : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) $(Application.binary_path)";
+
+            var result = Posix.system (command);
             if (result == 0) {
                 // Comet is enabled.
                 comet_is_enabled = true;
@@ -119,12 +134,14 @@ namespace Comet {
             return result == 0;
         }
 
-        private bool disable_comet () {
-            // TODO: Also handle spawn without Flatpak so app functions properly
-            // ===== when testing via task/run too.
 
+        private bool disable_comet () {
             // TODO: Do not harcode to Gnomit ;)
-            var result = Posix.system ("flatpak-spawn --host git config --global core.editor \"flatpak run org.small_tech.Gnomit\"");
+            var command = app.is_running_as_flatpak ?
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) org.small_tech.Gnomit\""
+                : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"flatpak run org.small_tech.Gnomit\"";
+
+            var result = Posix.system (command);
             if (result == 0) {
                 // Comet is disabled.
                 comet_is_enabled = false;

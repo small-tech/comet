@@ -8,6 +8,8 @@ namespace Comet {
 
     public class Application : Gtk.Application {
 
+        public static string binary_path;
+
         static string SUMMARY = """Helps you write better Git commit messages.
 
   To use, configure Git to use Gnomit as the default editor:
@@ -27,6 +29,9 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.""";
 
         public Comet.Model model;
+        public string flatpak_id;
+        public bool is_running_as_flatpak;
+
         private File commit_message_file;
         private bool launched_with_file = false;
 
@@ -40,6 +45,9 @@ There is NO WARRANTY, to the extent permitted by law.""";
                     | ApplicationFlags.NON_UNIQUE
             );
             saved_state = new GLib.Settings ("com.github.small_tech.comet.saved-state");
+
+            flatpak_id = Environment.get_variable ("FLATPAK_ID");
+            is_running_as_flatpak = flatpak_id != null;
 
             //
             // Set command-line option handling.
@@ -188,6 +196,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
         }
 
         public static int main (string[] commandline_arguments) {
+            Application.binary_path = File.new_for_path (commandline_arguments[0]).get_path();
             return new Application ().run (commandline_arguments);
         }
     }
