@@ -27,10 +27,6 @@ namespace Comet {
                         out git_config_exit_status
                     );
 
-                    print (@"stdout: >$(git_config_stdout)<");
-                    print (@"stderr: $(git_config_stderr)");
-                    print (@"exit status: $(git_config_exit_status)");
-
                     return git_config_stdout.replace ("\n", "");
                 } catch (SpawnError error) {
                     // TODO: Expose this error better.
@@ -130,6 +126,7 @@ namespace Comet {
                 comet_is_enabled = true;
             } else {
                 // Comet configuration failed.
+                // TODO: handle better.
                 print("Git configuration failed.\n");
             }
             return result == 0;
@@ -147,6 +144,7 @@ namespace Comet {
                 // Comet is disabled.
                 comet_is_enabled = false;
             } else {
+                // TODO: handle better.
                 print("Git configuration failed.\n");
             }
             return result == 0;

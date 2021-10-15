@@ -50,18 +50,10 @@ namespace Comet {
 
             var is_test = is_test_commit_message || is_test_tag_message || is_test_add_p_hunk_edit_message || is_test_rebase_message || is_test_merge_message;
 
-
-            print (@"Is git commit message: $(is_git_commit_message)");
-            print (@"Is test commit message: $(is_test_commit_message)");
-            print (@"Is commit message: $(is_commit_message)");
-
             string commit_message_file_contents;
             size_t commit_message_file_length;
 
             FileUtils.get_contents (commit_message_file_path, out commit_message_file_contents, out commit_message_file_length);
-
-            print (@"File path: $(commit_message_file_path)\n");
-            print (@"Contents: \n\n $(commit_message_file_contents)\n");
 
             original_text = commit_message_file_contents;
 
