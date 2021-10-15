@@ -1,5 +1,3 @@
-// TODO: This shouldn’t be its own window, it should be a conditional
-// ===== view in the main window.
 namespace Comet {
     public class WelcomeWindow : Comet.BaseWindow {
 
@@ -11,9 +9,42 @@ namespace Comet {
         private string FLATPAK_SPAWN_HOST = "flatpak-spawn --host";
         private string FLATPAK_RUN = "flatpak run";
 
+        private string? current_editor {
+            owned get {
+                string git_config_stdout;
+                string git_config_stderr;
+                int git_config_exit_status;
+
+                var command = app.is_running_as_flatpak ?
+                    @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR)" :
+                    GIT_CONFIG_GLOBAL_CORE_EDITOR;
+
+                try {
+                    Process.spawn_command_line_sync (
+                        command,
+                        out git_config_stdout,
+                        out git_config_stderr,
+                        out git_config_exit_status
+                    );
+
+                    print (@"stdout: >$(git_config_stdout)<");
+                    print (@"stderr: $(git_config_stderr)");
+                    print (@"exit status: $(git_config_exit_status)");
+
+                    return git_config_stdout.replace ("\n", "");
+                } catch (SpawnError error) {
+                    // TODO: Expose this error better.
+                    warning (error.message);
+                    return null;
+                }
+            }
+        }
+
+
         public WelcomeWindow (Comet.Application application) {
             base (application);
         }
+
 
         protected override void create_layout () {
             comet_is_enabled = is_comet_enabled ();
@@ -80,41 +111,11 @@ namespace Comet {
 
 
         private bool is_comet_enabled () {
-            // Check if Comet is the default git editor and create the first option accordingly
-            // (either to set Comet as the default editor or to restore the previously-set editor).
-            string git_config_stdout;
-            string git_config_stderr;
-            int git_config_exit_status;
+            var comet_path = app.is_running_as_flatpak ?
+                @"$(FLATPAK_RUN) $(app.flatpak_id)" :
+                Application.binary_path;
 
-            string command;
-            string comet_launch_path;
-
-            if (app.is_running_as_flatpak) {
-                command = @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR)";
-                comet_launch_path = @"$(FLATPAK_RUN) $(app.flatpak_id)";
-            } else {
-                command = GIT_CONFIG_GLOBAL_CORE_EDITOR;
-                comet_launch_path = Application.binary_path;
-            }
-
-            try {
-                Process.spawn_command_line_sync (
-                    command,
-                    out git_config_stdout,
-                    out git_config_stderr,
-                    out git_config_exit_status
-                );
-
-                print (@"stdout: >$(git_config_stdout)<");
-                print (@"stderr: $(git_config_stderr)");
-                print (@"exit status: $(git_config_exit_status)");
-
-                return (git_config_stdout.replace ("\n", "") == comet_launch_path);
-            } catch (SpawnError error) {
-                // TODO: Expose this error better.
-                warning (error.message);
-                return false;
-            }
+            return current_editor == comet_path;
         }
 
 
@@ -150,6 +151,7 @@ namespace Comet {
             }
             return result == 0;
         }
+
 
         // Changing the icon of a WelcomeButton doesn’t work currently so we can’t do this.
         // See https://github.com/elementary/granite/issues/530
