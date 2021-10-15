@@ -15,7 +15,7 @@ namespace Comet {
                 string git_config_stderr;
                 int git_config_exit_status;
 
-                var command = app.is_running_as_flatpak ?
+                var command = Application.is_running_as_flatpak ?
                     @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR)" :
                     GIT_CONFIG_GLOBAL_CORE_EDITOR;
 
@@ -107,8 +107,8 @@ namespace Comet {
 
 
         private bool is_comet_enabled () {
-            var comet_path = app.is_running_as_flatpak ?
-                @"$(FLATPAK_RUN) $(app.flatpak_id)" :
+            var comet_path = Application.is_running_as_flatpak ?
+                @"$(FLATPAK_RUN) $(Application.flatpak_id)" :
                 Application.binary_path;
 
             return current_editor == comet_path;
@@ -116,8 +116,8 @@ namespace Comet {
 
 
         private bool enable_comet () {
-            var command = app.is_running_as_flatpak ?
-                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(app.flatpak_id)\""
+            var command = Application.is_running_as_flatpak ?
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(Application.flatpak_id)\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) $(Application.binary_path)";
 
             var result = Posix.system (command);
@@ -135,7 +135,7 @@ namespace Comet {
 
         private bool disable_comet () {
             // TODO: Do not harcode to Gnomit ;)
-            var command = app.is_running_as_flatpak ?
+            var command = Application.is_running_as_flatpak ?
                 @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) org.small_tech.Gnomit\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"flatpak run org.small_tech.Gnomit\"";
 
