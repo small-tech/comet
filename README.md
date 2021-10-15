@@ -10,7 +10,7 @@ A beautiful git commit message editor for elementary OS.
 
   - [Elementary OS](https://elementary.io) 6 (Odin)
 
-Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is being developed by Sonny Piers and is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which itself was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I used to love using back when my development machine was a Mac.
+Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is being developed by Sonny Piers and is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which itself was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I loved using back when my development machine was a Mac.
 
 ## Developer notes
 
