@@ -21,5 +21,10 @@
       <summary>Most recent window size</summary>
       <description>Most recent window size (width, height)</description>
     </key>
+    <key name="previous-editor" type="s">
+      <default>""</default>
+      <summary>Previous editor</summary>
+      <description>The previous git commit message editor before it was replaced with Comet (by Comet).</description>
+    </key>
   </schema>
 </schemalist>

@@ -116,6 +116,8 @@ namespace Comet {
 
 
         private bool enable_comet () {
+            Comet.saved_state.set("previous-editor", "s", current_editor);
+
             var command = Application.is_running_as_flatpak ?
                 @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(Application.flatpak_id)\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) $(Application.binary_path)";
@@ -134,10 +136,12 @@ namespace Comet {
 
 
         private bool disable_comet () {
-            // TODO: Do not harcode to Gnomit ;)
+            string previous_editor;
+            Comet.saved_state.get ("previous-editor", "s", out previous_editor);
+
             var command = Application.is_running_as_flatpak ?
                 @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) org.small_tech.Gnomit\""
-                : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"flatpak run org.small_tech.Gnomit\"";
+                : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(previous_editor)\"";
 
             var result = Posix.system (command);
             if (result == 0) {
