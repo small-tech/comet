@@ -17,11 +17,13 @@ namespace Comet {
 
         // Highlighting
         private string HIGHLIGHT_BACKGROUND_TAG_NAME = "highlight-background";
+        private string UNDERLINE_COLOUR_TAG_NAME = "underline-colour";
 
         // TODO: Make this configurable.
         private int FIRST_LINE_CHARACTER_LIMIT = 69;
 
         private Gtk.TextTag highlight_background_tag;
+        private Gtk.TextTag underline_colour_tag;
 
         // Actions
         private const string ACTION_COMMIT = "action_commit";
@@ -60,6 +62,8 @@ namespace Comet {
             // Create scrollable text view for the message.
             var message_scrolled_window = new Gtk.ScrolledWindow (null, null);
             message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
+
+
             message_scrolled_window.vexpand = true;
 
             message_view = new Gtk.TextView ();
@@ -73,6 +77,31 @@ namespace Comet {
                 Gtk.InputHints.UPPERCASE_SENTENCES;
             message_view.set_buffer (model.message_buffer);
             message_view_buffer = message_view.get_buffer ();
+
+            underline_colour_tag = new Gtk.TextTag (UNDERLINE_COLOUR_TAG_NAME);
+            var red = Gdk.RGBA ();
+            red.parse ("#ff5555");
+            underline_colour_tag.underline_rgba = red;
+            underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
+            message_view_buffer.tag_table.add (underline_colour_tag);
+
+            // Original dracula background colour: #282a36
+            // Darker dracula background colour: #121220
+            var dracula_theme = """
+                textview text {
+                    color: #f8f8f2;
+                    background-color: #282a36;
+                }
+
+                textview selection {
+                    color: #f8f8f2;
+                    background-color: #44475a;
+                }
+            """;
+            var css_provider = new Gtk.CssProvider ();
+            css_provider.load_from_data (dracula_theme, -1);
+            message_view.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
 
             highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
             message_view_buffer.tag_table.add (highlight_background_tag);
@@ -176,8 +205,8 @@ namespace Comet {
             // colour of the foreground text.
 
             // Colour shade guide for Minty Rose: https://www.color-hex.com/color/ffe4e1
-            var dark_foreground_highlight_colour = "#ffe4e1";  // minty rose
-            var light_foreground_highlight_colour = "#4c4443"; // darker shade of minty rose
+            var dark_foreground_highlight_colour = "#ff5555";  // minty rose
+            var light_foreground_highlight_colour = "#ff5555"; // darker shade of minty rose
             string highlight_colour;
             var font_colour = g_spell_text_view.get_view().get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -194,6 +223,7 @@ namespace Comet {
                 highlight_colour = dark_foreground_highlight_colour;
             }
             highlight_background_tag.background = highlight_colour;
+            highlight_background_tag.foreground = "#282a36";
         }
 
 
@@ -223,6 +253,9 @@ namespace Comet {
             // highlighted piece of the first line and paste it and we don’t want it
             // highlighted on subsequent lines if they do that.)
             message_view_buffer.remove_tag_by_name (HIGHLIGHT_BACKGROUND_TAG_NAME, message_start_text_iterator, message_end_text_iterator);
+            message_view_buffer.remove_tag_by_name (UNDERLINE_COLOUR_TAG_NAME, message_start_text_iterator, message_end_text_iterator);
+            message_view_buffer.apply_tag (underline_colour_tag, message_start_text_iterator, message_end_text_iterator);
+            underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size () - 1);
 
             // Highlight the overflow area, if any.
             if (first_line_length > FIRST_LINE_CHARACTER_LIMIT) {
