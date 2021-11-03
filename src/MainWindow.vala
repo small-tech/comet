@@ -273,13 +273,13 @@ namespace Comet {
 
             // We have to do all comparisons using iterators.
             var characters_left = FIRST_LINE_CHARACTER_LIMIT - first_line_length;
-            if ((characters_left < 12) && (characters_left > -1) && cursor_position_iter.compare(glyph_count_iter) <= 0) {
+            if ((characters_left < 15) && (characters_left > -1) && cursor_position_iter.compare(glyph_count_iter) <= 0) {
                 if (overlay_bar == null) {
                     // Create overlay bar to display hint about number of characters left.
                     overlay_bar = new Granite.Widgets.OverlayBar (overlay);
                     overlay.show_all ();
                 }
-                overlay_bar.label = _(@"$(first_line_length)");
+                overlay_bar.label = _(@"$(characters_left) characters left on first line");
                 overlay_bar.visible = true;
             } else {
                 if (overlay_bar != null) {
