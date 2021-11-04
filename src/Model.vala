@@ -89,21 +89,18 @@ namespace Comet {
 
             comment = text.slice (first_comment_index - 1, -1);
 
-            // Add Pango markup to make the commented area appear lighter.
-            // TODO: Rewrite to make this work with adequate contrast under both light
-            // and dark schemes.
-            comment = @"<span foreground=\"#959595\">$(comment)</span>";
+            // Remove the comment tokens.
+            try {
+                var all_comment_tokens = new Regex ("^#", RegexCompileFlags.MULTILINE);
+                var all_lines_that_begin_with_a_space = new Regex ("^ ", RegexCompileFlags.MULTILINE);
+                comment = all_comment_tokens.replace_literal (comment, -1, 0, "");
+                comment = all_lines_that_begin_with_a_space.replace_literal (comment, -1, 0, "");
+            } catch (RegexError e) {
+                assert_not_reached ();
+            }
 
-            // Populate the initial buffers.
-            comment_buffer = new Gtk.TextBuffer (null);
-
-            // Unfortunately, there’s no set_markup method like there is for
-            // set_text so we have to use an iterator and the insert method.
-            Gtk.TextIter comment_buffer_start_iterator;
-            comment_buffer.get_start_iter (out comment_buffer_start_iterator);
-            comment_buffer.insert_markup (ref comment_buffer_start_iterator, comment, -1);
-            message_buffer = new Gtk.TextBuffer (null);
-            message_buffer.set_text (message);
+            // Remove leading and trailing whitespace.
+            var comment = comment.strip ();
 
             // Split the comment
             var comment_lines = new Gee.ArrayList<string>.wrap (comment.split ("\n"));
@@ -138,36 +135,55 @@ namespace Comet {
                 // Try to get the branch name via a method that relies on
                 // positional aspect of the branch name so it should work with
                 // other languages.
-                var words_on_branch_line = comment_lines[4].split (" ");
+                var words_on_branch_line = comment_lines[3].split (" ");
                 var branch_name = words_on_branch_line[words_on_branch_line.length - 1];
                 action = "commit";
                 detail = branch_name;
-              } else if (is_merge_message) {
+            } else if (is_merge_message) {
                 // Display the branch name
                 action = "merge";
                 detail = @"branch $(comment.split ("'")[1])";
-              } else if (is_tag_message) {
+            } else if (is_tag_message) {
                 // Get the version number from the message
-                var version = comment_lines[3].slice (1, -1).strip ();
+                var version = comment_lines[2].slice (1, -1).strip ();
                 action = "tag";
                 detail = version;
-              } else if (is_add_p_hunk_edit_message) {
+            } else if (is_add_p_hunk_edit_message) {
                 // git add -p: edit hunk message
                 action = "add -p";
                 detail = "manual hunk edit mode";
-              } else if (is_rebase_message) {
+                // Remove the first line, which is ---
+                comment_lines.remove_at (0);
+                comment = string.joinv("\n", comment_lines.to_array ());
+            } else if (is_rebase_message) {
                 action = "rebase";
-                var _detail = comment_lines[1].replace ("# ", "");
+                var _detail = comment_lines[0].replace ("# ", "");
                 var _detailChunks = _detail.split (" ");
                 detail = @"$(_detailChunks[1]) → $(_detailChunks[3])";
-              } else {
+            } else {
                 // This should not happen.
                 // TODO: Ensure this results in the ability to easily report this issue.
                 warning ("Warning: unknown Git commit type encountered in: ${commitMessageFilePath}");
-              }
+            }
 
-              print (@"\nAction: $(action)");
-              print (@"\nDetail: $(detail)");
+            print (@"\nAction: $(action)");
+            print (@"\nDetail: $(detail)");
+
+            // Add Pango markup to make the commented area appear lighter.
+            // TODO: Rewrite to make this work with adequate contrast under both light
+            // and dark schemes.
+            comment = @"<span foreground=\"#959595\">$(comment)</span>";
+
+            // Populate the initial buffers.
+            comment_buffer = new Gtk.TextBuffer (null);
+
+            // Unfortunately, there’s no set_markup method like there is for
+            // set_text so we have to use an iterator and the insert method.
+            Gtk.TextIter comment_buffer_start_iterator;
+            comment_buffer.get_start_iter (out comment_buffer_start_iterator);
+            comment_buffer.insert_markup (ref comment_buffer_start_iterator, comment, -1);
+            message_buffer = new Gtk.TextBuffer (null);
+            message_buffer.set_text (message);
 
             // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;

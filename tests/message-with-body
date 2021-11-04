@@ -1,4 +1,4 @@
-Merge branch 'master' of source.small-tech.org:gnome/gnomit
+Merge branch 'main' of source.small-tech.org:gnome/gnomit
 
 This is another line.
 
@@ -6,7 +6,7 @@ This is another line.
 # with '#' will be ignored, and an empty message aborts the commit.
 #
 # On branch master
-# Your branch is up-to-date with 'origin/master'.
+# Your branch is up-to-date with 'origin/main'.
 #
 # Changes to be committed:
 #	modified:   README.md
