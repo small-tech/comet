@@ -57,6 +57,8 @@ namespace Comet {
                 {ACTION_COMMIT, action_commit}
             };
 
+            // Note: app name in title string should not be translated.
+            // The action and detail will already be localised by git.
             var title_string = @"Comet: $(model.action) ($(model.detail))";
             title = title_string;           // Window title, used in task switcher, etc.
             toolbar.title = title_string;   // Toolbar title, displayed in app.
@@ -307,7 +309,7 @@ namespace Comet {
                 } else {
                     // To understand why we’re doing it this way for localisation,
                     // please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
-                    status_message = ngettext ("%d character left on first line.", "%d characters left on first line.", characters_left).printf (characters_left);
+                    status_message = ngettext ("%d character left on first line.", "%d characters left on first line.", (ulong) characters_left).printf (characters_left);
                 }
                 overlay_bar.label = status_message;
                 overlay_bar.visible = true;

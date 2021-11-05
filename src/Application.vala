@@ -47,6 +47,15 @@ There is NO WARRANTY, to the extent permitted by law.""";
             saved_state = new GLib.Settings ("com.github.small_tech.comet.saved-state");
 
             //
+            // Setup localisation.
+            //
+
+            GLib.Intl.setlocale (LocaleCategory.ALL, "");
+            GLib.Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALEDIR);
+            GLib.Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+            GLib.Intl.textdomain (Constants.GETTEXT_PACKAGE);
+
+            //
             // Set command-line option handling.
             //
 
@@ -108,6 +117,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
                 activate ();
             });
         }
+
 
         protected override void activate () {
             // Custom icon

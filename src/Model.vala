@@ -147,7 +147,7 @@ namespace Comet {
             } else if (is_merge_message) {
                 // Display the branch name
                 action = "merge";
-                detail = @"branch $(comment.split ("'")[1])";
+                detail = _("branch %s").printf(comment.split ("'")[1]);
             } else if (is_tag_message) {
                 // Get the version number from the message
                 var version = comment_lines[2].slice (1, -1).strip ();
@@ -156,7 +156,7 @@ namespace Comet {
             } else if (is_add_p_hunk_edit_message) {
                 // git add -p: edit hunk message
                 action = "add -p";
-                detail = "manual hunk edit mode";
+                detail = _("manual hunk edit mode");
                 // Remove the first line, which is ---
                 comment_lines.remove_at (0);
                 comment = string.joinv("\n", comment_lines.to_array ());
