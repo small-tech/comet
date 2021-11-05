@@ -3,6 +3,11 @@
 # This file is distributed under the same license as the com.github.small_tech.comet package.
 # Automatically generated, 2021.
 #
+# Initially translated by Aral Balkan.
+#
+# References:
+#  - Git terminology: https://github.com/git/git/blob/master/po/tr.po
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
@@ -55,7 +60,7 @@ msgstr ""
 
 #: src/Application.vala:39
 msgid "Helps you write better Git commit messages."
-msgstr "Daha iyi Git işletim mesajları yazmanıza yardımcı olur."
+msgstr "Daha iyi Git işleme mesajları yazmanıza yardımcı olur."
 
 #.
 #. Set command-line option handling.
@@ -64,16 +69,16 @@ msgstr "Daha iyi Git işletim mesajları yazmanıza yardımcı olur."
 #. list of options on the first line of the --help screen.
 #: src/Application.vala:59
 msgid "<path-to-git-commit-message-file>"
-msgstr ""
+msgstr "<git-işleme-mesaj-dosyasının-yolu>"
 
 #: src/Application.vala:74
 msgid "Show version number and exit"
-msgstr ""
+msgstr "Sürüm numarasını göster ve çik"
 
 #: src/Application.vala:104
 #, c-format
 msgid "Error: Too many files (%d)."
-msgstr ""
+msgstr "Hata: Çok fazla dosya (%d)."
 
 #: src/Application.vala:172
 msgid "Comet can’t read the git commit message."
@@ -95,12 +100,12 @@ msgstr "İptal et"
 
 #: src/MainWindow.vala:171
 msgid "Commit"
-msgstr "İşlet"
+msgstr "İşle"
 
 #. TODO: Handle this better.
 #: src/MainWindow.vala:223
 msgid "Could not save commit message."
-msgstr ""
+msgstr "İşleme mesajını kaydedemedik."
 
 #: src/MainWindow.vala:308
 msgid "No characters left on first line."
@@ -125,7 +130,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Comet: Ne yazık ki bu geçerli bir git işletim mesajına benzemiyor (yorum "
+"Comet: Ne yazık ki bu geçerli bir git işleme mesajına benzemiyor (yorum "
 "bölümü eksik):\n"
 "\n"
 "%s"
@@ -139,7 +144,7 @@ msgstr ""
 #. git add -p: edit hunk message
 #: src/Model.vala:159
 msgid "manual hunk edit mode"
-msgstr ""
+msgstr "el ile parça düzenleme kipi"
 
 #. This should not happen.
 #. TODO: Ensure this results in the ability to easily report this issue, like
@@ -153,49 +158,49 @@ msgstr ""
 
 #: src/WelcomeWindow.vala:73
 msgid "Disable Comet"
-msgstr ""
+msgstr "Comet’i Devre Dışı Bırak"
 
 #: src/WelcomeWindow.vala:73
 msgid "Revert to using your previous editor for git commit messages."
-msgstr ""
+msgstr "Bir önceki git işlem düzenleyicinizi kullanmaya geri dönün."
 
 #: src/WelcomeWindow.vala:75
 msgid "Enable Comet"
-msgstr ""
+msgstr "Comet’i Etkinleştir"
 
 #: src/WelcomeWindow.vala:75
 msgid "Use Comet as the default editor for git commit messages."
-msgstr ""
+msgstr "Comet’i öntanımlı git işlem mesajı düzenleyiciniz olarak kullanın."
 
 #: src/WelcomeWindow.vala:79
 msgid "Help"
-msgstr "Yardim"
+msgstr "Yardım"
 
 #: src/WelcomeWindow.vala:79
 msgid "Having trouble? Get help and report issues."
-msgstr "Problem mi var? Yardim alin ve problemi iletin."
+msgstr "Bilgi almak ve sorun raporu açmak için."
 
 #: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:12
 msgid "Comet"
-msgstr ""
+msgstr "Comet"
 
 #. Insert the status text into the view.
 #: src/Widgets/Welcome.vala:20
 msgid "Comet is enabled as your editor for git commit messages."
-msgstr ""
+msgstr "Comet öntanımlı git işlem düzenleyiciniz olarak etkinleştirilmiştir."
 
 #: src/Widgets/Welcome.vala:21
 msgid "Comet is disabled."
-msgstr ""
+msgstr "Comet devre dışı bırakılmıştır."
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
-msgstr ""
+msgstr "Git İşlem Mesaji Düzenleyicisi"
 
 #: data/comet.desktop.in:7
 msgid "Git commit message editor"
-msgstr ""
+msgstr "Git işlem mesaji düzenleyicisi"
 
 #: data/comet.desktop.in:10
 msgid "com.github.small_tech.comet"
@@ -203,50 +208,8 @@ msgstr ""
 
 #: data/comet.desktop.in:12
 msgid "git;commit;message;editor"
-msgstr ""
+msgstr "git;işlem;mesaj;düzenleyici"
 
 #: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
 msgid "A beautiful git commit message editor for elementary OS."
-msgstr ""
-
-#, fuzzy
-#~ msgid ""
-#~ "Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
-#~ "profit (https://small-tech.org).\n"
-#~ "\n"
-#~ "Small Technology are everyday tools for everyday people designed to "
-#~ "increase human welfare, not corporate profits.\n"
-#~ "\n"
-#~ "Like this? Fund us! https://small-tech.org/fund-us\n"
-#~ "\n"
-#~ "Copyright © 2021 Aral Balkan (https://ar.al)\n"
-#~ "\n"
-#~ "License GPLv3+: GNU GPL version 3 (http://gnu.org/licenses/gpl.html)\n"
-#~ "This is free software: you are free to change and redistribute it.\n"
-#~ "There is NO WARRANTY, to the extent permitted by law."
-#~ msgstr ""
-#~ "Minicik, bağımsız ve kar amacı gütmeyen Small Technology Foundation "
-#~ "(Küçük Teknoloji Kurumu) tarafından sevgiyle yapılmıştır.\n"
-#~ "\n"
-#~ "Küçük Teknoloji kurumsal karları değil, insan refahını artırmak için "
-#~ "yaratılan, günlük insanlar için günlük aletlerdir.\n"
-#~ "\n"
-#~ "Bunu beğendiniz mi? Bizi destekleyin! https://small-tech.org/fund-us\n"
-#~ "\n"
-#~ "Telif Hakkı © 2021 Aral Balkan (https://ar.al)\n"
-#~ "\n"
-#~ "Lisansı GPLv3: GNU GPL version 3 (http://gnu.org/licenses/gpl.html)\n"
-#~ "Bu özgür yazılımdır: değiştirebilirsiniz ve dağıtabilirsiniz.\n"
-#~ "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
-
-#~ msgid ""
-#~ "Helps you write better Git commit messages.\n"
-#~ "\n"
-#~ "  To use, configure Git to use Gnomit as the default editor:\n"
-#~ "\n"
-#~ "  git config --global core.editor \"flatpak run com.github.small_tech."
-#~ "Comet\" "
-#~ msgstr "Daha iyi Git işletim mesajları yazmanıza yardımcı olur.\n"
-
-#~ msgid "Comet: $(model.action) ($(model.detail))"
-#~ msgstr "Komet: $(model.action) ($(model.detail))"
+msgstr "elementary OS için güzel bir git işlem mesaji duzenleyicisi."
