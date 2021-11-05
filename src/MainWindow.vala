@@ -69,13 +69,13 @@ namespace Comet {
 
             // Create scrollable text view for the message.
             var message_scrolled_window = new Gtk.ScrolledWindow (null, null);
-            message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
+            //  message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
 
 
             message_scrolled_window.vexpand = true;
 
             message_view = new Gtk.TextView ();
-            message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
+            //  message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
             message_view.wrap_mode = Gtk.WrapMode.WORD;
             message_view.margin = 12;
             message_view.input_hints =
@@ -88,28 +88,31 @@ namespace Comet {
 
             underline_colour_tag = new Gtk.TextTag (UNDERLINE_COLOUR_TAG_NAME);
             var red = Gdk.RGBA ();
-            red.parse ("#ff5555");
+            red.parse ("#ed5353");
             underline_colour_tag.underline_rgba = red;
             //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
             message_view_buffer.tag_table.add (underline_colour_tag);
 
-            // Original dracula background colour: #282a36
-            // Darker dracula background colour: #121220
-            var dracula_theme = """
+            var nord_theme = """
                 textview text {
-                    color: #f8f8f2;
-                    background-color: #282a36;
+                    background-color: #1a1a1a;
+                    color: #d8dee9;
                 }
 
-                textview selection {
-                    color: #f8f8f2;
-                    background-color: #44475a;
+                textview {
+                    font-size: 1.25em;
+                }
+
+                scrolledwindow {
+                    background-color: #1a1a1a;
+                    border-radius: 0;
                 }
             """;
             var css_provider = new Gtk.CssProvider ();
-            css_provider.load_from_data (dracula_theme, -1);
+            css_provider.load_from_data (nord_theme, -1);
             message_view.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
+            message_view.monospace = true;
+            message_scrolled_window.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
             message_view_buffer.tag_table.add (highlight_background_tag);
@@ -129,10 +132,28 @@ namespace Comet {
             grid.attach (overlay, 0, 1);
 
             // Create simple text view for comment.
+            var comment_view_styles = """
+                textview {
+                    background-color: #333333;
+                }
+
+                textview text {
+                    color: red;
+                }
+
+                grid {
+                    background-color: #333333;
+                }
+            """;
+            var comment_view_css_provider = new Gtk.CssProvider ();
+            comment_view_css_provider.load_from_data (comment_view_styles, -1);
             comment_view = new Gtk.TextView ();
             comment_view.margin = 12;
             comment_view.buffer = model.comment_buffer;
             comment_view_buffer = comment_view.get_buffer ();
+
+            comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            grid.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             // Mark the comment area as non-editable.
             comment_view.editable = false;
@@ -217,8 +238,8 @@ namespace Comet {
             // colour of the foreground text.
 
             // Colour shade guide for Minty Rose: https://www.color-hex.com/color/ffe4e1
-            var dark_foreground_highlight_colour = "#ff5555";  // minty rose
-            var light_foreground_highlight_colour = "#ff5555"; // darker shade of minty rose
+            var dark_foreground_highlight_colour = "#ebcb8b";  // minty rose
+            var light_foreground_highlight_colour = "#ebcb8b"; // darker shade of minty rose
             string highlight_colour;
             var font_colour = g_spell_text_view.get_view().get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -235,7 +256,7 @@ namespace Comet {
                 highlight_colour = dark_foreground_highlight_colour;
             }
             highlight_background_tag.background = highlight_colour;
-            highlight_background_tag.foreground = "#282a36";
+            highlight_background_tag.foreground = "#1a1a1a";
         }
 
 
@@ -279,7 +300,16 @@ namespace Comet {
                     overlay_bar = new Granite.Widgets.OverlayBar (overlay);
                     overlay.show_all ();
                 }
-                overlay_bar.label = _(@"$(characters_left) characters left on first line");
+
+                string status_message;
+                if (characters_left == 0) {
+                    status_message = _("No characters left on first line.");
+                } else {
+                    // To understand why we’re doing it this way for localisation,
+                    // please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
+                    status_message = ngettext ("%d character left on first line.", "%d characters left on first line.", characters_left).printf (characters_left);
+                }
+                overlay_bar.label = status_message;
                 overlay_bar.visible = true;
             } else {
                 if (overlay_bar != null) {
