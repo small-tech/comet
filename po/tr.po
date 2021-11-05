@@ -82,7 +82,7 @@ msgstr "Hata: Çok fazla dosya (%d)."
 
 #: src/Application.vala:172
 msgid "Comet can’t read the git commit message."
-msgstr ""
+msgstr "Comet git işlem mesajını okuyamıyor."
 
 #: src/Application.vala:173
 msgid ""
