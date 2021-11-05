@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 18:19+0000\n"
+"POT-Creation-Date: 2021-11-05 18:45+0000\n"
 "PO-Revision-Date: 2021-10-08 13:07+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -89,10 +89,12 @@ msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
+"Hata Raporu Aç düğmesi sizi GitHub¯sitesinde gönderilmeye hazır bir"
+"hata raporuna götürür."
 
 #: src/Application.vala:179
 msgid "Report Error"
-msgstr ""
+msgstr "Hata Raporu Aç"
 
 #: src/MainWindow.vala:169
 msgid "Cancel"
@@ -139,7 +141,7 @@ msgstr ""
 #: src/Model.vala:150
 #, c-format
 msgid "branch %s"
-msgstr ""
+msgstr "dal %s"
 
 #. git add -p: edit hunk message
 #: src/Model.vala:159
@@ -154,7 +156,11 @@ msgstr "el ile parça düzenleme kipi"
 #: src/Model.vala:177
 #, c-format
 msgid "Warning: unknown Git commit type encountered in %s"
-msgstr ""
+msgstr "Uyarı: bilinmeyen Git işlem türü ile karşılaşıldi: %s"
+
+#: src/WelcomeWindow.vala:67
+msgid "A beautiful git commit message editor."
+msgstr "Güzel bir git işlem mesaji duzenleyicisi."
 
 #: src/WelcomeWindow.vala:73
 msgid "Disable Comet"

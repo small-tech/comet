@@ -64,7 +64,7 @@ namespace Comet {
 
             welcome = new Comet.Widgets.Welcome (
                 "Comet",
-                "A beautiful git commit message editor.",
+                _("A beautiful git commit message editor."),
                 comet_is_enabled
             );
 

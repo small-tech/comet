@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 18:19+0000\n"
+"POT-Creation-Date: 2021-11-05 18:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,6 +140,10 @@ msgstr ""
 #: src/Model.vala:177
 #, c-format
 msgid "Warning: unknown Git commit type encountered in %s"
+msgstr ""
+
+#: src/WelcomeWindow.vala:67
+msgid "A beautiful git commit message editor."
 msgstr ""
 
 #: src/WelcomeWindow.vala:73
