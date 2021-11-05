@@ -14,17 +14,15 @@ namespace Comet {
 
         static string SUMMARY = _("Helps you write better Git commit messages.");
 
-        static string COPYRIGHT = _("""Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit (https://small-tech.org).
-
-Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.
-
-Like this? Fund us! https://small-tech.org/fund-us
-
-Copyright © 2021 Aral Balkan (https://ar.al)
-
-License GPLv3+: GNU GPL version 3 (http://gnu.org/licenses/gpl.html)
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.""");
+        static string COPYRIGHT =
+            _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit") +
+            "(https://small-tech.org).\n\n" +
+            _("Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.") +
+            "\n\n" +
+            _("Like this? Fund us!") + " https://small-tech.org/fund-us" +
+            _("Copyright") + " © 2021 Aral Balkan (https://ar.al)" + "\n\n" +
+            _("License GPLv3+: GNU GPL version 3") + " (http://gnu.org/licenses/gpl.html)" +
+            _("This is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.");
 
         public Comet.Model model;
 
