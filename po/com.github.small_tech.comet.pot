@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 18:03+0000\n"
+"POT-Creation-Date: 2021-11-05 18:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,38 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: src/Application.vala:15
-msgid "Helps you write better Git commit messages."
-msgstr ""
-
-#: src/Application.vala:18
+#: src/Application.vala:30
 msgid ""
 "Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
 "profit"
 msgstr ""
 
-#: src/Application.vala:20
+#: src/Application.vala:32
 msgid ""
 "Small Technology are everyday tools for everyday people designed to increase "
 "human welfare, not corporate profits."
 msgstr ""
 
-#: src/Application.vala:22
+#: src/Application.vala:34
 msgid "Like this? Fund us!"
 msgstr ""
 
-#: src/Application.vala:23
+#: src/Application.vala:35
 msgid "Copyright"
 msgstr ""
 
-#: src/Application.vala:24
+#: src/Application.vala:36
 msgid "License GPLv3+: GNU GPL version 3"
 msgstr ""
 
-#: src/Application.vala:25
+#: src/Application.vala:37
 msgid ""
 "This is free software: you are free to change and redistribute it.\n"
 "There is NO WARRANTY, to the extent permitted by law."
+msgstr ""
+
+#: src/Application.vala:39
+msgid "Helps you write better Git commit messages."
 msgstr ""
 
 #.
@@ -57,30 +57,30 @@ msgstr ""
 #.
 #. The option context parameter string is displayed next to the
 #. list of options on the first line of the --help screen.
-#: src/Application.vala:58
+#: src/Application.vala:59
 msgid "<path-to-git-commit-message-file>"
 msgstr ""
 
-#: src/Application.vala:73
+#: src/Application.vala:74
 msgid "Show version number and exit"
 msgstr ""
 
-#: src/Application.vala:103
+#: src/Application.vala:104
 #, c-format
 msgid "Error: Too many files (%d)."
 msgstr ""
 
-#: src/Application.vala:171
+#: src/Application.vala:172
 msgid "Comet can’t read the git commit message."
 msgstr ""
 
-#: src/Application.vala:172
+#: src/Application.vala:173
 msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
 
-#: src/Application.vala:178
+#: src/Application.vala:179
 msgid "Report Error"
 msgstr ""
 
