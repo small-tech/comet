@@ -136,7 +136,6 @@ namespace Comet {
 
             action = "n/a";
             detail = "n/a";
-
             if (is_commit_message) {
                 // Try to get the branch name via a method that relies on
                 // positional aspect of the branch name so it should work with
@@ -168,8 +167,11 @@ namespace Comet {
                 detail = @"$(_detailChunks[1]) → $(_detailChunks[3])";
             } else {
                 // This should not happen.
-                // TODO: Ensure this results in the ability to easily report this issue.
-                warning ("Warning: unknown Git commit type encountered in: ${commitMessageFilePath}");
+                // TODO: Ensure this results in the ability to easily report this issue, like
+                // we do with the errors (but without throwing an error as we don’t want to
+                // stop the person from commiting just because we can’t format and display the
+                // commit message in a nice way).
+                warning (_("Warning: unknown Git commit type encountered in %s"), commit_message_file_path);
             }
 
             print (@"\nAction: $(action)");
