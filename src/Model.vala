@@ -80,6 +80,12 @@ namespace Comet {
 
             var first_comment_index = text.index_of ("#");
 
+            // In case there is no comment for some reason, let’s not go further as this is likely not
+            // a proper git commit message.
+            if (first_comment_index == -1) {
+                throw new FileError.INVAL (_("Comet: Sorry, this does not look like a valid git commit message (it’s missing a comment section):\n\n%s").printf(text));
+            }
+
             message = text.slice (0, first_comment_index - 1);
 
             // Trim any newlines there may be at the end of the commit body
