@@ -93,7 +93,7 @@ namespace Comet {
             //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
             message_view_buffer.tag_table.add (underline_colour_tag);
 
-            var nord_theme = """
+            var base_styles = """
                 textview text {
                     background-color: #1a1a1a;
                     color: #d8dee9;
@@ -107,9 +107,13 @@ namespace Comet {
                     background-color: #1a1a1a;
                     border-radius: 0;
                 }
+
+                grid {
+                    background-color: #333333;
+                }
             """;
             var css_provider = new Gtk.CssProvider ();
-            css_provider.load_from_data (nord_theme, -1);
+            css_provider.load_from_data (base_styles, -1);
             message_view.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             message_view.monospace = true;
             message_scrolled_window.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -139,10 +143,6 @@ namespace Comet {
 
                 textview text {
                     color: red;
-                }
-
-                grid {
-                    background-color: #333333;
                 }
             """;
             var comment_view_css_provider = new Gtk.CssProvider ();
