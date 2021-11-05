@@ -6,7 +6,7 @@ pushd build
 ninja com.github.small_tech.comet-pot
 ninja com.github.small_tech.comet-update-po
 popd
-if [[ $1 != '--no-status' ]]; then
+if [[ $# == 0 || $1 != '--no-status' ]]; then
   git status
 fi
 
