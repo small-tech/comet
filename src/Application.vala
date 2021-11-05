@@ -12,22 +12,32 @@ namespace Comet {
         public static string flatpak_id;
         public static bool is_running_as_flatpak;
 
-        static string SUMMARY = _("Helps you write better Git commit messages.");
-
-        static string COPYRIGHT =
-            _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit") +
-            "(https://small-tech.org).\n\n" +
-            _("Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.") +
-            "\n\n" +
-            _("Like this? Fund us!") + " https://small-tech.org/fund-us" +
-            _("Copyright") + " © 2021 Aral Balkan (https://ar.al)" + "\n\n" +
-            _("License GPLv3+: GNU GPL version 3") + " (http://gnu.org/licenses/gpl.html)" +
-            _("This is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.");
+        string SUMMARY;
+        string COPYRIGHT;
 
         public Comet.Model model;
 
         private File commit_message_file;
         private bool launched_with_file = false;
+
+        construct {
+            // Setup localisation.
+            GLib.Intl.setlocale (LocaleCategory.ALL, "");
+            GLib.Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALEDIR);
+            GLib.Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
+            GLib.Intl.textdomain (Constants.GETTEXT_PACKAGE);
+
+            COPYRIGHT = _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit")
+            + " (https://small-tech.org).\n\n"
+            + _("Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.")
+            + "\n\n"
+            +_("Like this? Fund us!") + " https://small-tech.org/fund-us" + "\n\n"
+            + _("Copyright") + " © 2021 Aral Balkan (https://ar.al)" + "\n\n"
+            + _("License GPLv3+: GNU GPL version 3") + " (http://gnu.org/licenses/gpl.html)"
+            + _("This is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.");
+
+            SUMMARY = _("Helps you write better Git commit messages.");
+        }
 
         public Application () {
             Object(
@@ -39,15 +49,6 @@ namespace Comet {
                     | ApplicationFlags.NON_UNIQUE
             );
             saved_state = new GLib.Settings ("com.github.small_tech.comet.saved-state");
-
-            //
-            // Setup localisation.
-            //
-
-            GLib.Intl.setlocale (LocaleCategory.ALL, "");
-            GLib.Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALEDIR);
-            GLib.Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-            GLib.Intl.textdomain (Constants.GETTEXT_PACKAGE);
 
             //
             // Set command-line option handling.

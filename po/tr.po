@@ -26,8 +26,8 @@ msgid ""
 "Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
 "profit"
 msgstr ""
-"Minicik, bağımsız ve kar amacı gütmeyen Small Technology Foundation"
-" (Küçük Teknoloji Kurumu) tarafından sevgiyle yapılmıştır."
+"♥ Minicik, bağımsız ve kar amacı gütmeyen Small Technology Foundation"
+" (Küçük Teknoloji Kurumu) tarafından sevgiyle yapılmıştır"
 
 #: src/Application.vala:20
 msgid ""
