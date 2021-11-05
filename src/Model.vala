@@ -165,6 +165,9 @@ namespace Comet {
                 var _detail = comment_lines[0].replace ("# ", "");
                 var _detailChunks = _detail.split (" ");
                 detail = @"$(_detailChunks[1]) → $(_detailChunks[3])";
+
+                // Remove the ugly triple-newline at end of message.
+                comment = comment.replace ("\n\n\n", "\n\n");
             } else {
                 // This should not happen.
                 // TODO: Ensure this results in the ability to easily report this issue, like
@@ -180,7 +183,7 @@ namespace Comet {
             // Add Pango markup to make the commented area appear lighter.
             // TODO: Rewrite to make this work with adequate contrast under both light
             // and dark schemes.
-            comment = @"<span foreground=\"#959595\">$(comment)</span>";
+            comment = @"<span foreground=\"#d4d4d4\">$(comment)</span>";
 
             // Populate the initial buffers.
             comment_buffer = new Gtk.TextBuffer (null);
