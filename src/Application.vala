@@ -12,13 +12,9 @@ namespace Comet {
         public static string flatpak_id;
         public static bool is_running_as_flatpak;
 
-        static string SUMMARY = """Helps you write better Git commit messages.
+        static string SUMMARY = _("Helps you write better Git commit messages.");
 
-  To use, configure Git to use Gnomit as the default editor:
-
-  git config --global core.editor "flatpak run com.github.small_tech.Comet" """;
-
-        static string COPYRIGHT = """Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit (https://small-tech.org).
+        static string COPYRIGHT = _("""Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit (https://small-tech.org).
 
 Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.
 
@@ -26,9 +22,9 @@ Like this? Fund us! https://small-tech.org/fund-us
 
 Copyright © 2021 Aral Balkan (https://ar.al)
 
-License GPLv3+: GNU GPL version 3 or later (http://gnu.org/licenses/gpl.html)
+License GPLv3+: GNU GPL version 3 (http://gnu.org/licenses/gpl.html)
 This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.""";
+There is NO WARRANTY, to the extent permitted by law.""");
 
         public Comet.Model model;
 
@@ -61,7 +57,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
 
             // The option context parameter string is displayed next to the
             // list of options on the first line of the --help screen.
-            set_option_context_parameter_string ("<path-to-git-commit-message-file>");
+            set_option_context_parameter_string (_("<path-to-git-commit-message-file>"));
 
             // The option context summary is displayed above the set of options
             // on the --help screen.
@@ -76,7 +72,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
                 "version", 'v',
                 GLib.OptionFlags.NONE,
                 GLib.OptionArg.NONE,
-                "Show version number and exit",
+                _("Show version number and exit"),
                 null
             );
 
@@ -106,7 +102,7 @@ There is NO WARRANTY, to the extent permitted by law.""";
 
             open.connect((application, files, hint) => {
                 if (files.length > 1) {
-                    print (@"Error: Too many files ($(files.length)).");
+                    print (_("Error: Too many files (%d).").printf (files.length));
                     quit ();
                     return;
                 }
@@ -174,14 +170,14 @@ There is NO WARRANTY, to the extent permitted by law.""";
 
         private void show_commit_message_file_error (FileError error) {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                "Comet can’t read the git commit message.",
-                "The Report Error button will take you to a pre-filled issue on GitHub that you can submit to help improve Comet.",
+                _("Comet can’t read the git commit message."),
+                _("The Report Error button will take you to a pre-filled issue on GitHub that you can submit to help improve Comet."),
                 "process-stop",
                 Gtk.ButtonsType.CLOSE
             );
             message_dialog.badge_icon = new ThemedIcon("comet-128");
 
-            var report_error_button = new Gtk.Button.with_label ("Report Error");
+            var report_error_button = new Gtk.Button.with_label (_("Report Error"));
             report_error_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
             message_dialog.add_action_widget (report_error_button, Gtk.ResponseType.ACCEPT);
             message_dialog.show_error_details (error.message);
@@ -190,6 +186,8 @@ There is NO WARRANTY, to the extent permitted by law.""";
             message_dialog.response.connect ((response_id) => {
                if (response_id == Gtk.ResponseType.ACCEPT) {
                     try {
+                        // Note: these are *not* translatable strings on purpose as we
+                        // want the issues to be in English only.
                         var title = Uri.escape_string ("Error: Cannot read git commit message file");
                         var body = Uri.escape_string (@"Comet could not read the git commit message file on launch and failed with the following error:\n\n```\n$(error.message)\n```");
                         AppInfo.launch_default_for_uri (@"https://github.com/small-tech/comet/issues/new/?title=$(title)&body=$(body)", null);

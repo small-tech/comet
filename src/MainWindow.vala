@@ -220,7 +220,7 @@ namespace Comet {
                 app.quit ();
             } catch (FileError error) {
                 // TODO: Handle this better.
-                warning ("Could not save commit message.");
+                warning (_("Could not save commit message."));
             }
         }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 15:53+0000\n"
+"POT-Creation-Date: 2021-11-05 17:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: src/Application.vala:15
+msgid "Helps you write better Git commit messages."
+msgstr ""
+
+#: src/Application.vala:17
+msgid ""
+"Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
+"profit (https://small-tech.org).\n"
+"\n"
+"Small Technology are everyday tools for everyday people designed to increase "
+"human welfare, not corporate profits.\n"
+"\n"
+"Like this? Fund us! https://small-tech.org/fund-us\n"
+"\n"
+"Copyright © 2021 Aral Balkan (https://ar.al)\n"
+"\n"
+"License GPLv3+: GNU GPL version 3 or later (http://gnu.org/licenses/gpl."
+"html)\n"
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law."
+msgstr ""
+
+#.
+#. Set command-line option handling.
+#.
+#. The option context parameter string is displayed next to the
+#. list of options on the first line of the --help screen.
+#: src/Application.vala:60
+msgid "<path-to-git-commit-message-file>"
+msgstr ""
+
+#: src/Application.vala:75
+msgid "Show version number and exit"
+msgstr ""
+
+#: src/Application.vala:105
+#, c-format
+msgid "Error: Too many files (%d)."
+msgstr ""
+
+#: src/Application.vala:173
+msgid "Comet can’t read the git commit message."
+msgstr ""
+
+#: src/Application.vala:174
+msgid ""
+"The Report Error button will take you to a pre-filled issue on GitHub that "
+"you can submit to help improve Comet."
+msgstr ""
+
+#: src/Application.vala:180
+msgid "Report Error"
+msgstr ""
+
 #: src/MainWindow.vala:169
 msgid "Cancel"
 msgstr ""
 
 #: src/MainWindow.vala:171
 msgid "Commit"
+msgstr ""
+
+#. TODO: Handle this better.
+#: src/MainWindow.vala:223
+msgid "Could not save commit message."
 msgstr ""
 
 #: src/MainWindow.vala:308
