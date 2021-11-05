@@ -7,18 +7,105 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 13:07+0100\n"
+"POT-Creation-Date: 2021-11-05 15:53+0000\n"
 "PO-Revision-Date: 2021-10-08 13:07+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: data/comet.desktop.in:5 data/comet.appdata.xml.in:12
+#: src/MainWindow.vala:169
+msgid "Cancel"
+msgstr "İptal et"
+
+#: src/MainWindow.vala:171
+msgid "Commit"
+msgstr "İşlet"
+
+#: src/MainWindow.vala:308
+msgid "No characters left on first line."
+msgstr "İlk satırın harf limitindesiniz."
+
+#. To understand why we’re doing it this way for localisation,
+#. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
+#: src/MainWindow.vala:312
+#, c-format
+msgid "%d character left on first line."
+msgid_plural "%d characters left on first line."
+msgstr[0] "İlk satır limitine %d harf kaldı."
+msgstr[1] "İlk satır limitine %d harf kaldı."
+
+#. In case there is no comment for some reason, let’s not go further as this is likely not
+#. a proper git commit message.
+#: src/Model.vala:86
+#, c-format
+msgid ""
+"Comet: Sorry, this does not look like a valid git commit message (it’s "
+"missing a comment section):\n"
+"\n"
+"%s"
+msgstr ""
+
+#. Display the branch name
+#: src/Model.vala:150
+#, c-format
+msgid "branch %s"
+msgstr ""
+
+#. git add -p: edit hunk message
+#: src/Model.vala:159
+msgid "manual hunk edit mode"
+msgstr ""
+
+#. This should not happen.
+#. TODO: Ensure this results in the ability to easily report this issue, like
+#. we do with the errors (but without throwing an error as we don’t want to
+#. stop the person from commiting just because we can’t format and display the
+#. commit message in a nice way).
+#: src/Model.vala:177
+#, c-format
+msgid "Warning: unknown Git commit type encountered in %s"
+msgstr ""
+
+#: src/WelcomeWindow.vala:73
+msgid "Disable Comet"
+msgstr ""
+
+#: src/WelcomeWindow.vala:73
+msgid "Revert to using your previous editor for git commit messages."
+msgstr ""
+
+#: src/WelcomeWindow.vala:75
+msgid "Enable Comet"
+msgstr ""
+
+#: src/WelcomeWindow.vala:75
+msgid "Use Comet as the default editor for git commit messages."
+msgstr ""
+
+#: src/WelcomeWindow.vala:79
+msgid "Help"
+msgstr "Yardim"
+
+#: src/WelcomeWindow.vala:79
+msgid "Having trouble? Get help and report issues."
+msgstr "Problem mi var? Yardim alin ve problemi iletin."
+
+#: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
+#: data/comet.appdata.xml.in:12
 msgid "Comet"
+msgstr ""
+
+#. Insert the status text into the view.
+#: src/Widgets/Welcome.vala:20
+msgid "Comet is enabled as your editor for git commit messages."
+msgstr ""
+
+#: src/Widgets/Welcome.vala:21
+msgid "Comet is disabled."
 msgstr ""
 
 #: data/comet.desktop.in:6
@@ -40,3 +127,6 @@ msgstr ""
 #: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
 msgid "A beautiful git commit message editor for elementary OS."
 msgstr ""
+
+#~ msgid "Comet: $(model.action) ($(model.detail))"
+#~ msgstr "Komet: $(model.action) ($(model.detail))"
