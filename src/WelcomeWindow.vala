@@ -135,8 +135,11 @@ namespace Comet {
 
             status_grid.show_all ();
             welcome.show_all ();
+
             grid.attach (welcome, 0, 1);
             grid.attach (status_grid, 0, 2);
+
+            // Necessary for the “toggle” to maintain focus.
             enable_disable_button.grab_focus ();
         }
 
