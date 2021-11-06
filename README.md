@@ -44,7 +44,7 @@ To get your system ready to develop for elementary OS, please see the [Basic Set
 
 #### Install
 
-Configures and runs the build, installing settings-related features and also refreshing the icon cache.
+Configures and runs the build, installs settings-related features and translations and refreshes the icon cache.
 
 Run this after you clone this repository to get a working build.
 
@@ -94,7 +94,7 @@ There are two different ways to test Comet, as there are two ways to build it.
 The quickest way to build and test Comet is by using Meson and Ninja and creating a native binary:
 
 1. Run `task/build`
-2. Run `build/com.github.small_tech.comet test/<name of test message>`
+2. Run `build/com.github.small_tech.comet tests/<name of test message>`
 
 This will build and run Comet using one of the test git commit messages found in the tests folder.
 
@@ -120,7 +120,7 @@ Testing with the Flatpak build is slower but you can be sure that you’re seein
 2. Either carry out a `git commit` or, to run Comet using one of the test messages:
 
     ```shell
-    flatpak run com.github.small_tech.comet test/<name of test message>
+    flatpak run com.github.small_tech.comet tests/<name of test message>
     ```
 
 To test the Welcome screen, either launch Comet from the Applications Menu or, via Terminal, run the Comet flatpak without passing it any arguments:
@@ -155,6 +155,83 @@ For example, to debug with a standard git commit message without a body:
 ```
 
 If you do not pass an argument (if `"args": []`), Comet will launch in the debugger with the Welcome screen.
+
+### Translations
+
+To test the native binary with a locale different to your account’s locale (e.g., to test the Turkish translations):
+
+```shell
+# Test the welcome screen
+LANGUAGE=tr_TR.utf8 build/com.github.small_tech.comet
+
+# Test with a commit message
+LANGUAGE=tr_TR.utf8 build/com.github.small_tech.comet tests/message-without-body
+```
+
+Note that the message comment will display in English as the test messages are all in English. The comments are localised by git, not Comet, so to see fully localised output, set either the native binary or the flatpak as your default git editor with the `LANGUAGE` environment variable set and test with actual commits.
+
+Remember to update the translation files whenever you change localisable strings in your app:
+
+```shell
+tasks/update-translations
+```
+
+__Tip:__ Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
+
+e.g., if you run `build/com.github.small_tech.comet --help` from the terminal, you will see a localised summary string. This is how it’s composed as a collection of localisable and non-localisable strings:
+
+```vala
+var copyright_message = _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit")
++ " (https://small-tech.org).\n\n"
++ _("Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.")
++ "\n\n"
++_("Like this? Fund us!") + " https://small-tech.org/fund-us" + "\n\n"
++ _("Copyright") + " © 2021 Aral Balkan (https://ar.al)" + "\n\n"
++ _("License GPLv3+: GNU GPL version 3") + " (http://gnu.org/licenses/gpl.html)"
++ _("This is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.");
+```
+
+This leads to translation strings that provide enough context for translators without requiring them to maintain formatting and the non-localised bits and should lead to fewer errors.
+
+Here’s what the Turkish translation of this section looks like:
+
+```po
+#: src/Application.vala:30
+msgid ""
+"Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
+"profit"
+msgstr ""
+"♥ Minicik, bağımsız ve kar amacı gütmeyen Small Technology Foundation (Küçük "
+"Teknoloji Kurumu) tarafından sevgiyle yapılmıştır"
+
+#: src/Application.vala:32
+msgid ""
+"Small Technology are everyday tools for everyday people designed to increase "
+"human welfare, not corporate profits."
+msgstr ""
+"Küçük Teknoloji kurumsal karları değil, insan refahını artırmak için "
+"yaratılan, günlük insanlar için günlük aletlerdir."
+
+#: src/Application.vala:34
+msgid "Like this? Fund us!"
+msgstr "Bunu beğendiniz mi? Bizi destekleyin!"
+
+#: src/Application.vala:35
+msgid "Copyright"
+msgstr "Telif Hakkı"
+
+#: src/Application.vala:36
+msgid "License GPLv3+: GNU GPL version 3"
+msgstr "Lisansı GPLv3: GNU GPL sürüm 3"
+
+#: src/Application.vala:37
+msgid ""
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law."
+msgstr ""
+"Bu özgür yazılımdır: değiştirebilirsiniz ve dağıtabilirsiniz.\n"
+"Yasaların izin verdiği kapsamda hiçbir garanti içermez."
+```
 
 ### VSCodium
 
