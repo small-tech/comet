@@ -181,7 +181,8 @@ __Tip:__ Break up long strings into compositions of smaller ones. This is especi
 e.g., if you run `build/com.github.small_tech.comet --help` from the terminal, you will see a localised summary string. This is how it’s composed as a collection of localisable and non-localisable strings:
 
 ```vala
-var copyright_message = _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit")
+var copyright_message = ""
++ _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit")
 + " (https://small-tech.org).\n\n"
 + _("Small Technology are everyday tools for everyday people designed to increase human welfare, not corporate profits.")
 + "\n\n"
