@@ -78,6 +78,10 @@ namespace Comet {
             }
             enable_disable_button = welcome.get_button_from_index (enable_disable_button_index);
 
+            // Request a specific width so the whole interface does not
+            // jump around when we toggle it.
+            enable_disable_button.width_request = 460;
+
             welcome.append ("help-faq", _("Help"), _("Having trouble? Get help and report issues."));
             welcome.set_size_request (560, 380);
 
@@ -105,9 +109,6 @@ namespace Comet {
             status_grid = new Gtk.Grid ();
             status_grid.orientation = Gtk.Orientation.VERTICAL;
             status_grid.halign = Gtk.Align.CENTER;
-            //  status_grid.row_spacing = 12;
-            //  status_grid.margin_top = 24;
-            //  status_grid.margin_bottom = 12;
 
             // Insert the status text into the view.
             var status_message = comet_is_enabled ?
@@ -132,16 +133,7 @@ namespace Comet {
             status_box.add (status_icon);
             status_box.add (status_label);
 
-            // Make the status box display as a rounded card to further
-            // differentiate it from the list of actionable choices.
-            //  var status_box_style_context = status_box.get_style_context ();
-            //  status_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
-            //  status_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
-
             status_grid.add (status_box);
-
-            //  var baseGrid = (Gtk.Grid) get_child ();
-            //  baseGrid.insert_row (2);
 
             status_grid.show_all ();
             welcome.show_all ();
