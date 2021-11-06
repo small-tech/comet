@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 18:45+0000\n"
+"POT-Creation-Date: 2021-11-06 17:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,46 +142,49 @@ msgstr ""
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr ""
 
-#: src/WelcomeWindow.vala:67
+#: src/WelcomeWindow.vala:70
 msgid "A beautiful git commit message editor."
 msgstr ""
 
-#: src/WelcomeWindow.vala:73
+#: src/WelcomeWindow.vala:76
 msgid "Disable Comet"
 msgstr ""
 
-#: src/WelcomeWindow.vala:73
+#: src/WelcomeWindow.vala:76
 msgid "Revert to using your previous editor for git commit messages."
 msgstr ""
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:78
 msgid "Enable Comet"
 msgstr ""
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:78
 msgid "Use Comet as the default editor for git commit messages."
 msgstr ""
 
-#: src/WelcomeWindow.vala:79
+#: src/WelcomeWindow.vala:82
 msgid "Help"
 msgstr ""
 
-#: src/WelcomeWindow.vala:79
+#: src/WelcomeWindow.vala:82
 msgid "Having trouble? Get help and report issues."
+msgstr ""
+
+#. status_grid.row_spacing = 12;
+#. status_grid.margin_top = 24;
+#. status_grid.margin_bottom = 12;
+#. Insert the status text into the view.
+#: src/WelcomeWindow.vala:115
+msgid "Comet is enabled as your editor for git commit messages."
+msgstr ""
+
+#: src/WelcomeWindow.vala:116
+msgid "Comet is disabled."
 msgstr ""
 
 #: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:12
 msgid "Comet"
-msgstr ""
-
-#. Insert the status text into the view.
-#: src/Widgets/Welcome.vala:20
-msgid "Comet is enabled as your editor for git commit messages."
-msgstr ""
-
-#: src/Widgets/Welcome.vala:21
-msgid "Comet is disabled."
 msgstr ""
 
 #: data/comet.desktop.in:6

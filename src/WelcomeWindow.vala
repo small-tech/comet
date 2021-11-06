@@ -1,9 +1,11 @@
 namespace Comet {
     public class WelcomeWindow : Comet.BaseWindow {
 
-        private bool comet_is_enabled;
+        private bool comet_is_enabled { get; set; }
+
         private Granite.Widgets.WelcomeButton enable_disable_button;
-        private Comet.Widgets.Welcome welcome;
+        private Granite.Widgets.Welcome welcome;
+        private Gtk.Grid status_grid;
 
         private string GIT_CONFIG_GLOBAL_CORE_EDITOR = "git config --global core.editor";
         private string FLATPAK_SPAWN_HOST = "flatpak-spawn --host";
@@ -60,12 +62,12 @@ namespace Comet {
                 // This is not the first time the view is being created.
                 // Remove the old view.
                 grid.remove(welcome);
+                grid.remove(status_grid);
             }
 
-            welcome = new Comet.Widgets.Welcome (
+            welcome = new Granite.Widgets.Welcome (
                 "Comet",
-                _("A beautiful git commit message editor."),
-                comet_is_enabled
+                _("A beautiful git commit message editor.")
             );
 
             int enable_disable_button_index;
@@ -100,8 +102,51 @@ namespace Comet {
                 }
             });
 
+            status_grid = new Gtk.Grid ();
+            status_grid.orientation = Gtk.Orientation.VERTICAL;
+            status_grid.halign = Gtk.Align.CENTER;
+            //  status_grid.row_spacing = 12;
+            //  status_grid.margin_top = 24;
+            //  status_grid.margin_bottom = 12;
+
+            // Insert the status text into the view.
+            var status_message = comet_is_enabled ?
+                _("Comet is enabled as your editor for git commit messages.")
+                : _("Comet is disabled.");
+
+            var status_icon_name = comet_is_enabled ? "process-completed" : "process-stop";
+
+            var status_label = new Gtk.Label (status_message);
+            status_label.justify = Gtk.Justification.LEFT;
+            status_label.wrap = true;
+            status_label.wrap_mode = Pango.WrapMode.WORD;
+            status_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
+            status_label.margin_end = 12;
+
+            var status_icon = new Gtk.Image.from_icon_name (status_icon_name, Gtk.IconSize.LARGE_TOOLBAR);
+            status_icon.margin_start = 12;
+            status_icon.margin_top = 12;
+            status_icon.margin_bottom = 12;
+
+            var status_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
+            status_box.add (status_icon);
+            status_box.add (status_label);
+
+            // Make the status box display as a rounded card to further
+            // differentiate it from the list of actionable choices.
+            //  var status_box_style_context = status_box.get_style_context ();
+            //  status_box_style_context.add_class (Granite.STYLE_CLASS_CARD);
+            //  status_box_style_context.add_class (Granite.STYLE_CLASS_ROUNDED);
+
+            status_grid.add (status_box);
+
+            //  var baseGrid = (Gtk.Grid) get_child ();
+            //  baseGrid.insert_row (2);
+
+            status_grid.show_all ();
             welcome.show_all ();
             grid.attach (welcome, 0, 1);
+            grid.attach (status_grid, 0, 2);
             enable_disable_button.grab_focus ();
         }
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-05 18:45+0000\n"
+"POT-Creation-Date: 2021-11-06 17:16+0000\n"
 "PO-Revision-Date: 2021-10-08 13:07+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -89,8 +89,8 @@ msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
-"Hata Raporu Aç düğmesi sizi GitHub¯sitesinde gönderilmeye hazır bir"
-"hata raporuna götürür."
+"Hata Raporu Aç düğmesi sizi GitHub¯sitesinde gönderilmeye hazır birhata "
+"raporuna götürür."
 
 #: src/Application.vala:179
 msgid "Report Error"
@@ -158,47 +158,50 @@ msgstr "el ile parça düzenleme kipi"
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr "Uyarı: bilinmeyen Git işlem türü ile karşılaşıldi: %s"
 
-#: src/WelcomeWindow.vala:67
+#: src/WelcomeWindow.vala:70
 msgid "A beautiful git commit message editor."
 msgstr "Güzel bir git işlem mesaji duzenleyicisi."
 
-#: src/WelcomeWindow.vala:73
+#: src/WelcomeWindow.vala:76
 msgid "Disable Comet"
 msgstr "Comet’i Devre Dışı Bırak"
 
-#: src/WelcomeWindow.vala:73
+#: src/WelcomeWindow.vala:76
 msgid "Revert to using your previous editor for git commit messages."
 msgstr "Bir önceki git işlem düzenleyicinizi kullanmaya geri dönün."
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:78
 msgid "Enable Comet"
 msgstr "Comet’i Etkinleştir"
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:78
 msgid "Use Comet as the default editor for git commit messages."
 msgstr "Comet’i öntanımlı git işlem mesajı düzenleyiciniz olarak kullanın."
 
-#: src/WelcomeWindow.vala:79
+#: src/WelcomeWindow.vala:82
 msgid "Help"
 msgstr "Yardım"
 
-#: src/WelcomeWindow.vala:79
+#: src/WelcomeWindow.vala:82
 msgid "Having trouble? Get help and report issues."
 msgstr "Bilgi almak ve sorun raporu açmak için."
+
+#. status_grid.row_spacing = 12;
+#. status_grid.margin_top = 24;
+#. status_grid.margin_bottom = 12;
+#. Insert the status text into the view.
+#: src/WelcomeWindow.vala:115
+msgid "Comet is enabled as your editor for git commit messages."
+msgstr "Comet öntanımlı git işlem düzenleyiciniz olarak etkinleştirilmiştir."
+
+#: src/WelcomeWindow.vala:116
+msgid "Comet is disabled."
+msgstr "Comet devre dışı bırakılmıştır."
 
 #: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:12
 msgid "Comet"
 msgstr "Comet"
-
-#. Insert the status text into the view.
-#: src/Widgets/Welcome.vala:20
-msgid "Comet is enabled as your editor for git commit messages."
-msgstr "Comet öntanımlı git işlem düzenleyiciniz olarak etkinleştirilmiştir."
-
-#: src/Widgets/Welcome.vala:21
-msgid "Comet is disabled."
-msgstr "Comet devre dışı bırakılmıştır."
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
