@@ -122,14 +122,12 @@ namespace Comet {
             status_label.wrap = true;
             status_label.wrap_mode = Pango.WrapMode.WORD;
             status_label.get_style_context ().add_class (Granite.STYLE_CLASS_H3_LABEL);
-            status_label.margin_end = 12;
 
             var status_icon = new Gtk.Image.from_icon_name (status_icon_name, Gtk.IconSize.LARGE_TOOLBAR);
-            status_icon.margin_start = 12;
-            status_icon.margin_top = 12;
-            status_icon.margin_bottom = 12;
+            status_icon.margin_top = 8;
+            status_icon.margin_bottom = 8;
 
-            var status_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
+            var status_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
             status_box.add (status_icon);
             status_box.add (status_label);
 
