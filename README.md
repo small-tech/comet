@@ -40,6 +40,25 @@ Please take some time to familiarise yourself with those documents before contin
 
 To get your system ready to develop for elementary OS, please see the [Basic Setup](https://docs.elementary.io/develop/writing-apps/the-basic-setup) section of the [elementary OS Developer Documentation](https://docs.elementary.io/develop/).
 
+### Accessibility Notes
+
+#### Welcome screen
+
+When the app first loads, the initial option button is selected in the Welcome screen. This is an accessibility issue for two reasons:
+
+1. The description (not title) of that option is read out by Orca.
+2. The rest of the window’s contents are not read in order unless the person invokes Orca’s “Speak entire window using flat review” command.
+
+This is an issue that affects all elementary OS apps that use the standard Granite Welcome screen widget and is being tracked in [Issue #526 on the Granite bug tracker](https://github.com/elementary/granite/issues/536).
+
+### Editor
+
+The title, git command, and git commit message type detail (e.g., the branch to be committed) are read out and the person is informed that the the git commit message editor component has focus.
+
+To have the git commit message comment read out, please invoke Orca’s “Speak entire window using flat review” command.
+
+If you have ideas for improving the accessibility of Comet, please voice them in the [discussions](https://github.com/small-tech/comet/discussions) or [open an issue](https://github.com/small-tech/comet/issues).
+
 ### Tasks
 
 #### Install
@@ -59,7 +78,6 @@ Builds the project.
 ```shell
 task/build
 ```
-
 
 #### Run
 
@@ -157,6 +175,19 @@ For example, to debug with a standard git commit message without a body:
 If you do not pass an argument (if `"args": []`), Comet will launch in the debugger with the Welcome screen.
 
 ### Translations
+
+#### Add a new language
+
+1. Add the language code to the [po/LINGUAS](https://github.com/small-tech/comet/blob/main/po/LINGUAS) file.
+2. Update translations:
+
+    ```shell
+    tasks/update-translations
+    ```
+
+_If you want to help translate but don’t want to clone the repository you can contribute using GitHub’s online interface. Please introduce yourself in the  [discussions](https://github.com/small-tech/comet/discussions) and let us know which language you’d like to work on and we can help you get started._
+
+#### Testing
 
 To test the native binary with a locale different to your account’s locale (e.g., to test the Turkish translations):
 
