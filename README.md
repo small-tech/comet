@@ -51,7 +51,7 @@ When the app first loads, the initial option button is selected in the Welcome s
 
 This is an issue that affects all elementary OS apps that use the standard Granite Welcome screen widget and is being tracked in [Issue #526 on the Granite bug tracker](https://github.com/elementary/granite/issues/536).
 
-### Editor
+#### Editor
 
 The title, git command, and git commit message type detail (e.g., the branch to be committed) are read out and the person is informed that the the git commit message editor component has focus.
 
