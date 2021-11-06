@@ -83,7 +83,7 @@ namespace Comet {
             enable_disable_button.width_request = 460;
 
             welcome.append ("help-faq", _("Help"), _("Having trouble? Get help and report issues."));
-            welcome.set_size_request (560, 380);
+            welcome.set_size_request (540, 300);
 
             welcome.activated.connect ((index) => {
                 switch (index) {

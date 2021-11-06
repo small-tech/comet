@@ -153,6 +153,7 @@ namespace Comet {
 
         private void preserve_window_state () {
             // Persist window dimensions and location.
+            print("Preserving window state!");
             var state = get_window ().get_state ();
             if (Gdk.WindowState.MAXIMIZED in state) {
                 Comet.saved_state.set_enum ("window-state", WindowState.MAXIMIZED);

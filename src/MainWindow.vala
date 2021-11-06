@@ -135,6 +135,10 @@ namespace Comet {
 
             overlay.add (message_scrolled_window);
 
+            // Ensure that there is always several lines of space in the editor view
+            // so that a long comment doesn’t squeeze it down to a single line.
+            message_scrolled_window.height_request = 100;
+
             grid.attach (overlay, 0, 1);
 
             // Create simple text view for comment.
