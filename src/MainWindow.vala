@@ -3,12 +3,21 @@ namespace Comet {
         // Model
         public Comet.Model model { get; private set; }
 
+        // Settings
+        Granite.Settings granite_settings;
+
         // Widgets
         private Gtk.TextView comment_view;
+        private Gtk.ScrolledWindow message_scrolled_window;
         private Gtk.TextView message_view;
+        private Gtk.ButtonBox button_box;
         private Gtk.Button commit_button;
         private Gtk.Overlay overlay;
         private Granite.Widgets.OverlayBar overlay_bar;
+
+        // Style providers
+        private Gtk.CssProvider base_styles_css_provider;
+        private Gtk.CssProvider comment_view_css_provider;
 
         // Spell check
         private Gspell.TextView g_spell_text_view;
@@ -70,14 +79,10 @@ namespace Comet {
             overlay = new Gtk.Overlay ();
 
             // Create scrollable text view for the message.
-            var message_scrolled_window = new Gtk.ScrolledWindow (null, null);
-            //  message_scrolled_window.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
-
-
+            message_scrolled_window = new Gtk.ScrolledWindow (null, null);
             message_scrolled_window.vexpand = true;
 
             message_view = new Gtk.TextView ();
-            //  message_view.get_style_context ().add_class (Granite.STYLE_CLASS_TERMINAL);
             message_view.wrap_mode = Gtk.WrapMode.WORD;
             message_view.margin = 12;
             message_view.input_hints =
@@ -94,15 +99,118 @@ namespace Comet {
             underline_colour_tag.underline_rgba = red;
             //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
             message_view_buffer.tag_table.add (underline_colour_tag);
+            message_view.monospace = true;
 
-            var granite_settings = Granite.Settings.get_default ();
+            highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
+            message_view_buffer.tag_table.add (highlight_background_tag);
+
+            message_scrolled_window.add (message_view);
+
+            Gtk.TextIter start_of_message;
+            message_view_buffer.get_start_iter (out start_of_message);
+            message_view_buffer.place_cursor (start_of_message);
+
+            // Set up spell checking for the text view.
+            g_spell_text_view = Gspell.TextView.get_from_gtk_text_view (message_view);
+            g_spell_text_view.basic_setup ();
+
+            overlay.add (message_scrolled_window);
+
+            // Ensure that the editor view is always at least as large
+            // as it was on first launch with a regular commit (with about
+            // 5/6 lines of text visible) so that a long comment (e.g., a rebase)
+            // doesn’t squeeze it down to a single line.
+            message_scrolled_window.set_size_request (540, 130);
+
+            grid.attach (overlay, 0, 1);
+
+            // Create simple text view for comment.
+            comment_view = new Gtk.TextView ();
+            comment_view.margin = 12;
+            comment_view.buffer = model.comment_buffer;
+            comment_view_buffer = comment_view.get_buffer ();
+
+            // Mark the comment area as non-editable.
+            comment_view.editable = false;
+
+            grid.attach (comment_view, 0, 2);
+
+            // Add the action buttons.
+            button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
+            button_box.layout_style = Gtk.ButtonBoxStyle.EDGE;
+            var cancel_button = new Gtk.Button.with_label (_("Cancel"));
+            cancel_button.margin = 12;
+
+            commit_button = new Gtk.Button.with_label (_("Commit"));
+            commit_button.margin = 12;
+
+            button_box.add (cancel_button);
+            button_box.add (commit_button);
+
+            cancel_button.clicked.connect (app.quit);
+            commit_button.clicked.connect (save_commit_message_and_exit);
+
+            validate_commit_button ();
+
+            grid.attach (button_box, 0, 3);
+
+            // Handle colour scheme.
+            granite_settings = Granite.Settings.get_default ();
+
+            // Listen for changes in person’s color scheme settings
+            // and update color scheme of app accordingly.
+            granite_settings.notify["prefers-color-scheme"].connect (() => {
+                // I can’t seem to connect this signal to the update_styles method
+                // directly and, if I invoke it in a closure, I can’t seem to
+                // specify that the closure should throw so this is a hack.
+                // If anyone knows of a better way to handle this, please open an issue.
+                try {
+                    update_styles();
+                } catch (Error error) {
+                    assert_not_reached ();
+                }
+            });
+
+            // Ditto: I can’t specify that the create_layout method throws without
+            // changing the base class.
+            try {
+                update_styles();
+            } catch (Error error) {
+                assert_not_reached ();
+            }
+
+            // Highlight colour.
+            style_updated.connect (set_highlight_colour);
+            message_view_buffer.changed.connect (highlight_text);
+            message_view_buffer.paste_done.connect (highlight_text);
+            //  message_view_buffer.delete_range.connect (highlight_text);
+            message_view_buffer.notify["cursor-position"].connect (highlight_text);
+
+            // Exit via escape key.
+            key_press_event.connect ((widget, event) => {
+                uint keyValue;
+                event.get_keyval (out keyValue);
+                if (keyValue == Gdk.Key.Escape) {
+                    app.quit();
+                    return true;
+                }
+                return false;
+            });
+
+            // Validate the commit button whenever the person updates the message.
+            message_view_buffer.end_user_action.connect (() => {
+                validate_commit_button ();
+            });
+        }
+
+
+        // Update styles. Is called at start and anytime the colour scheme changes.
+        private void update_styles () throws GLib.Error {
             var is_dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
             var message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
             var message_background_colour = is_dark_mode ? Constants.Colours.BLACK_700 : Constants.Colours.SILVER_100;
-
             var comment_foreground_colour = is_dark_mode ? message_foreground_colour : Constants.Colours.BLACK_300;
-
             var app_background_colour = is_dark_mode ? Constants.Colours.BLACK_500: Constants.Colours.SILVER_300;
 
             var base_styles = @"
@@ -133,37 +241,7 @@ namespace Comet {
                 }
                 */
             ";
-            var base_styles_css_provider = new Gtk.CssProvider ();
-            base_styles_css_provider.load_from_data (base_styles, -1);
-            message_view.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            message_view.monospace = true;
-            message_scrolled_window.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-            highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
-            message_view_buffer.tag_table.add (highlight_background_tag);
-
-            message_scrolled_window.add (message_view);
-
-            Gtk.TextIter start_of_message;
-            message_view_buffer.get_start_iter (out start_of_message);
-            message_view_buffer.place_cursor (start_of_message);
-
-            // Set up spell checking for the text view.
-            g_spell_text_view = Gspell.TextView.get_from_gtk_text_view (message_view);
-            g_spell_text_view.basic_setup ();
-
-            overlay.add (message_scrolled_window);
-
-            // Ensure that the editor view is always at least as large
-            // as it was on first launch with a regular commit (with about
-            // 5/6 lines of text visible) so that a long comment (e.g., a rebase)
-            // doesn’t squeeze it down to a single line.
-            message_scrolled_window.set_size_request (540, 130);
-
-            grid.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            grid.attach (overlay, 0, 1);
-
-            // Create simple text view for comment.
             var comment_view_styles = @"
                 textview {
                     background-color: $(app_background_colour);
@@ -173,63 +251,30 @@ namespace Comet {
                     color: $(comment_foreground_colour);
                 }
             ";
-            var comment_view_css_provider = new Gtk.CssProvider ();
+
+            // Create the CSS providers if necessary and remove existing ones
+            // from the components otherwise.
+            if (base_styles_css_provider == null) {
+                base_styles_css_provider = new Gtk.CssProvider ();
+                comment_view_css_provider = new Gtk.CssProvider ();
+            } else {
+                grid.get_style_context ().remove_provider (base_styles_css_provider);
+                message_scrolled_window.get_style_context ().remove_provider (base_styles_css_provider);
+                message_view.get_style_context ().remove_provider (base_styles_css_provider);
+                comment_view.get_style_context ().remove_provider (comment_view_css_provider);
+                button_box.get_style_context ().remove_provider (base_styles_css_provider);
+            }
+
+            // Load the new styles.
+            base_styles_css_provider.load_from_data (base_styles, -1);
             comment_view_css_provider.load_from_data (comment_view_styles, -1);
-            comment_view = new Gtk.TextView ();
-            comment_view.margin = 12;
-            comment_view.buffer = model.comment_buffer;
-            comment_view_buffer = comment_view.get_buffer ();
 
-            // Mark the comment area as non-editable.
-            comment_view.editable = false;
-
-            grid.attach (comment_view, 0, 2);
+            // Add the CSS providers.
+            grid.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            message_scrolled_window.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            message_view.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-            // Add the action buttons.
-            var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
-            //  button_box.margin = 12;
-            button_box.layout_style = Gtk.ButtonBoxStyle.EDGE;
-            var cancel_button = new Gtk.Button.with_label (_("Cancel"));
-            cancel_button.margin = 12;
-
-            commit_button = new Gtk.Button.with_label (_("Commit"));
-            commit_button.margin = 12;
-
-            button_box.add (cancel_button);
-            button_box.add (commit_button);
-
             button_box.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-            cancel_button.clicked.connect (app.quit);
-            commit_button.clicked.connect (save_commit_message_and_exit);
-
-            validate_commit_button ();
-
-            grid.attach (button_box, 0, 3);
-
-            // Highlight colour.
-            style_updated.connect (set_highlight_colour);
-            message_view_buffer.changed.connect (highlight_text);
-            message_view_buffer.paste_done.connect (highlight_text);
-            //  message_view_buffer.delete_range.connect (highlight_text);
-            message_view_buffer.notify["cursor-position"].connect (highlight_text);
-
-            // Exit via escape key.
-            key_press_event.connect ((widget, event) => {
-                uint keyValue;
-                event.get_keyval (out keyValue);
-                if (keyValue == Gdk.Key.Escape) {
-                    app.quit();
-                    return true;
-                }
-                return false;
-            });
-
-            // Validate the commit button whenever the person updates the message.
-            message_view_buffer.end_user_action.connect (() => {
-                validate_commit_button ();
-            });
         }
 
 
@@ -331,6 +376,11 @@ namespace Comet {
             if ((characters_left < 15) && (characters_left > -1) && cursor_position_iter.compare(glyph_count_iter) <= 0) {
                 if (overlay_bar == null) {
                     // Create overlay bar to display hint about number of characters left.
+                    // Note: the overlay bar does not appear to adapt its look depending on
+                    // colour scheme and I can’t seem to find a way to do it via CSS.
+                    // I’ve asked on Granite discussions. If there isn’t an easy way, it
+                    // would be easier just to recreate a simple version of it myself.
+                    // (https://github.com/elementary/granite/discussions/537)
                     overlay_bar = new Granite.Widgets.OverlayBar (overlay);
                     overlay.show_all ();
                 }
