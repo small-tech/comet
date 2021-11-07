@@ -5,6 +5,7 @@ namespace Comet {
 
         // Settings
         Granite.Settings granite_settings;
+        bool is_dark_mode;
 
         // Widgets
         private Gtk.TextView comment_view;
@@ -35,6 +36,10 @@ namespace Comet {
 
         private Gtk.TextTag highlight_background_tag;
         private Gtk.TextTag underline_colour_tag;
+
+        // Colours
+        private string message_foreground_colour;
+        private string message_background_colour;
 
         // Actions
         private const string ACTION_COMMIT = "action_commit";
@@ -206,10 +211,10 @@ namespace Comet {
 
         // Update styles. Is called at start and anytime the colour scheme changes.
         private void update_styles () throws GLib.Error {
-            var is_dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            is_dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
-            var message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
-            var message_background_colour = is_dark_mode ? Constants.Colours.BLACK_700 : Constants.Colours.SILVER_100;
+            message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
+            message_background_colour = is_dark_mode ? Constants.Colours.BLACK_700 : Constants.Colours.SILVER_100;
             var comment_foreground_colour = is_dark_mode ? message_foreground_colour : Constants.Colours.BLACK_300;
             var app_background_colour = is_dark_mode ? Constants.Colours.BLACK_500: Constants.Colours.SILVER_300;
 
@@ -309,33 +314,10 @@ namespace Comet {
 
 
         private void set_highlight_colour () {
-            // Set the overflow text background highlight colour based on the
-            // colour of the foreground text.
-            var dark_foreground_highlight_colour = Constants.Colours.BANANA_900;
-            var light_foreground_highlight_colour = Constants.Colours.BANANA_300;
-            string highlight_colour;
-
-            var font_colour = Gdk.RGBA ();
-            font_colour.parse (Constants.Colours.SILVER_300);
-
-            //  var font_colour =  // g_spell_text_view.get_view().get_style_context().get_color(Gtk.StateFlags.NORMAL);
-
-            print(@"Font colour: $(font_colour)");
-
-            // Luma calculation courtesy: https://stackoverflow.com/a/12043228
-            var luma = 0.2126 * font_colour.red + 0.7152 * font_colour.green + 0.0722 * font_colour.blue; // ITU-R BT.709
-
-            // As get_color() returns r/g/b values between 0 and 1, the luma calculation will
-            // return values between 0 and 1 also.
-            if (luma > 0.5) {
-                // The foreground is light, use darker shade of original highlight colour.
-                highlight_colour = light_foreground_highlight_colour;
-            } else {
-                // The foreground is dark, use original highlight colour.
-                highlight_colour = dark_foreground_highlight_colour;
-            }
-            highlight_background_tag.background = highlight_colour;
-            highlight_background_tag.foreground = Constants.Colours.BLACK_700;
+            // Always highlight with bright banana yellow on dark text,
+            // regardless of the colour scheme.
+            highlight_background_tag.background = Constants.Colours.BANANA_300;
+            highlight_background_tag.foreground = is_dark_mode ? message_background_colour : message_foreground_colour;
         }
 
 
