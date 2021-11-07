@@ -16,6 +16,8 @@ namespace Constants.Colours {
     public const string SILVER_500 = "#abacae";
 
     public const string STRAWBERRY_300 = "#ed5353";
+    public const string STRAWBERRY_500 = "#c6262e";
+    public const string STRAWBERRY_700 = "#a10705";
 
     public const string BANANA_300 = "#f9c440";
     public const string BANANA_900 = "#ad5f00";

@@ -98,12 +98,6 @@ namespace Comet {
             message_view.set_buffer (model.message_buffer);
             message_view_buffer = message_view.get_buffer ();
 
-            underline_colour_tag = new Gtk.TextTag (UNDERLINE_COLOUR_TAG_NAME);
-            var red = Gdk.RGBA ();
-            red.parse (Constants.Colours.STRAWBERRY_300);
-            underline_colour_tag.underline_rgba = red;
-            //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
-            message_view_buffer.tag_table.add (underline_colour_tag);
             message_view.monospace = true;
 
             highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
@@ -118,6 +112,11 @@ namespace Comet {
             // Set up spell checking for the text view.
             g_spell_text_view = Gspell.TextView.get_from_gtk_text_view (message_view);
             g_spell_text_view.basic_setup ();
+
+            // Add a tag that we’ll use to override the gspell underline colour.
+            underline_colour_tag = new Gtk.TextTag (UNDERLINE_COLOUR_TAG_NAME);
+            //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
+            message_view_buffer.tag_table.add (underline_colour_tag);
 
             overlay.add (message_scrolled_window);
 
@@ -280,6 +279,11 @@ namespace Comet {
             message_view.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             button_box.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+            // Update the colour of the spelling mistake indicator underline.
+            var strawberry = Gdk.RGBA ();
+            strawberry.parse (is_dark_mode ? Constants.Colours.STRAWBERRY_300 : Constants.Colours.STRAWBERRY_700);
+            underline_colour_tag.underline_rgba = strawberry;
         }
 
 
