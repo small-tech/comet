@@ -177,9 +177,6 @@ namespace Comet {
                 warning (_("Warning: unknown Git commit type encountered in %s"), commit_message_file_path);
             }
 
-            print (@"\nAction: $(action)");
-            print (@"\nDetail: $(detail)");
-
             // Populate the initial buffers.
             comment_buffer = new Gtk.TextBuffer (null);
 
@@ -191,7 +188,6 @@ namespace Comet {
             message_buffer = new Gtk.TextBuffer (null);
             message_buffer.set_text (message);
 
-            // original_text.strip ().replace ("# ", "").replace("#\n", "\n").replace("#	", "  - ");
             return true;
         }
 
