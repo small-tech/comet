@@ -39,6 +39,7 @@ namespace Comet {
             SUMMARY = _("Helps you write better Git commit messages.");
         }
 
+
         public Application () {
             Object(
                 application_id: "com.github.small_tech.comet",
@@ -199,6 +200,7 @@ namespace Comet {
             message_dialog.run ();
         }
 
+
         public static int main (string[] commandline_arguments) {
             flatpak_id = Environment.get_variable ("FLATPAK_ID");
             is_running_as_flatpak = flatpak_id != null;
@@ -213,6 +215,7 @@ namespace Comet {
 
             return new Application ().run (commandline_arguments);
         }
+
 
         private static LogWriterOutput logWriterFunc (LogLevelFlags log_level, [CCode (array_length_type = "gsize")] LogField[] fields) {
             return log_level == LogLevelFlags.LEVEL_MESSAGE ? LogWriterOutput.HANDLED : LogWriterOutput.UNHANDLED;

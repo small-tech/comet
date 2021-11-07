@@ -90,35 +90,54 @@ namespace Comet {
 
             underline_colour_tag = new Gtk.TextTag (UNDERLINE_COLOUR_TAG_NAME);
             var red = Gdk.RGBA ();
-            red.parse ("#ed5353");
+            red.parse (Constants.Colours.STRAWBERRY_300);
             underline_colour_tag.underline_rgba = red;
             //  underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size ());
             message_view_buffer.tag_table.add (underline_colour_tag);
 
-            var base_styles = """
+            var granite_settings = Granite.Settings.get_default ();
+            var is_dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+
+            var message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
+            var message_background_colour = is_dark_mode ? Constants.Colours.BLACK_700 : Constants.Colours.SILVER_100;
+
+            var comment_foreground_colour = is_dark_mode ? message_foreground_colour : Constants.Colours.BLACK_300;
+
+            var app_background_colour = is_dark_mode ? Constants.Colours.BLACK_500: Constants.Colours.SILVER_300;
+
+            var base_styles = @"
+                /* Message scrolled window and text view */
+                scrolledwindow {
+                    background-color: $(message_background_colour);
+                    border-radius: 0;
+                }
+
                 textview text {
-                    background-color: #1a1a1a;
-                    color: #d8dee9;
+                    background-color: $(message_background_colour);
+                    color: $(message_foreground_colour);
                 }
 
                 textview {
                     font-size: 1.25em;
                 }
 
-                scrolledwindow {
-                    background-color: #1a1a1a;
-                    border-radius: 0;
+                /* Background of window. */
+                grid {
+                    background-color: $(app_background_colour);
                 }
 
-                grid {
-                    background-color: #333333;
+                /* Action buttons. */
+                /*
+                buttonbox {
+                    background-color: $(Constants.Colours.BLACK_300);
                 }
-            """;
-            var css_provider = new Gtk.CssProvider ();
-            css_provider.load_from_data (base_styles, -1);
-            message_view.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+                */
+            ";
+            var base_styles_css_provider = new Gtk.CssProvider ();
+            base_styles_css_provider.load_from_data (base_styles, -1);
+            message_view.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             message_view.monospace = true;
-            message_scrolled_window.get_style_context ().add_provider (css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            message_scrolled_window.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             highlight_background_tag = new Gtk.TextTag (HIGHLIGHT_BACKGROUND_TAG_NAME);
             message_view_buffer.tag_table.add (highlight_background_tag);
@@ -141,18 +160,19 @@ namespace Comet {
             // doesn’t squeeze it down to a single line.
             message_scrolled_window.set_size_request (540, 130);
 
+            grid.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             grid.attach (overlay, 0, 1);
 
             // Create simple text view for comment.
-            var comment_view_styles = """
+            var comment_view_styles = @"
                 textview {
-                    background-color: #333333;
+                    background-color: $(app_background_colour);
                 }
 
                 textview text {
-                    color: red;
+                    color: $(comment_foreground_colour);
                 }
-            """;
+            ";
             var comment_view_css_provider = new Gtk.CssProvider ();
             comment_view_css_provider.load_from_data (comment_view_styles, -1);
             comment_view = new Gtk.TextView ();
@@ -160,24 +180,26 @@ namespace Comet {
             comment_view.buffer = model.comment_buffer;
             comment_view_buffer = comment_view.get_buffer ();
 
-            comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-            grid.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
             // Mark the comment area as non-editable.
             comment_view.editable = false;
 
             grid.attach (comment_view, 0, 2);
+            comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             // Add the action buttons.
             var button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
-            button_box.margin = 12;
+            //  button_box.margin = 12;
             button_box.layout_style = Gtk.ButtonBoxStyle.EDGE;
             var cancel_button = new Gtk.Button.with_label (_("Cancel"));
+            cancel_button.margin = 12;
 
             commit_button = new Gtk.Button.with_label (_("Commit"));
+            commit_button.margin = 12;
 
             button_box.add (cancel_button);
             button_box.add (commit_button);
+
+            button_box.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
             cancel_button.clicked.connect (app.quit);
             commit_button.clicked.connect (save_commit_message_and_exit);
@@ -244,12 +266,16 @@ namespace Comet {
         private void set_highlight_colour () {
             // Set the overflow text background highlight colour based on the
             // colour of the foreground text.
-
-            // Colour shade guide for Minty Rose: https://www.color-hex.com/color/ffe4e1
-            var dark_foreground_highlight_colour = "#ebcb8b";  // minty rose
-            var light_foreground_highlight_colour = "#ebcb8b"; // darker shade of minty rose
+            var dark_foreground_highlight_colour = Constants.Colours.BANANA_900;
+            var light_foreground_highlight_colour = Constants.Colours.BANANA_300;
             string highlight_colour;
-            var font_colour = g_spell_text_view.get_view().get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+            var font_colour = Gdk.RGBA ();
+            font_colour.parse (Constants.Colours.SILVER_300);
+
+            //  var font_colour =  // g_spell_text_view.get_view().get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+            print(@"Font colour: $(font_colour)");
 
             // Luma calculation courtesy: https://stackoverflow.com/a/12043228
             var luma = 0.2126 * font_colour.red + 0.7152 * font_colour.green + 0.0722 * font_colour.blue; // ITU-R BT.709
@@ -264,7 +290,7 @@ namespace Comet {
                 highlight_colour = dark_foreground_highlight_colour;
             }
             highlight_background_tag.background = highlight_colour;
-            highlight_background_tag.foreground = "#1a1a1a";
+            highlight_background_tag.foreground = Constants.Colours.BLACK_700;
         }
 
 

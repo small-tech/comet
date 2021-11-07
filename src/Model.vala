@@ -180,11 +180,6 @@ namespace Comet {
             print (@"\nAction: $(action)");
             print (@"\nDetail: $(detail)");
 
-            // Add Pango markup to make the commented area appear lighter.
-            // TODO: Rewrite to make this work with adequate contrast under both light
-            // and dark schemes.
-            comment = @"<span foreground=\"#d4d4d4\">$(comment)</span>";
-
             // Populate the initial buffers.
             comment_buffer = new Gtk.TextBuffer (null);
 

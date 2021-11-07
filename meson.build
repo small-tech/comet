@@ -39,6 +39,7 @@ executable(
     'src' / 'Model.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
     'src' / 'WelcomeWindow.vala',
+    'src' / 'Colours.vala',
     config_header,
     dependencies: [
       dependency('granite', version: '>=5.2.4'),
