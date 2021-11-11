@@ -6,6 +6,7 @@ namespace Comet {
         // Settings
         Granite.Settings granite_settings;
         bool is_dark_mode;
+        int first_line_character_limit;
 
         // Widgets
         private Gtk.TextView comment_view;
@@ -31,9 +32,6 @@ namespace Comet {
         private string HIGHLIGHT_BACKGROUND_TAG_NAME = "highlight-background";
         private string UNDERLINE_COLOUR_TAG_NAME = "underline-colour";
 
-        // TODO: Make this configurable.
-        private int FIRST_LINE_CHARACTER_LIMIT = 69;
-
         private Gtk.TextTag highlight_background_tag;
         private Gtk.TextTag underline_colour_tag;
 
@@ -53,6 +51,11 @@ namespace Comet {
             //       not seem possible in Vala.
             //       Neither setting a construct-time property or calling Object ()
             //       alongside base () works.
+
+            update_first_line_character_limit ();
+            saved_state.changed.connect (() => {
+                update_first_line_character_limit ();
+            });
         }
 
 
@@ -327,6 +330,12 @@ namespace Comet {
         }
 
 
+        private void update_first_line_character_limit () {
+            first_line_character_limit = saved_state.get_int (Constants.Names.Settings.FIRST_LINE_CHARACTER_LIMIT);
+            highlight_text ();
+        }
+
+
         public void highlight_text () {
             // Check first line length and highlight characters beyond the limit.
             var text = message_view_buffer.text;
@@ -360,7 +369,7 @@ namespace Comet {
             message_view_buffer.get_iter_at_offset (out cursor_position_iter, cursor_position);
 
             // We have to do all comparisons using iterators.
-            var characters_left = FIRST_LINE_CHARACTER_LIMIT - first_line_length;
+            var characters_left = first_line_character_limit - first_line_length;
             if ((characters_left < 15) && (characters_left > -1) && cursor_position_iter.compare(glyph_count_iter) <= 0) {
                 if (overlay_bar == null) {
                     // Create overlay bar to display hint about number of characters left.
@@ -408,10 +417,10 @@ namespace Comet {
             underline_colour_tag.set_priority (message_view_buffer.get_tag_table ().get_size () - 1);
 
             // Highlight the overflow area, if any.
-            if (first_line_length > FIRST_LINE_CHARACTER_LIMIT) {
+            if (first_line_length > first_line_character_limit) {
                 Gtk.TextIter start_of_overflow_iterator;
                 message_view_buffer.get_start_iter (out start_of_overflow_iterator);
-                start_of_overflow_iterator.forward_cursor_positions (FIRST_LINE_CHARACTER_LIMIT);
+                start_of_overflow_iterator.forward_cursor_positions (first_line_character_limit);
                 message_view_buffer.apply_tag (highlight_background_tag, start_of_overflow_iterator, end_of_first_line_iterator);
             }
         }

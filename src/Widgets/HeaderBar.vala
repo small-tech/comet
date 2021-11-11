@@ -10,7 +10,8 @@ namespace Comet.Widgets {
         }
 
         construct {
-            var line_length_adjustment = new Gtk.Adjustment (69, 50, 120, 1, 1, 1);
+            var initial_line_limit = Comet.saved_state.get_int(Constants.Names.Settings.FIRST_LINE_CHARACTER_LIMIT);
+            var line_length_adjustment = new Gtk.Adjustment (initial_line_limit, /* min */ 50, /* max */ 121, 1, 1, 1);
             var line_length_numerical_spinner = new Gtk.SpinButton (line_length_adjustment, 1.0, 0);
 
             var line_length_label = new Gtk.Label (_("Line limit"));
@@ -18,6 +19,11 @@ namespace Comet.Widgets {
             var line_length_limit = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
             line_length_limit.add(line_length_label);
             line_length_limit.add(line_length_numerical_spinner);
+
+            line_length_numerical_spinner.value_changed.connect (() => {
+                var new_line_length = (int) line_length_numerical_spinner.value;
+                Comet.saved_state.set_int (Constants.Names.Settings.FIRST_LINE_CHARACTER_LIMIT, (int) line_length_numerical_spinner.value);
+            });
 
             var menu_grid = new Gtk.Grid ();
             menu_grid.margin = 12;
