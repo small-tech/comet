@@ -205,6 +205,8 @@ namespace Comet {
             message_view_buffer.end_user_action.connect (() => {
                 validate_commit_button ();
             });
+
+            message_view.grab_focus ();
         }
 
 
