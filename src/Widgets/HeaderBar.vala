@@ -35,7 +35,7 @@ namespace Comet.Widgets {
             menu.add(menu_grid);
 
             var app_menu = new Gtk.MenuButton ();
-            app_menu.image = new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
+            app_menu.image = new Gtk.Image.from_icon_name ("emblem-system", Gtk.IconSize.SMALL_TOOLBAR);
             app_menu.tooltip_text = _("Settings");
             app_menu.popover = menu;
 
