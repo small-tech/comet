@@ -23,9 +23,9 @@ namespace Comet {
         construct {
             // Setup localisation.
             GLib.Intl.setlocale (LocaleCategory.ALL, "");
-            GLib.Intl.bindtextdomain (Constants.GETTEXT_PACKAGE, Constants.LOCALEDIR);
-            GLib.Intl.bind_textdomain_codeset (Constants.GETTEXT_PACKAGE, "UTF-8");
-            GLib.Intl.textdomain (Constants.GETTEXT_PACKAGE);
+            GLib.Intl.bindtextdomain (Constants.Config.GETTEXT_PACKAGE, Constants.Config.LOCALEDIR);
+            GLib.Intl.bind_textdomain_codeset (Constants.Config.GETTEXT_PACKAGE, "UTF-8");
+            GLib.Intl.textdomain (Constants.Config.GETTEXT_PACKAGE);
 
             COPYRIGHT = _("Made with ♥ by Small Technology Foundation, a tiny, independent not-for-profit")
             + " (https://small-tech.org).\n\n"
@@ -86,7 +86,7 @@ namespace Comet {
                 // Print a minimal version string based on the GNU coding standards.
                 // https://www.gnu.org/prep/standards/standards.html#g_t_002d_002dversion
                 if (options.contains("version")) {
-                    print (@"Comet $(Constants.VERSION)\n");
+                    print (@"Comet $(Constants.Config.VERSION)\n");
 
                     // OK.
                     return 0;

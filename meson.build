@@ -16,8 +16,8 @@ conf_data.set_quoted('GETTEXT_PACKAGE', meson.project_name())
 conf_data.set_quoted('LOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
 conf_data.set_quoted('VERSION', meson.project_version())
 config_header = configure_file(
-    input : 'src' / 'config.vala.in',
-    output : 'config.vala',
+    input : 'src' / 'Constants' / 'Config.vala.in',
+    output : 'Config.vala',
     configuration : conf_data
 )
 
@@ -39,7 +39,7 @@ executable(
     'src' / 'Model.vala',
     'src' / 'Widgets' / 'HeaderBar.vala',
     'src' / 'WelcomeWindow.vala',
-    'src' / 'Colours.vala',
+    'src' / 'Constants' / 'Colours.vala',
     config_header,
     dependencies: [
       dependency('granite', version: '>=5.2.4'),
