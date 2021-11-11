@@ -42,6 +42,11 @@ namespace Comet {
         // Actions
         private const string ACTION_COMMIT = "action_commit";
 
+        // Accelerators
+        private const string COMMIT_ACCELERATOR = "<Control>Return";
+        private const string CANCEL_ACCELERATOR = "Escape";
+        private const string QUIT_ACCELERATOR = "<Control>Q";
+
 
         public MainWindow (Comet.Application application) {
             base (application);
@@ -60,7 +65,7 @@ namespace Comet {
 
 
         protected override void define_action_accelerators () {
-            action_accelerators.set (ACTION_COMMIT, "<Control>Return");
+            action_accelerators.set (ACTION_COMMIT, COMMIT_ACCELERATOR);
         }
 
 
@@ -150,6 +155,14 @@ namespace Comet {
 
             commit_button = new Gtk.Button.with_label (_("Commit"));
             commit_button.margin = 12;
+
+            // Add tooltips to document the accelerators for the buttons
+            // to enable accidental discovery.
+            var commit_button_accelerator_tooltip_markup = Granite.markup_accel_tooltip ({COMMIT_ACCELERATOR}, "Commit");
+            commit_button.tooltip_markup = commit_button_accelerator_tooltip_markup;
+
+            var cancel_button_accelerator_tooltip_markup = Granite.markup_accel_tooltip ({CANCEL_ACCELERATOR, QUIT_ACCELERATOR}, "Cancel");
+            cancel_button.tooltip_markup = cancel_button_accelerator_tooltip_markup;
 
             button_box.add (cancel_button);
             button_box.add (commit_button);
