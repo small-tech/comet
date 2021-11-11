@@ -91,7 +91,7 @@ namespace Comet {
             message_scrolled_window.vexpand = true;
 
             message_view = new Gtk.TextView ();
-            message_view.wrap_mode = Gtk.WrapMode.WORD;
+            message_view.wrap_mode = Gtk.WrapMode.WORD_CHAR;
             message_view.margin = 12;
             message_view.input_hints =
                 Gtk.InputHints.SPELLCHECK |
