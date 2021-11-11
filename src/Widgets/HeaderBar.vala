@@ -28,7 +28,6 @@ namespace Comet.Widgets {
             var menu_grid = new Gtk.Grid ();
             menu_grid.margin = 12;
             menu_grid.orientation = Gtk.Orientation.VERTICAL;
-            menu_grid.width_request = 200;
             menu_grid.attach (line_length_limit, 0, 0, 1, 1);
             menu_grid.show_all ();
 
