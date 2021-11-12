@@ -58,7 +58,6 @@ namespace Comet {
             //       not seem possible in Vala.
             //       Neither setting a construct-time property or calling Object ()
             //       alongside base () works.
-
             update_first_line_character_limit ();
             saved_state.changed.connect (() => {
                 update_first_line_character_limit ();
@@ -148,6 +147,18 @@ namespace Comet {
                 keyboard_shortcut_tip = new Gtk.InfoBar ();
                 keyboard_shortcut_tip.message_type = Gtk.MessageType.INFO;
                 keyboard_shortcut_tip.add_button (_("Hide tip"), Gtk.ResponseType.CLOSE);
+                keyboard_shortcut_tip.response.connect (() => {
+                    // Make the tip disappear and resize the window to remove the space
+                    // that was used up by it. This is more abrupt than I’d like it but
+                    // I’m not sure how to animate it any more smoothly at this time.
+                    // If anyone else does, pull requests are welcome ;)
+                    keyboard_shortcut_tip.visible = false;
+
+                    // Note: this will resize the window to the minimum size it can
+                    // given all the various restraints. It won’t resize it to 1px by 1px :)
+                    this.resize (1, 1);
+                });
+
 
                 var content_area = keyboard_shortcut_tip.get_content_area ();
 
