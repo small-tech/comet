@@ -15,11 +15,13 @@ namespace Comet {
         private Gtk.ButtonBox button_box;
         private Gtk.Button commit_button;
         private Gtk.Overlay overlay;
+        private Gtk.InfoBar keyboard_shortcut_tip;
         private Granite.Widgets.OverlayBar overlay_bar;
 
         // Style providers
         private Gtk.CssProvider base_styles_css_provider;
         private Gtk.CssProvider comment_view_css_provider;
+        private Gtk.CssProvider keyboard_shortcut_tip_css_provider;
 
         // Spell check
         private Gspell.TextView g_spell_text_view;
@@ -139,11 +141,12 @@ namespace Comet {
             grid.attach (overlay, 0, grid_vertical_position);
             grid_vertical_position++;
 
-            // Display an info bar to teach the person the keyboard shortcuts for
+            // Display an information bar to teach the person the keyboard shortcuts for
             // commit and cancel until the person either dismisses it or until
             // they actually use one of the accelerators.
             if (Comet.saved_state.get_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP)) {
-                var keyboard_shortcut_tip = new Gtk.InfoBar ();
+                keyboard_shortcut_tip = new Gtk.InfoBar ();
+                keyboard_shortcut_tip.message_type = Gtk.MessageType.INFO;
                 keyboard_shortcut_tip.add_button (_("Hide tip"), Gtk.ResponseType.CLOSE);
 
                 var content_area = keyboard_shortcut_tip.get_content_area ();
@@ -254,10 +257,13 @@ namespace Comet {
         private void update_styles () throws GLib.Error {
             is_dark_mode = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
 
-            message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
+            message_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_100 : Constants.Colours.BLACK_700;
             message_background_colour = is_dark_mode ? Constants.Colours.BLACK_700 : Constants.Colours.SILVER_100;
-            var comment_foreground_colour = is_dark_mode ? message_foreground_colour : Constants.Colours.BLACK_300;
+            var comment_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_300;
             var app_background_colour = is_dark_mode ? Constants.Colours.BLACK_500: Constants.Colours.SILVER_300;
+
+            var keyboard_shortcut_tip_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_500;
+            var keyboard_shortcut_tip_background_colour = is_dark_mode ? Constants.Colours.LIME_900 : Constants.Colours.LIME_300;
 
             var base_styles = @"
                 /* Message scrolled window and text view */
@@ -279,13 +285,6 @@ namespace Comet {
                 grid {
                     background-color: $(app_background_colour);
                 }
-
-                /* Action buttons. */
-                /*
-                buttonbox {
-                    background-color: $(Constants.Colours.BLACK_300);
-                }
-                */
             ";
 
             var comment_view_styles = @"
@@ -298,17 +297,36 @@ namespace Comet {
                 }
             ";
 
+            var keyboard_shortcut_tip_styles = @"
+                infobar.info {
+                    color: $(keyboard_shortcut_tip_foreground_colour);
+                }
+
+                infobar.info > revealer > box {
+                    background-color: $(keyboard_shortcut_tip_background_colour);
+                }
+            ";
+
             // Create the CSS providers if necessary and remove existing ones
             // from the components otherwise.
             if (base_styles_css_provider == null) {
                 base_styles_css_provider = new Gtk.CssProvider ();
                 comment_view_css_provider = new Gtk.CssProvider ();
+
+                if (keyboard_shortcut_tip != null) {
+                    keyboard_shortcut_tip_css_provider = new Gtk.CssProvider ();
+                }
+
             } else {
                 grid.get_style_context ().remove_provider (base_styles_css_provider);
                 message_scrolled_window.get_style_context ().remove_provider (base_styles_css_provider);
                 message_view.get_style_context ().remove_provider (base_styles_css_provider);
                 comment_view.get_style_context ().remove_provider (comment_view_css_provider);
                 button_box.get_style_context ().remove_provider (base_styles_css_provider);
+
+                if (keyboard_shortcut_tip != null) {
+                    keyboard_shortcut_tip.get_style_context ().remove_provider (keyboard_shortcut_tip_css_provider);
+                }
             }
 
             // Load the new styles.
@@ -321,6 +339,15 @@ namespace Comet {
             message_view.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             comment_view.get_style_context ().add_provider (comment_view_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
             button_box.get_style_context ().add_provider (base_styles_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+            if (keyboard_shortcut_tip != null) {
+                keyboard_shortcut_tip_css_provider.load_from_data (keyboard_shortcut_tip_styles, -1);
+                // Note: we add the CSS Provider to the screen as it’s only way to get it
+                // ===== to work. The following, commented-out method of adding it to the Gtk.InfoBar itself
+                //       does *not* work. See https://elementarycommunity.slack.com/archives/C013GMHPS80/p1636718109000400
+                //  keyboard_shortcut_tip.get_style_context ().add_provider (keyboard_shortcut_tip_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+                Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), keyboard_shortcut_tip_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            }
 
             // Update the colour of the spelling mistake indicator underline.
             var strawberry = Gdk.RGBA ();
@@ -362,7 +389,7 @@ namespace Comet {
         private void set_highlight_colour () {
             // Always highlight with bright banana yellow on dark text,
             // regardless of the colour scheme.
-            highlight_background_tag.background = Constants.Colours.BANANA_300;
+            highlight_background_tag.background = Constants.Colours.BANANA_500;
             highlight_background_tag.foreground = is_dark_mode ? message_background_colour : message_foreground_colour;
         }
 
