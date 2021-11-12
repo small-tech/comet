@@ -59,9 +59,12 @@ namespace Comet {
             //       Neither setting a construct-time property or calling Object ()
             //       alongside base () works.
             update_first_line_character_limit ();
-            saved_state.changed.connect (() => {
+            Comet.saved_state.changed.connect (() => {
                 update_first_line_character_limit ();
             });
+
+            // For testing only. To reset the keyboard shortcut tip.
+            // Comet.saved_state.set_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP, true);
         }
 
 
@@ -148,15 +151,7 @@ namespace Comet {
                 keyboard_shortcut_tip.message_type = Gtk.MessageType.INFO;
                 keyboard_shortcut_tip.add_button (_("Hide tip"), Gtk.ResponseType.CLOSE);
                 keyboard_shortcut_tip.response.connect (() => {
-                    // Make the tip disappear and resize the window to remove the space
-                    // that was used up by it. This is more abrupt than I’d like it but
-                    // I’m not sure how to animate it any more smoothly at this time.
-                    // If anyone else does, pull requests are welcome ;)
-                    keyboard_shortcut_tip.visible = false;
-
-                    // Note: this will resize the window to the minimum size it can
-                    // given all the various restraints. It won’t resize it to 1px by 1px :)
-                    this.resize (1, 1);
+                    hide_keyboard_shortcut_tip ();
                 });
 
 
@@ -249,6 +244,7 @@ namespace Comet {
                 uint keyValue;
                 event.get_keyval (out keyValue);
                 if (keyValue == Gdk.Key.Escape) {
+                    hide_keyboard_shortcut_tip ();
                     app.quit();
                     return true;
                 }
@@ -366,9 +362,26 @@ namespace Comet {
             underline_colour_tag.underline_rgba = strawberry;
         }
 
+        private void hide_keyboard_shortcut_tip () {
+            print("Hiding keyboard shortcut tip.");
+            // Make sure we don’t show it again.
+            Comet.saved_state.set_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP, false);
+
+            // Make the tip disappear and resize the window to remove the space
+            // that was used up by it. This is more abrupt than I’d like it but
+            // I’m not sure how to animate it any more smoothly at this time.
+            // If anyone else does, pull requests are welcome ;)
+            keyboard_shortcut_tip.visible = false;
+
+            // Note: this will resize the window to the minimum size it can
+            // given all the various restraints. It won’t resize it to 1px by 1px :)
+            this.resize (1, 1);
+        }
+
 
         private void action_commit () {
             print ("MainWindow: Action commit");
+            hide_keyboard_shortcut_tip ();
             if (validate_commit_button ()) {
                 print ("Commiting via action.");
                 save_commit_message_and_exit ();
@@ -406,7 +419,7 @@ namespace Comet {
 
 
         private void update_first_line_character_limit () {
-            first_line_character_limit = saved_state.get_int (Constants.Names.Settings.FIRST_LINE_CHARACTER_LIMIT);
+            first_line_character_limit = Comet.saved_state.get_int (Constants.Names.Settings.FIRST_LINE_CHARACTER_LIMIT);
             highlight_text ();
         }
 
