@@ -85,6 +85,8 @@ namespace Comet {
             title = title_string;           // Window title, used in task switcher, etc.
             toolbar.title = title_string;   // Toolbar title, displayed in app.
 
+            var grid_vertical_position = 1;
+
             // Create an overlay container.
             // (We will add an overlay bar to this lazily to show
             // the number of characters left as the person gets closer to the
@@ -134,7 +136,35 @@ namespace Comet {
             // doesn’t squeeze it down to a single line.
             message_scrolled_window.set_size_request (540, 130);
 
-            grid.attach (overlay, 0, 1);
+            grid.attach (overlay, 0, grid_vertical_position);
+            grid_vertical_position++;
+
+            // Display an info bar to teach the person the keyboard shortcuts for
+            // commit and cancel until the person either dismisses it or until
+            // they actually use one of the accelerators.
+            if (Comet.saved_state.get_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP)) {
+                var keyboard_shortcut_tip = new Gtk.InfoBar ();
+                keyboard_shortcut_tip.add_button (_("Hide tip"), Gtk.ResponseType.CLOSE);
+
+                var content_area = keyboard_shortcut_tip.get_content_area ();
+
+                var commit_tip_markup = Granite.markup_accel_tooltip ({COMMIT_ACCELERATOR}, _("Commit"));
+                var cancel_tip_markup = Granite.markup_accel_tooltip ({CANCEL_ACCELERATOR}, _("Cancel"));
+
+                var instructions_label = new Gtk.Label (_("Use keyboard shortcuts to improve your workflow."));
+                content_area.add (instructions_label);
+
+                var commit_shortcut_tip_label = new Gtk.Label (null);
+                commit_shortcut_tip_label.set_markup (commit_tip_markup);
+                content_area.add (commit_shortcut_tip_label);
+
+                var cancel_shortcut_tip_label = new Gtk.Label (null);
+                cancel_shortcut_tip_label.set_markup (cancel_tip_markup);
+                content_area.add (cancel_shortcut_tip_label);
+
+                grid.attach (keyboard_shortcut_tip, 0, grid_vertical_position);
+                grid_vertical_position++;
+            }
 
             // Create simple text view for comment.
             comment_view = new Gtk.TextView ();
@@ -145,7 +175,8 @@ namespace Comet {
             // Mark the comment area as non-editable.
             comment_view.editable = false;
 
-            grid.attach (comment_view, 0, 2);
+            grid.attach (comment_view, 0, grid_vertical_position);
+            grid_vertical_position++;
 
             // Add the action buttons.
             button_box = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL);
@@ -156,14 +187,6 @@ namespace Comet {
             commit_button = new Gtk.Button.with_label (_("Commit"));
             commit_button.margin = 12;
 
-            // Add tooltips to document the accelerators for the buttons
-            // to enable accidental discovery.
-            var commit_button_accelerator_tooltip_markup = Granite.markup_accel_tooltip ({COMMIT_ACCELERATOR}, "Commit");
-            commit_button.tooltip_markup = commit_button_accelerator_tooltip_markup;
-
-            var cancel_button_accelerator_tooltip_markup = Granite.markup_accel_tooltip ({CANCEL_ACCELERATOR, QUIT_ACCELERATOR}, "Cancel");
-            cancel_button.tooltip_markup = cancel_button_accelerator_tooltip_markup;
-
             button_box.add (cancel_button);
             button_box.add (commit_button);
 
@@ -172,7 +195,8 @@ namespace Comet {
 
             validate_commit_button ();
 
-            grid.attach (button_box, 0, 3);
+            grid.attach (button_box, 0, grid_vertical_position);
+            grid_vertical_position++;
 
             // Handle colour scheme.
             granite_settings = Granite.Settings.get_default ();
