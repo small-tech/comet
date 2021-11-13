@@ -27,7 +27,7 @@
       <description>The previous git commit message editor before it was replaced with Comet (by Comet).</description>
     </key>
     <key name="first-line-character-limit" type="i">
-      <default>69</default>
+      <default>72</default>
       <summary>First line character limit</summary>
       <description>Holds the character limit beyond with first line characters are highlighted.</description>
     </key>

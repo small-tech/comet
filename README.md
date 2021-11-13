@@ -10,7 +10,36 @@ A beautiful git commit message editor for elementary OS.
 
   - [Elementary OS](https://elementary.io) 6 (Odin)
 
-Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is being developed by Sonny Piers and is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which itself was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I loved using back when my development machine was a Mac.
+_Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is being developed by Sonny Piers and is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which itself was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I loved using back when my development machine was a Mac._
+
+## Installation and usage
+
+1. Install Comet from AppCenter.
+2. Launch Comet from the _Applications Menu_.
+
+When launched from the _Applications Menu_, Comet will display the Welcome Screen and it will automatically make itself your default git commit message editor.
+
+Comet remembers your previous editor and restores it as your default git commit message editor when you disable it.
+
+When Comet is enabled as your default git commit message editor, it launches automatically whenever you make a git commit.
+
+### About the first line character limit
+
+Using the numerical stepper in the _Settings Menu_ in the header bar, you can set the first line character limit to any value from 50 to 132. You can also use the shortcut buttons in the _Settings Menu_ to set the limit to:
+
+  - Dogmatic (50)
+  - GitHub truncation (72)
+  - GitLab truncation (100)
+
+The _Dogmatic (50)_ limit is based on the assumption that [the median message length in the git projects’s own repository](https://preslav.me/2015/02/21/what-s-with-the-50-72-rule/) is somehow an indication of message quality. (Somewhat ironically, [Linus Torvald’s example of a good git message](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88) has 65 characters in the first line.)
+
+The _GitHub trunctation (72)_ and _GitLab truncation (100)_ limits are the lengths beyond which GitHub and GitLab truncate the first line of a commit message when displaying it ([GitHub truncates messages longer than 72 characters to 69 characters](https://robertcooper.me/post/git-commit-messages#subject-line-less-than-or-equal-to-72-characters-in-length) and [GitLab truncates lines over 100 characters to 80 characters]((https://gitlab.com/gitlab-org/gitlab-foss/-/blob/2859e8d54f948184ac489afea995c65ed0ca325c/app/models/commit.rb#L172))).
+
+(GitHub’s own limit is based on an [80-character terminal screen limit](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).)
+
+The default character limit in Comet is the GitHub truncation limit.
+
+Comet will not prevent you from exceeding the character limit but it will warn you as you approach the limit and highlight overflowing characters if you exceed it.
 
 ## Developer notes
 
