@@ -199,6 +199,11 @@ namespace Comet {
             button_box.add (cancel_button);
             button_box.add (commit_button);
 
+            // Note: it’s OK to connect the cancel button directly to app.quit
+            // as we don’t need to wait for anything (unlike use of the keyboard
+            // accelerators for quit and commit which may have to wait for the
+            // size of the window to change and be persisted in case the keyboard
+            // accelerator tip was showing).
             cancel_button.clicked.connect (app.quit);
             commit_button.clicked.connect (save_commit_message_and_exit);
 
@@ -245,7 +250,7 @@ namespace Comet {
                 event.get_keyval (out keyValue);
                 if (keyValue == Gdk.Key.Escape) {
                     hide_keyboard_shortcut_tip ();
-                    app.quit();
+                    quit_on_future_stack_frame ();
                     return true;
                 }
                 return false;
@@ -259,6 +264,19 @@ namespace Comet {
             message_view.grab_focus ();
         }
 
+        private void quit_on_future_stack_frame () {
+            // Carry out the quit on a future stack frame to give
+            // the window time to resize after hiding the shortcut
+            // tip so window is correctly sized when we next launch.
+            Timeout.add (0, () => {
+                app.quit ();
+
+                // Returning false here will ensure this closure
+                // is called just once.
+                return false;
+            });
+        }
+
 
         // Update styles. Is called at start and anytime the colour scheme changes.
         private void update_styles () throws GLib.Error {
@@ -269,8 +287,8 @@ namespace Comet {
             var comment_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_300;
             var app_background_colour = is_dark_mode ? Constants.Colours.BLACK_500: Constants.Colours.SILVER_300;
 
-            var keyboard_shortcut_tip_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_500;
-            var keyboard_shortcut_tip_background_colour = is_dark_mode ? Constants.Colours.LIME_900 : Constants.Colours.LIME_300;
+            var keyboard_shortcut_tip_foreground_colour = is_dark_mode ? Constants.Colours.SILVER_300 : Constants.Colours.BLACK_700;
+            var keyboard_shortcut_tip_background_colour = is_dark_mode ? Constants.Colours.SLATE_500 : Constants.Colours.SLATE_100;
 
             var base_styles = @"
                 /* Message scrolled window and text view */
@@ -363,27 +381,26 @@ namespace Comet {
         }
 
         private void hide_keyboard_shortcut_tip () {
-            print("Hiding keyboard shortcut tip.");
-            // Make sure we don’t show it again.
-            Comet.saved_state.set_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP, false);
+            if (keyboard_shortcut_tip != null) {
+                // Make sure we don’t show it again.
+                Comet.saved_state.set_boolean (Constants.Names.Settings.SHOW_KEYBOARD_SHORTCUT_TIP, false);
 
-            // Make the tip disappear and resize the window to remove the space
-            // that was used up by it. This is more abrupt than I’d like it but
-            // I’m not sure how to animate it any more smoothly at this time.
-            // If anyone else does, pull requests are welcome ;)
-            keyboard_shortcut_tip.visible = false;
+                // Make the tip disappear and resize the window to remove the space
+                // that was used up by it. This is more abrupt than I’d like it but
+                // I’m not sure how to animate it any more smoothly at this time.
+                // If anyone else does, pull requests are welcome ;)
+                keyboard_shortcut_tip.visible = false;
 
-            // Note: this will resize the window to the minimum size it can
-            // given all the various restraints. It won’t resize it to 1px by 1px :)
-            this.resize (1, 1);
+                // Note: this will resize the window to the minimum size it can
+                // given all the various restraints. It won’t resize it to 1px by 1px :)
+                this.resize (1, 1);
+            }
         }
 
 
         private void action_commit () {
-            print ("MainWindow: Action commit");
             hide_keyboard_shortcut_tip ();
             if (validate_commit_button ()) {
-                print ("Commiting via action.");
                 save_commit_message_and_exit ();
             }
         }
@@ -392,7 +409,7 @@ namespace Comet {
         private void save_commit_message_and_exit () {
             try {
                 app.model.save ();
-                app.quit ();
+                quit_on_future_stack_frame ();
             } catch (FileError error) {
                 // TODO: Handle this better.
                 warning (_("Could not save commit message."));
