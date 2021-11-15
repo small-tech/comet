@@ -3,8 +3,8 @@
 set -eu -o pipefail
 
 pushd build
-ninja com.github.small_tech.comet-pot
-ninja com.github.small_tech.comet-update-po
+ninja org.small_tech.comet-pot
+ninja org.small_tech.comet-update-po
 popd
 if [[ $# == 0 || $1 != '--no-status' ]]; then
   git status

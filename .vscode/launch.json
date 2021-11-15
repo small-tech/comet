@@ -17,7 +17,7 @@
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/build/com.github.small_tech.comet",
+      "program": "${workspaceFolder}/build/org.small_tech.comet",
       "args": ["tests/message-without-body"],
       "cwd": "${workspaceFolder}"
     }

@@ -1,6 +1,6 @@
-# Turkish translations for com.github.small_tech.comet package.
-# Copyright (C) 2021 THE com.github.small_tech.comet'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the com.github.small_tech.comet package.
+# Turkish translations for org.small_tech.comet package.
+# Copyright (C) 2021 THE org.small_tech.comet'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the org.small_tech.comet package.
 # Automatically generated, 2021.
 #
 # Initially translated by Aral Balkan.
@@ -10,7 +10,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: com.github.small_tech.comet\n"
+"Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-06 17:16+0000\n"
 "PO-Revision-Date: 2021-10-08 13:07+0100\n"
@@ -212,7 +212,7 @@ msgid "Git commit message editor"
 msgstr "Git işlem mesaji düzenleyicisi"
 
 #: data/comet.desktop.in:10
-msgid "com.github.small_tech.comet"
+msgid "org.small_tech.comet"
 msgstr ""
 
 #: data/comet.desktop.in:12

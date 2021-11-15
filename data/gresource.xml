@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/github/small_tech/comet">
+  <gresource prefix="/org/small_tech/comet">
     <file compressed="true" preprocess="xml-stripblanks">comet-128.svg</file>
   </gresource>
-  <gresource prefix="/com/github/small_tech/comet">
+  <gresource prefix="/org/small_tech/comet">
     <file compressed="true" preprocess="xml-stripblanks">comet-disable.svg</file>
   </gresource>
 </gresources>

@@ -12,4 +12,4 @@ fi
 pushd build
 ninja
 popd
-build/com.github.small_tech.comet
+build/org.small_tech.comet

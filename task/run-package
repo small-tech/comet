@@ -3,4 +3,4 @@
 set -eu -o pipefail
 
 task/package
-flatpak run com.github.small_tech.comet
+flatpak run org.small_tech.comet

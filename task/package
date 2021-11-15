@@ -2,4 +2,4 @@
 
 set -eu -o pipefail
 
-flatpak-builder build com.github.small_tech.comet.yml --user --install --force-clean
+flatpak-builder build org.small_tech.comet.yml --user --install --force-clean

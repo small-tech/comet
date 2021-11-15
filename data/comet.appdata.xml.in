@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright ⓒ 2021 to present, Aral Balkan <mail@ar.al> -->
 <component type="desktop">
-  <id>com.github.small_tech.comet</id>
+  <id>org.small_tech.comet</id>
   <metadata_license>CC0</metadata_license>
   <!--
     To update the content rating data of your app, you can

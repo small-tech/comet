@@ -16,4 +16,4 @@ popd
 echo 'Comet is built.'
 echo ''
 echo 'Run it with:'
-echo 'build/com.github.small_tech.comet'
+echo 'build/org.small_tech.comet'

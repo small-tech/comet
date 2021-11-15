@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <enum id="com.github.small_tech.comet.window-states">
+  <enum id="org.small_tech.comet.window-states">
     <value nick="Normal" value="0" />
     <value nick="Maximized" value="1" />
     <value nick="Fullscreen" value="2" />
   </enum>
-  <schema path="/com/github/small_tech/comet/saved-state/" id="com.github.small_tech.comet.saved-state" gettext-domain="com.github.small_tech">
-    <key name="window-state" enum="com.github.small_tech.comet.window-states">
+  <schema path="/org/small_tech/comet/saved-state/" id="org.small_tech.comet.saved-state" gettext-domain="org.small_tech">
+    <key name="window-state" enum="org.small_tech.comet.window-states">
       <default>"Normal"</default>
       <summary>The saved state of the window.</summary>
       <description>The saved state of the window.</description>

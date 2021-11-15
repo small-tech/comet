@@ -1,5 +1,5 @@
 project(
-    'com.github.small_tech.comet',
+    'org.small_tech.comet',
     'vala',
     'c',
     version: '1.0.0'

@@ -42,14 +42,14 @@ namespace Comet {
 
         public Application () {
             Object(
-                application_id: "com.github.small_tech.comet",
+                application_id: "org.small_tech.comet",
                 flags:
                     /* We handle file opens. */
                     ApplicationFlags.HANDLES_OPEN
                     /* We can have more than one instance active at once. */
                     | ApplicationFlags.NON_UNIQUE
             );
-            saved_state = new GLib.Settings ("com.github.small_tech.comet.saved-state");
+            saved_state = new GLib.Settings ("org.small_tech.comet.saved-state");
 
             //
             // Set command-line option handling.
@@ -117,7 +117,7 @@ namespace Comet {
 
         protected override void activate () {
             // Custom icon
-            Gtk.IconTheme.get_default ().add_resource_path ("/com/github/small_tech/comet");
+            Gtk.IconTheme.get_default ().add_resource_path ("/org/small_tech/comet");
 
             // Use the person’s preferred color scheme.
             // See: https://docs.elementary.io/develop/apis/color-scheme

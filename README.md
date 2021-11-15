@@ -4,7 +4,7 @@
 
 A beautiful git commit message editor for elementary OS.
 
-[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.small_tech.comet)
+[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
 ## System requirements
 
@@ -141,20 +141,20 @@ There are two different ways to test Comet, as there are two ways to build it.
 The quickest way to build and test Comet is by using Meson and Ninja and creating a native binary:
 
 1. Run `task/build`
-2. Run `build/com.github.small_tech.comet tests/<name of test message>`
+2. Run `build/org.small_tech.comet tests/<name of test message>`
 
 This will build and run Comet using one of the test git commit messages found in the tests folder.
 
 If you want to test the native binary with actual git commits, you must register the binary as your default editor manually.
 
 ```shell
-git config --global core.editor <full path to build/com.github.small_tech.comet>
+git config --global core.editor <full path to build/org.small_tech.comet>
 ```
 
 To test the Welcome screen, run the binary without passing any arguments:
 
 ```shell
-build/com.github.small_tech.comet
+build/org.small_tech.comet
 ```
 
 Note that the native binary, unlike the Flatpak package that is distributed to people on the elementary OS AppCenter, is not sandboxed and uses different calls to configure git. While it should behave identically to the Flatpak package, always make sure to test comprehensively with the Flatpak package before creating releases.
@@ -167,13 +167,13 @@ Testing with the Flatpak build is slower but you can be sure that you’re seein
 2. Either carry out a `git commit` or, to run Comet using one of the test messages:
 
     ```shell
-    flatpak run com.github.small_tech.comet tests/<name of test message>
+    flatpak run org.small_tech.comet tests/<name of test message>
     ```
 
 To test the Welcome screen, either launch Comet from the Applications Menu or, via Terminal, run the Comet flatpak without passing it any arguments:
 
 ```shell
-flatpak run com.github.small_tech.comet
+flatpak run org.small_tech.comet
 ```
 
 ### Debugging
@@ -193,7 +193,7 @@ For example, to debug with a standard git commit message without a body:
       "type": "lldb",
       "request": "launch",
       "name": "Debug",
-      "program": "${workspaceFolder}/build/com.github.small_tech.comet",
+      "program": "${workspaceFolder}/build/org.small_tech.comet",
       "args": ["tests/message-without-body"],
       "cwd": "${workspaceFolder}"
     }
@@ -222,10 +222,10 @@ To test the native binary with a locale different to your account’s locale (e.
 
 ```shell
 # Test the welcome screen
-LANGUAGE=tr_TR.utf8 build/com.github.small_tech.comet
+LANGUAGE=tr_TR.utf8 build/org.small_tech.comet
 
 # Test with a commit message
-LANGUAGE=tr_TR.utf8 build/com.github.small_tech.comet tests/message-without-body
+LANGUAGE=tr_TR.utf8 build/org.small_tech.comet tests/message-without-body
 ```
 
 Note that the message comment will display in English as the test messages are all in English. The comments are localised by git, not Comet, so to see fully localised output, set either the native binary or the flatpak as your default git editor with the `LANGUAGE` environment variable set and test with actual commits.
@@ -238,7 +238,7 @@ tasks/update-translations
 
 __Tip:__ Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
 
-e.g., if you run `build/com.github.small_tech.comet --help` from the terminal, you will see a localised summary string. This is how it’s composed as a collection of localisable and non-localisable strings:
+e.g., if you run `build/org.small_tech.comet --help` from the terminal, you will see a localised summary string. This is how it’s composed as a collection of localisable and non-localisable strings:
 
 ```vala
 var copyright_message = ""
