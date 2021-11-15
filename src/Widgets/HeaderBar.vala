@@ -14,7 +14,7 @@ namespace Comet.Widgets {
             var line_length_adjustment = new Gtk.Adjustment (initial_line_limit, /* min */ 50, /* max */ 133, 1, 1, 1);
             var line_length_numerical_spinner = new Gtk.SpinButton (line_length_adjustment, 1.0, 0);
 
-            var line_length_label = new Gtk.Label (_("Line limit"));
+            var line_length_label = new Gtk.Label (_("First line character limit"));
 
             var line_length_limit = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
             line_length_limit.add(line_length_label);
