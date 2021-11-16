@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 13:02+0000\n"
+"POT-Creation-Date: 2021-11-16 13:06+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -54,7 +54,6 @@ msgstr ""
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 
 #: src/Application.vala:39 src/WelcomeWindow.vala:70
-#, fuzzy
 msgid "Write better Git commit messages."
 msgstr "Daha iyi Git işleme mesajları yaz."
 
@@ -224,12 +223,11 @@ msgstr "Ayarlar"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
-msgstr "Git İşlem Mesaji Düzenleyicisi"
+msgstr "Git İşlem Mesajı Düzenleyicisi"
 
 #: data/comet.desktop.in:7 data/comet.appdata.xml.in:14
-#, fuzzy
 msgid "Write better Git commit messages"
-msgstr "Daha iyi Git işleme mesajları yazmanıza yardımcı olur."
+msgstr "Daha iyi Git işleme mesajları yaz."
 
 #: data/comet.desktop.in:10
 msgid "org.small_tech.comet"
@@ -243,7 +241,8 @@ msgstr "git;işlem;mesaj;düzenleyici"
 msgid ""
 "A distaction-free Git commit message editor with spell-check, first line "
 "character limit warnings, and emoji support."
-msgstr ""
+msgstr "Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği"
+" olan ve dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
 
 #: data/comet.appdata.xml.in:18
 msgid "Small Technology Foundation"
