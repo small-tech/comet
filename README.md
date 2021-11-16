@@ -1,6 +1,6 @@
 # Comet
 
-![Comet screenshot](https://small-tech.org/downloads/comet/screenshots/comet-header.jpg)
+![Comet screenshot](https://small-tech.org/downloads/comet/screenshots/en/comet-header.jpg)
 
 _Write better Git commit messages._
 

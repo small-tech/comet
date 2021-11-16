@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 15:00+0000\n"
+"POT-Creation-Date: 2021-11-16 19:22+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -249,3 +249,22 @@ msgstr ""
 #: data/comet.appdata.xml.in:18
 msgid "Small Technology Foundation"
 msgstr "Küçüĸ Teknoloji Vakfı"
+
+#: data/comet.appdata.xml.in:34
+msgid "Get helpful hints, whether you prefer the light or dark side."
+msgstr ""
+
+#: data/comet.appdata.xml.in:38
+msgid ""
+"Configure Comet according to your project, organisation, or personal "
+"preferences."
+msgstr ""
+
+#: data/comet.appdata.xml.in:42
+msgid "Comet supports emoji."
+msgstr ""
+
+#: data/comet.appdata.xml.in:46
+msgid ""
+"Launch the app when you install it and Comet will configure Git for you."
+msgstr ""
