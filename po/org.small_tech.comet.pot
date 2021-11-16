@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 17:16+0000\n"
+"POT-Creation-Date: 2021-11-16 12:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,53 +57,61 @@ msgstr ""
 #.
 #. The option context parameter string is displayed next to the
 #. list of options on the first line of the --help screen.
-#: src/Application.vala:59
+#: src/Application.vala:60
 msgid "<path-to-git-commit-message-file>"
 msgstr ""
 
-#: src/Application.vala:74
+#: src/Application.vala:75
 msgid "Show version number and exit"
 msgstr ""
 
-#: src/Application.vala:104
+#: src/Application.vala:105
 #, c-format
 msgid "Error: Too many files (%d)."
 msgstr ""
 
-#: src/Application.vala:172
+#: src/Application.vala:173
 msgid "Comet can’t read the Git commit message."
 msgstr ""
 
-#: src/Application.vala:173
+#: src/Application.vala:174
 msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
 
-#: src/Application.vala:179
+#: src/Application.vala:180
 msgid "Report Error"
 msgstr ""
 
-#: src/MainWindow.vala:169
-msgid "Cancel"
+#: src/MainWindow.vala:152
+msgid "Hide tip"
 msgstr ""
 
-#: src/MainWindow.vala:171
+#: src/MainWindow.vala:160 src/MainWindow.vala:196
 msgid "Commit"
 msgstr ""
 
+#: src/MainWindow.vala:161 src/MainWindow.vala:193
+msgid "Cancel"
+msgstr ""
+
+#: src/MainWindow.vala:163
+msgid "Use keyboard shortcuts to improve your workflow."
+msgstr ""
+
 #. TODO: Handle this better.
-#: src/MainWindow.vala:223
+#: src/MainWindow.vala:415
 msgid "Could not save commit message."
 msgstr ""
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:492
 msgid "No characters left on first line."
 msgstr ""
 
 #. To understand why we’re doing it this way for localisation,
 #. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
-#: src/MainWindow.vala:312
+#: src/MainWindow.vala:496
 #, c-format
 msgid "%d character left on first line."
 msgid_plural "%d characters left on first line."
@@ -142,37 +150,36 @@ msgstr ""
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr ""
 
-#: src/WelcomeWindow.vala:70
+#: src/WelcomeWindow.vala:70 data/comet.appdata.xml.in:14
 msgid "Commit in style"
 msgstr ""
 
-#: src/WelcomeWindow.vala:76
+#: src/WelcomeWindow.vala:75
 msgid "Disable Comet"
 msgstr ""
 
-#: src/WelcomeWindow.vala:76
+#: src/WelcomeWindow.vala:75
 msgid "Revert to using your previous editor for Git commit messages."
 msgstr ""
 
-#: src/WelcomeWindow.vala:78
+#: src/WelcomeWindow.vala:77
 msgid "Enable Comet"
 msgstr ""
 
-#: src/WelcomeWindow.vala:78
+#: src/WelcomeWindow.vala:77
 msgid "Use Comet as the default editor for Git commit messages."
 msgstr ""
 
-#: src/WelcomeWindow.vala:82
+#. Request a specific width so the whole interface does not
+#. jump around when we toggle it.
+#: src/WelcomeWindow.vala:85
 msgid "Help"
 msgstr ""
 
-#: src/WelcomeWindow.vala:82
+#: src/WelcomeWindow.vala:85
 msgid "Having trouble? Get help and report issues."
 msgstr ""
 
-#. status_grid.row_spacing = 12;
-#. status_grid.margin_top = 24;
-#. status_grid.margin_bottom = 12;
 #. Insert the status text into the view.
 #: src/WelcomeWindow.vala:115
 msgid "Comet is enabled as your editor for Git commit messages."
@@ -183,8 +190,28 @@ msgid "Comet is disabled."
 msgstr ""
 
 #: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
-#: data/comet.appdata.xml.in:12
+#: data/comet.appdata.xml.in:13
 msgid "Comet"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:17
+msgid "First line character limit"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:28
+msgid "Dogmatic (50)"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:31
+msgid "GitHub truncation (72)"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:34
+msgid "GitLab truncation (100)"
+msgstr ""
+
+#: src/Widgets/HeaderBar.vala:63
+msgid "Settings"
 msgstr ""
 
 #: data/comet.desktop.in:6
@@ -192,7 +219,7 @@ msgid "Git Commit Message Editor"
 msgstr ""
 
 #: data/comet.desktop.in:7
-msgid "Git commit message editor"
+msgid "Compose Git commit messages"
 msgstr ""
 
 #: data/comet.desktop.in:10
@@ -203,6 +230,12 @@ msgstr ""
 msgid "git;commit;message;editor"
 msgstr ""
 
-#: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
-msgid "Commit in style"
+#: data/comet.appdata.xml.in:16
+msgid ""
+"A distaction-free Git commit message editor with spell-check, first line "
+"character limit warnings, and emoji support."
+msgstr ""
+
+#: data/comet.appdata.xml.in:18
+msgid "Small Technology Foundation"
 msgstr ""

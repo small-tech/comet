@@ -3,17 +3,12 @@
 # This file is distributed under the same license as the org.small_tech.comet package.
 # Automatically generated, 2021.
 #
-# Initially translated by Aral Balkan.
-#
-# References:
-#  - Git terminology: https://github.com/git/git/blob/master/po/tr.po
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 17:16+0000\n"
-"PO-Revision-Date: 2021-10-08 13:07+0100\n"
+"POT-Creation-Date: 2021-11-16 12:21+0000\n"
+"PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: tr\n"
@@ -67,24 +62,24 @@ msgstr "Daha iyi Git işleme mesajları yazmanıza yardımcı olur."
 #.
 #. The option context parameter string is displayed next to the
 #. list of options on the first line of the --help screen.
-#: src/Application.vala:59
+#: src/Application.vala:60
 msgid "<path-to-git-commit-message-file>"
 msgstr "<git-işleme-mesaj-dosyasının-yolu>"
 
-#: src/Application.vala:74
+#: src/Application.vala:75
 msgid "Show version number and exit"
 msgstr "Sürüm numarasını göster ve çik"
 
-#: src/Application.vala:104
+#: src/Application.vala:105
 #, c-format
 msgid "Error: Too many files (%d)."
 msgstr "Hata: Çok fazla dosya (%d)."
 
-#: src/Application.vala:172
+#: src/Application.vala:173
 msgid "Comet can’t read the Git commit message."
 msgstr "Comet Git işlem mesajını okuyamıyor."
 
-#: src/Application.vala:173
+#: src/Application.vala:174
 msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
@@ -92,30 +87,38 @@ msgstr ""
 "Hata Raporu Aç düğmesi sizi GitHub¯sitesinde gönderilmeye hazır birhata "
 "raporuna götürür."
 
-#: src/Application.vala:179
+#: src/Application.vala:180
 msgid "Report Error"
 msgstr "Hata Raporu Aç"
 
-#: src/MainWindow.vala:169
-msgid "Cancel"
-msgstr "İptal et"
+#: src/MainWindow.vala:152
+msgid "Hide tip"
+msgstr "İpucuyu sakla"
 
-#: src/MainWindow.vala:171
+#: src/MainWindow.vala:160 src/MainWindow.vala:196
 msgid "Commit"
 msgstr "İşle"
 
+#: src/MainWindow.vala:161 src/MainWindow.vala:193
+msgid "Cancel"
+msgstr "İptal et"
+
+#: src/MainWindow.vala:163
+msgid "Use keyboard shortcuts to improve your workflow."
+msgstr "Daha hızlı çalışmak için klavye kısayollarını kullan."
+
 #. TODO: Handle this better.
-#: src/MainWindow.vala:223
+#: src/MainWindow.vala:415
 msgid "Could not save commit message."
 msgstr "İşleme mesajını kaydedemedik."
 
-#: src/MainWindow.vala:308
+#: src/MainWindow.vala:492
 msgid "No characters left on first line."
-msgstr "İlk satırın harf limitindesiniz."
+msgstr "İşleme mesajını kaydedemedik."
 
 #. To understand why we’re doing it this way for localisation,
 #. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
-#: src/MainWindow.vala:312
+#: src/MainWindow.vala:496
 #, c-format
 msgid "%d character left on first line."
 msgid_plural "%d characters left on first line."
@@ -158,58 +161,77 @@ msgstr "el ile parça düzenleme kipi"
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr "Uyarı: bilinmeyen Git işlem türü ile karşılaşıldi: %s"
 
-#: src/WelcomeWindow.vala:70
+#: src/WelcomeWindow.vala:70 data/comet.appdata.xml.in:14
 msgid "Commit in style"
-msgstr "Klaslı işlemle"
+msgstr "Klaslı işlem yap"
 
-#: src/WelcomeWindow.vala:76
+#: src/WelcomeWindow.vala:75
 msgid "Disable Comet"
 msgstr "Comet’i Devre Dışı Bırak"
 
-#: src/WelcomeWindow.vala:76
+#: src/WelcomeWindow.vala:75
 msgid "Revert to using your previous editor for Git commit messages."
-msgstr "Bir önceki Git işlem düzenleyicinizi kullanmaya geri dönün."
+msgstr "Bir önceki Git işlem düzenleyicini kullanmaya geri dön."
 
-#: src/WelcomeWindow.vala:78
+#: src/WelcomeWindow.vala:77
 msgid "Enable Comet"
 msgstr "Comet’i Etkinleştir"
 
-#: src/WelcomeWindow.vala:78
+#: src/WelcomeWindow.vala:77
 msgid "Use Comet as the default editor for Git commit messages."
-msgstr "Comet’i öntanımlı Git işlem mesajı düzenleyiciniz olarak kullanın."
+msgstr "Comet’i öntanımlı Git işlem mesajı düzenleyicin olarak kullan."
 
-#: src/WelcomeWindow.vala:82
+#. Request a specific width so the whole interface does not
+#. jump around when we toggle it.
+#: src/WelcomeWindow.vala:85
 msgid "Help"
 msgstr "Yardım"
 
-#: src/WelcomeWindow.vala:82
+#: src/WelcomeWindow.vala:85
 msgid "Having trouble? Get help and report issues."
-msgstr "Bilgi almak ve sorun raporu açmak için."
+msgstr "Sorun mu yaşıyorsun? Bilgi al ve sorun raporu aç."
 
-#. status_grid.row_spacing = 12;
-#. status_grid.margin_top = 24;
-#. status_grid.margin_bottom = 12;
 #. Insert the status text into the view.
 #: src/WelcomeWindow.vala:115
 msgid "Comet is enabled as your editor for Git commit messages."
-msgstr "Comet öntanımlı Git işlem düzenleyiciniz olarak etkinleştirilmiştir."
+msgstr "Comet öntanımlı Git işlem düzenleyiciniz olarak etkinleştirildi."
 
 #: src/WelcomeWindow.vala:116
 msgid "Comet is disabled."
-msgstr "Comet devre dışı bırakılmıştır."
+msgstr "Comet devre dışı bırakıldı."
 
 #: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
-#: data/comet.appdata.xml.in:12
+#: data/comet.appdata.xml.in:13
 msgid "Comet"
 msgstr "Comet"
+
+#: src/Widgets/HeaderBar.vala:17
+msgid "First line character limit"
+msgstr "İlk satır karakter sınırı"
+
+#: src/Widgets/HeaderBar.vala:28
+msgid "Dogmatic (50)"
+msgstr "Dogmatik (50)"
+
+#: src/Widgets/HeaderBar.vala:31
+msgid "GitHub truncation (72)"
+msgstr "GitHub kesme noktası (72)"
+
+#: src/Widgets/HeaderBar.vala:34
+msgid "GitLab truncation (100)"
+msgstr "GitLab kesme noktası (100)"
+
+#: src/Widgets/HeaderBar.vala:63
+msgid "Settings"
+msgstr "Ayarlar"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
 msgstr "Git İşlem Mesaji Düzenleyicisi"
 
 #: data/comet.desktop.in:7
-msgid "Git commit message editor"
-msgstr "Git işlem mesaji düzenleyicisi"
+msgid "Compose Git commit messages"
+msgstr "Git işlem mesajları düzenle"
 
 #: data/comet.desktop.in:10
 msgid "org.small_tech.comet"
@@ -219,6 +241,12 @@ msgstr ""
 msgid "git;commit;message;editor"
 msgstr "git;işlem;mesaj;düzenleyici"
 
-#: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
-msgid "Commit in style"
-msgstr "Klaslı işlemle"
+#: data/comet.appdata.xml.in:16
+msgid ""
+"A distaction-free Git commit message editor with spell-check, first line "
+"character limit warnings, and emoji support."
+msgstr ""
+
+#: data/comet.appdata.xml.in:18
+msgid "Small Technology Foundation"
+msgstr "Küçüĸ Teknoloji Vakfı"
