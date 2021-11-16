@@ -2,26 +2,26 @@
 
 ![Comet icon](./data/comet-128.svg)
 
-A beautiful git commit message editor for elementary OS.
+An elegant Git commit message editor.
 
 [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
 ## System requirements
 
-  - [Elementary OS](https://elementary.io) 6 (Odin)
+  - [elementary OS](https://elementary.io) 6 (Odin)
 
-_Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is being developed by Sonny Piers and is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which itself was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I loved using back when my development machine was a Mac._
+_Comet is designed specifically for elementary OS 6. If you want a similar app for GNOME in general, please see [Commit](https://flathub.org/apps/details/re.sonny.Commit), which is a fork of my previous app, [Gnomit](https://flathub.org/apps/details/org.small_tech.Gnomit), which is being maintained by Sonny Piers and which, itself, was inspired by Mayur’s excellent [Komet](https://github.com/zorgiepoo/Komet) app that I loved using back when my development machine was a Mac._
 
 ## Installation and usage
 
 1. Install Comet from AppCenter.
 2. Launch Comet from the _Applications Menu_.
 
-When launched from the _Applications Menu_, Comet will display the Welcome Screen and it will automatically make itself your default git commit message editor.
+When launched from the _Applications Menu_, Comet displays the Welcome Screen and automatically sets itself as your default Git commit message editor.
 
-Comet remembers your previous editor and restores it as your default git commit message editor when you disable it.
+Comet remembers your previous editor and restores it should you disable it in the future.
 
-When Comet is enabled as your default git commit message editor, it launches automatically whenever you make a git commit.
+When Comet is enabled as your default Git commit message editor, it launches automatically whenever you make a Git commit.
 
 ### About the first line character limit
 
@@ -31,7 +31,7 @@ Using the numerical stepper in the _Settings Menu_ in the header bar, you can se
   - GitHub truncation (72)
   - GitLab truncation (100)
 
-The _Dogmatic (50)_ limit is based on the assumption that [the median message length in the git projects’s own repository](https://preslav.me/2015/02/21/what-s-with-the-50-72-rule/) is somehow an indication of message quality. (Somewhat ironically, [Linus Torvald’s example of a good git message](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88) has 65 characters in the first line.)
+The _Dogmatic (50)_ limit is based on the assumption that [the median message length in the Git projects’s own repository](https://preslav.me/2015/02/21/what-s-with-the-50-72-rule/) is somehow an indication of message quality. (Somewhat ironically, [Linus Torvald’s example of a good Git message](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88) has 65 characters in the first line.)
 
 The _GitHub trunctation (72)_ and _GitLab truncation (100)_ limits are the lengths beyond which GitHub and GitLab truncate the first line of a commit message when displaying it ([GitHub truncates messages longer than 72 characters to 69 characters](https://robertcooper.me/post/git-commit-messages#subject-line-less-than-or-equal-to-72-characters-in-length) and [GitLab truncates lines over 100 characters to 80 characters]((https://gitlab.com/gitlab-org/gitlab-foss/-/blob/2859e8d54f948184ac489afea995c65ed0ca325c/app/models/commit.rb#L172))).
 
@@ -82,9 +82,9 @@ This is an issue that affects all elementary OS apps that use the standard Grani
 
 #### Editor
 
-The title, git command, and git commit message type detail (e.g., the branch to be committed) are read out and the person is informed that the the git commit message editor component has focus.
+The title, Git command, and Git commit message type detail (e.g., the branch to be committed) are read out and the person is informed that the the Git commit message editor component has focus.
 
-To have the git commit message comment read out, please invoke Orca’s “Speak entire window using flat review” command.
+To have the Git commit message comment read out, please invoke Orca’s “Speak entire window using flat review” command.
 
 If you have ideas for improving the accessibility of Comet, please voice them in the [discussions](https://github.com/small-tech/comet/discussions) or [open an issue](https://github.com/small-tech/comet/issues).
 
@@ -143,9 +143,9 @@ The quickest way to build and test Comet is by using Meson and Ninja and creatin
 1. Run `task/build`
 2. Run `build/org.small_tech.comet tests/<name of test message>`
 
-This will build and run Comet using one of the test git commit messages found in the tests folder.
+This will build and run Comet using one of the test Git commit messages found in the tests folder.
 
-If you want to test the native binary with actual git commits, you must register the binary as your default editor manually.
+If you want to test the native binary with actual Git commits, you must register the binary as your default editor manually.
 
 ```shell
 git config --global core.editor <full path to build/org.small_tech.comet>
@@ -157,7 +157,7 @@ To test the Welcome screen, run the binary without passing any arguments:
 build/org.small_tech.comet
 ```
 
-Note that the native binary, unlike the Flatpak package that is distributed to people on the elementary OS AppCenter, is not sandboxed and uses different calls to configure git. While it should behave identically to the Flatpak package, always make sure to test comprehensively with the Flatpak package before creating releases.
+Note that the native binary, unlike the Flatpak package that is distributed to people on the elementary OS AppCenter, is not sandboxed and uses different calls to configure Git. While it should behave identically to the Flatpak package, always make sure to test comprehensively with the Flatpak package before creating releases.
 
 #### Flatpak testing
 
@@ -182,7 +182,7 @@ In [VSCodium](#vscodium), press <kbd>Control</kbd> + <kbd>Shift</kbd> + B → _B
 
 To pass a test commit message to Comet to debug with, edit the _.vscode/launch.json_ file and add the argument to the array referenced by the `args` property.
 
-For example, to debug with a standard git commit message without a body:
+For example, to debug with a standard Git commit message without a body:
 
 ```json
 {
@@ -228,7 +228,7 @@ LANGUAGE=tr_TR.utf8 build/org.small_tech.comet
 LANGUAGE=tr_TR.utf8 build/org.small_tech.comet tests/message-without-body
 ```
 
-Note that the message comment will display in English as the test messages are all in English. The comments are localised by git, not Comet, so to see fully localised output, set either the native binary or the flatpak as your default git editor with the `LANGUAGE` environment variable set and test with actual commits.
+Note that the message comment will display in English as the test messages are all in English. The comments are localised by Git, not Comet, so to see fully localised output, set either the native binary or the flatpak as your default Git editor with the `LANGUAGE` environment variable set and test with actual commits.
 
 Remember to update the translation files whenever you change localisable strings in your app:
 

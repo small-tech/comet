@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright ⓒ 2021 to present, Aral Balkan <mail@ar.al> -->
-<component type="desktop">
+<component type="desktop-application">
   <id>org.small_tech.comet</id>
   <metadata_license>CC0</metadata_license>
   <!--
@@ -9,9 +9,23 @@
     https://hughsie.github.io/oars/generate.html
   -->
   <content_rating type="oars-1.1" />
+  <project_license>GPL-3.0</project_license>
   <name>Comet</name>
-  <summary>A beautiful git commit message editor for elementary OS. </summary>
+  <summary>Commit in style</summary>
   <description>
-    <p>A beautiful git commit message editor for elementary OS. </p>
+    <p>A distaction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.</p>
   </description>
+  <developer_name>Small Technology Foundation</developer_name>
+  <launchable type="desktop-id">org.small_tech.comet.desktop</launchable>
+  <icon type="stock">org.small_tech.comet</icon>
+  <custom>
+    <value key="x-appcenter-color-primary">#a62100</value>
+    <value key="x-appcenter-color-primary-text">#fafafa</value>
+    <value key="x-appcenter-suggested-price">5</value>
+  </custom>
+  <url type="homepage">https://github.com/small-tech/comet</url>
+  <url type="bugtracker">https://github.com/small-tech/comet/issues</url>
+  <url type="donation">https://small-tech.org/fund-us</url>
+  <url type="help">https://github.com/small-tech/comet/discussions</url>
+  <update_contact>hello@small-tech.org</update_contact>
 </component>

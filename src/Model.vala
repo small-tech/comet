@@ -19,7 +19,7 @@ namespace Comet {
             commit_message_file_path = commit_message_file.get_path ();
 
             //
-            // Ascertain type of git message from its file path.
+            // Ascertain type of Git message from its file path.
             //
 
             // Generic commit message.
@@ -81,9 +81,9 @@ namespace Comet {
             var first_comment_index = text.index_of ("#");
 
             // In case there is no comment for some reason, let’s not go further as this is likely not
-            // a proper git commit message.
+            // a proper Git commit message.
             if (first_comment_index == -1) {
-                throw new FileError.INVAL (_("Comet: Sorry, this does not look like a valid git commit message (it’s missing a comment section):\n\n%s").printf(text));
+                throw new FileError.INVAL (_("Comet: Sorry, this does not look like a valid Git commit message (it’s missing a comment section):\n\n%s").printf(text));
             }
 
             message = text.slice (0, first_comment_index - 1);
@@ -126,7 +126,7 @@ namespace Comet {
                     // Comet was launche with a reference to a file that’s not in a .git
                     // folder or our test folder. This shouldn’t happen but it’s not really an
                     // error so we’ll allow it with a warning.
-                    warning (@"$(commit_message_file_path) is not a git commit message.");
+                    warning (@"$(commit_message_file_path) is not a Git commit message.");
                     project_directory_name = commit_message_file_path;
                 }
             }

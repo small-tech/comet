@@ -67,14 +67,14 @@ namespace Comet {
 
             welcome = new Granite.Widgets.Welcome (
                 "Comet",
-                _("A beautiful git commit message editor.")
+                _("Commit in style")
             );
 
             int enable_disable_button_index;
             if (comet_is_enabled) {
-                enable_disable_button_index = welcome.append ("comet-disable", _("Disable Comet"), _("Revert to using your previous editor for git commit messages."));
+                enable_disable_button_index = welcome.append ("comet-disable", _("Disable Comet"), _("Revert to using your previous editor for Git commit messages."));
             } else {
-                enable_disable_button_index = welcome.append ("comet-128", _("Enable Comet"), _("Use Comet as the default editor for git commit messages."));
+                enable_disable_button_index = welcome.append ("comet-128", _("Enable Comet"), _("Use Comet as the default editor for Git commit messages."));
             }
             enable_disable_button = welcome.get_button_from_index (enable_disable_button_index);
 
@@ -112,7 +112,7 @@ namespace Comet {
 
             // Insert the status text into the view.
             var status_message = comet_is_enabled ?
-                _("Comet is enabled as your editor for git commit messages.")
+                _("Comet is enabled as your editor for Git commit messages.")
                 : _("Comet is disabled.");
 
             var status_icon_name = comet_is_enabled ? "process-completed" : "process-stop";
@@ -202,11 +202,11 @@ namespace Comet {
         //      // ===== Try that and see if it flickers or works.
         //      if (comet_is_enabled) {
         //          enable_disable_button.title = _("Disable Comet");
-        //          enable_disable_button.description = _("Revert to using your previous editor for git commit messages.");
+        //          enable_disable_button.description = _("Revert to using your previous editor for Git commit messages.");
         //          enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-disable", Gtk.IconSize.DIALOG);
         //      } else {
         //          enable_disable_button.title = _("Enable Comet");
-        //          enable_disable_button.description = _("Use Comet as the default editor for git commit messages.");
+        //          enable_disable_button.description = _("Use Comet as the default editor for Git commit messages.");
         //          enable_disable_button.icon = new Gtk.Image.from_icon_name ("comet-128", Gtk.IconSize.DIALOG);
         //      }
         //  }

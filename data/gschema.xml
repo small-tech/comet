@@ -24,7 +24,7 @@
     <key name="previous-editor" type="s">
       <default>""</default>
       <summary>Previous editor</summary>
-      <description>The previous git commit message editor before it was replaced with Comet (by Comet).</description>
+      <description>The previous Git commit message editor before it was replaced with Comet (by Comet).</description>
     </key>
     <key name="first-line-character-limit" type="i">
       <default>72</default>

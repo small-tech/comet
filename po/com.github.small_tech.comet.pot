@@ -71,7 +71,7 @@ msgid "Error: Too many files (%d)."
 msgstr ""
 
 #: src/Application.vala:172
-msgid "Comet can’t read the git commit message."
+msgid "Comet can’t read the Git commit message."
 msgstr ""
 
 #: src/Application.vala:173
@@ -111,11 +111,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. In case there is no comment for some reason, let’s not go further as this is likely not
-#. a proper git commit message.
+#. a proper Git commit message.
 #: src/Model.vala:86
 #, c-format
 msgid ""
-"Comet: Sorry, this does not look like a valid git commit message (it’s "
+"Comet: Sorry, this does not look like a valid Git commit message (it’s "
 "missing a comment section):\n"
 "\n"
 "%s"
@@ -143,7 +143,7 @@ msgid "Warning: unknown Git commit type encountered in %s"
 msgstr ""
 
 #: src/WelcomeWindow.vala:70
-msgid "A beautiful git commit message editor."
+msgid "Commit in style"
 msgstr ""
 
 #: src/WelcomeWindow.vala:76
@@ -151,7 +151,7 @@ msgid "Disable Comet"
 msgstr ""
 
 #: src/WelcomeWindow.vala:76
-msgid "Revert to using your previous editor for git commit messages."
+msgid "Revert to using your previous editor for Git commit messages."
 msgstr ""
 
 #: src/WelcomeWindow.vala:78
@@ -159,7 +159,7 @@ msgid "Enable Comet"
 msgstr ""
 
 #: src/WelcomeWindow.vala:78
-msgid "Use Comet as the default editor for git commit messages."
+msgid "Use Comet as the default editor for Git commit messages."
 msgstr ""
 
 #: src/WelcomeWindow.vala:82
@@ -175,7 +175,7 @@ msgstr ""
 #. status_grid.margin_bottom = 12;
 #. Insert the status text into the view.
 #: src/WelcomeWindow.vala:115
-msgid "Comet is enabled as your editor for git commit messages."
+msgid "Comet is enabled as your editor for Git commit messages."
 msgstr ""
 
 #: src/WelcomeWindow.vala:116
@@ -204,5 +204,5 @@ msgid "git;commit;message;editor"
 msgstr ""
 
 #: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
-msgid "A beautiful git commit message editor for elementary OS."
+msgid "Commit in style"
 msgstr ""

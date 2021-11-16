@@ -81,8 +81,8 @@ msgid "Error: Too many files (%d)."
 msgstr "Hata: Çok fazla dosya (%d)."
 
 #: src/Application.vala:172
-msgid "Comet can’t read the git commit message."
-msgstr "Comet git işlem mesajını okuyamıyor."
+msgid "Comet can’t read the Git commit message."
+msgstr "Comet Git işlem mesajını okuyamıyor."
 
 #: src/Application.vala:173
 msgid ""
@@ -123,16 +123,16 @@ msgstr[0] "İlk satır limitine %d harf kaldı."
 msgstr[1] "İlk satır limitine %d harf kaldı."
 
 #. In case there is no comment for some reason, let’s not go further as this is likely not
-#. a proper git commit message.
+#. a proper Git commit message.
 #: src/Model.vala:86
 #, c-format
 msgid ""
-"Comet: Sorry, this does not look like a valid git commit message (it’s "
+"Comet: Sorry, this does not look like a valid Git commit message (it’s "
 "missing a comment section):\n"
 "\n"
 "%s"
 msgstr ""
-"Comet: Ne yazık ki bu geçerli bir git işleme mesajına benzemiyor (yorum "
+"Comet: Ne yazık ki bu geçerli bir Git işleme mesajına benzemiyor (yorum "
 "bölümü eksik):\n"
 "\n"
 "%s"
@@ -159,24 +159,24 @@ msgid "Warning: unknown Git commit type encountered in %s"
 msgstr "Uyarı: bilinmeyen Git işlem türü ile karşılaşıldi: %s"
 
 #: src/WelcomeWindow.vala:70
-msgid "A beautiful git commit message editor."
-msgstr "Güzel bir git işlem mesaji duzenleyicisi."
+msgid "Commit in style"
+msgstr "Klaslı işlemle"
 
 #: src/WelcomeWindow.vala:76
 msgid "Disable Comet"
 msgstr "Comet’i Devre Dışı Bırak"
 
 #: src/WelcomeWindow.vala:76
-msgid "Revert to using your previous editor for git commit messages."
-msgstr "Bir önceki git işlem düzenleyicinizi kullanmaya geri dönün."
+msgid "Revert to using your previous editor for Git commit messages."
+msgstr "Bir önceki Git işlem düzenleyicinizi kullanmaya geri dönün."
 
 #: src/WelcomeWindow.vala:78
 msgid "Enable Comet"
 msgstr "Comet’i Etkinleştir"
 
 #: src/WelcomeWindow.vala:78
-msgid "Use Comet as the default editor for git commit messages."
-msgstr "Comet’i öntanımlı git işlem mesajı düzenleyiciniz olarak kullanın."
+msgid "Use Comet as the default editor for Git commit messages."
+msgstr "Comet’i öntanımlı Git işlem mesajı düzenleyiciniz olarak kullanın."
 
 #: src/WelcomeWindow.vala:82
 msgid "Help"
@@ -191,8 +191,8 @@ msgstr "Bilgi almak ve sorun raporu açmak için."
 #. status_grid.margin_bottom = 12;
 #. Insert the status text into the view.
 #: src/WelcomeWindow.vala:115
-msgid "Comet is enabled as your editor for git commit messages."
-msgstr "Comet öntanımlı git işlem düzenleyiciniz olarak etkinleştirilmiştir."
+msgid "Comet is enabled as your editor for Git commit messages."
+msgstr "Comet öntanımlı Git işlem düzenleyiciniz olarak etkinleştirilmiştir."
 
 #: src/WelcomeWindow.vala:116
 msgid "Comet is disabled."
@@ -220,5 +220,5 @@ msgid "git;commit;message;editor"
 msgstr "git;işlem;mesaj;düzenleyici"
 
 #: data/comet.appdata.xml.in:13 data/comet.appdata.xml.in:15
-msgid "A beautiful git commit message editor for elementary OS."
-msgstr "elementary OS için güzel bir git işlem mesaji duzenleyicisi."
+msgid "Commit in style"
+msgstr "Klaslı işlemle"

@@ -170,7 +170,7 @@ namespace Comet {
 
         private void show_commit_message_file_error (FileError error) {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                _("Comet can’t read the git commit message."),
+                _("Comet can’t read the Git commit message."),
                 _("The Report Error button will take you to a pre-filled issue on GitHub that you can submit to help improve Comet."),
                 "process-stop",
                 Gtk.ButtonsType.CLOSE
@@ -188,8 +188,8 @@ namespace Comet {
                     try {
                         // Note: these are *not* translatable strings on purpose as we
                         // want the issues to be in English only.
-                        var title = Uri.escape_string ("Error: Cannot read git commit message file");
-                        var body = Uri.escape_string (@"Comet could not read the git commit message file on launch and failed with the following error:\n\n```\n$(error.message)\n```");
+                        var title = Uri.escape_string ("Error: Cannot read Git commit message file");
+                        var body = Uri.escape_string (@"Comet could not read the Git commit message file on launch and failed with the following error:\n\n```\n$(error.message)\n```");
                         AppInfo.launch_default_for_uri (@"https://github.com/small-tech/comet/issues/new/?title=$(title)&body=$(body)", null);
                     } catch (Error error) {
                         warning (error.message);
