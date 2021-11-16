@@ -22,10 +22,29 @@
     <value key="x-appcenter-color-primary">#a62100</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
     <value key="x-appcenter-suggested-price">5</value>
+    <value key="x-appcenter-stripe">pk_live_CYYwSVoh2kC4XcTPCudVIocg005StHQ47e</value>
   </custom>
   <url type="homepage">https://github.com/small-tech/comet</url>
   <url type="bugtracker">https://github.com/small-tech/comet/issues</url>
   <url type="donation">https://small-tech.org/fund-us</url>
   <url type="help">https://github.com/small-tech/comet/discussions</url>
   <update_contact>hello@small-tech.org</update_contact>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Get helpful hints, whether you prefer the light or dark side.</caption>
+      <image>https://small-tech.org/downloads/comet/screenshots/comet-light-and-dark.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Configure Comet according to your project, organisation, or personal preferences.</caption>
+      <image>https://small-tech.org/downloads/comet/screenshots/comet-character-limit.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Comet supports emoji.</caption>
+      <image>https://small-tech.org/downloads/comet/screenshots/comet-emoji.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Launch the app when you install it and Comet will configure Git for you.</caption>
+      <image>https://small-tech.org/downloads/comet/screenshots/comet-welcome.png</image>
+    </screenshot>
+  </screenshots>
 </component>
