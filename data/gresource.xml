@@ -6,4 +6,7 @@
   <gresource prefix="/org/small_tech/comet">
     <file compressed="true" preprocess="xml-stripblanks">comet-disable.svg</file>
   </gresource>
+  <gresource prefix="/org/small_tech/comet">
+    <file compressed="true" preprocess="xml-stripblanks">comet-help.svg</file>
+  </gresource>
 </gresources>
