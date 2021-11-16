@@ -8,6 +8,14 @@ A distraction-free Git commit message editor with spell-check, first line charac
 
 [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
+## Get the wallpaper
+
+Just like [Catts](https://github.com/small-tech/catts) and [Watson](https://github.com/small-tech/watson), Comet also has a lovely wallpaper designed by [Margo de Weerdt](https://www.margodeweerdt.com/) that you can download below (just right-click or long-tap and save it to your machine).
+
+![An illustration of The Little Prince flying through a multi-coloured cosmos of blues and purples towards the sun with a captured comet that’s emanating a tail of yellows and reds. Characters from previous projects can be seen on the planets around him, like the cats in Catts and Sherlock and Watson, who are in a boat on Earth, and Enola who is on the moon.](https://small-tech.org/downloads/comet/wallpaper/comet-wallpaper-4k-by-margo-de-weerdt-small-technology-foundation.jpg)
+
+_The wallpaper is released under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/). Please credit [Margo de Weerdt](https://www.margodeweerdt.com/) and [Comet](https://github.com/small-tech/catts) by [Small Technology Foundation](https://small-tech.org)._
+
 ## System requirements
 
   - [elementary OS](https://elementary.io) 6 (Odin)
