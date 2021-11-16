@@ -33,6 +33,24 @@ Comet remembers your previous editor and restores it should you disable it in th
 
 When Comet is enabled as your default Git commit message editor, it launches automatically whenever you make a Git commit.
 
+### About spell check
+
+Spell checking will try to automatically match your system’s locale but the dictionaries available are based on the ones installed on elementary OS by default. Needless to say, these have a Western bias.
+
+So, if you want spell checking to work with Turkish, for example, you have to manually install the dictionary.
+
+e.g., for Turkish, copy and paste this into Terminal:
+
+```shell
+sudo apt install hunspell-tr
+```
+
+You can see which dictionaries are installed by running the following command in Terminal:
+
+```shell
+apt search hunspell | grep installed
+```
+
 ### About the first line character limit
 
 Using the numerical stepper in the _Settings Menu_ in the header bar, you can set the first line character limit to any value from 50 to 132. You can also use the shortcut buttons in the _Settings Menu_ to set the limit to:
