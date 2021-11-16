@@ -2,7 +2,9 @@
 
 ![Comet icon](./data/comet-128.svg)
 
-An elegant Git commit message editor.
+_Write better Git commit messages._
+
+A distraction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.
 
 [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
@@ -211,7 +213,7 @@ If you do not pass an argument (if `"args": []`), Comet will launch in the debug
 2. Update translations:
 
     ```shell
-    tasks/update-translations
+    task/update-translations
     ```
 
 _If you want to help translate but don’t want to clone the repository you can contribute using GitHub’s online interface. Please introduce yourself in the  [discussions](https://github.com/small-tech/comet/discussions) and let us know which language you’d like to work on and we can help you get started._
@@ -233,7 +235,7 @@ Note that the message comment will display in English as the test messages are a
 Remember to update the translation files whenever you change localisable strings in your app:
 
 ```shell
-tasks/update-translations
+task/update-translations
 ```
 
 __Tip:__ Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
@@ -293,6 +295,24 @@ msgstr ""
 "Bu özgür yazılımdır: değiştirebilirsiniz ve dağıtabilirsiniz.\n"
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 ```
+
+### AppCenter Preview
+
+To test how the app will look on AppCenter, do the following:
+
+1. Uncomment the `<icon/>` tag in _data/comet.appdata.xml.in_.
+
+2. Build the app:
+    ```shell
+    task/build
+    ```
+
+3. Run AppCenter, asking it to display your local _appdata.xml_:
+    ```shell
+    io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
+    ```
+
+Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after you’re done previewing your app in AppCenter or your Flatpak builds will fail.
 
 ### VSCodium
 
