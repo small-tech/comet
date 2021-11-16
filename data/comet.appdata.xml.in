@@ -34,21 +34,17 @@
   <update_contact>hello@small-tech.org</update_contact>
   <screenshots>
     <screenshot type="default">
-      <caption>Get helpful hints, whether you prefer the light or dark side.</caption>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-light-and-dark.png</image>
     </screenshot>
     <screenshot>
-      <caption>Configure Comet according to your project, organisation, or personal preferences.</caption>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-character-limit.png</image>
     </screenshot>
     <screenshot>
-      <caption>Comet supports emoji.</caption>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-emoji.png</image>
     </screenshot>
     <screenshot>
-      <caption>Launch the app when you install it and Comet will configure Git for you.</caption>
-      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
-      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
+      <image type="source" xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
+      <image type="source">https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
     </screenshot>
   </screenshots>
 </component>

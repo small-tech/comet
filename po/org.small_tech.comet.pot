@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 19:22+0000\n"
+"POT-Creation-Date: 2021-11-16 19:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,25 +232,12 @@ msgid ""
 "character limit warnings, and emoji support."
 msgstr ""
 
-#: data/comet.appdata.xml.in:18
+#: data/comet.appdata.xml.in:19
+msgid ""
+"Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve "
+"dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
+msgstr ""
+
+#: data/comet.appdata.xml.in:21
 msgid "Small Technology Foundation"
-msgstr ""
-
-#: data/comet.appdata.xml.in:34
-msgid "Get helpful hints, whether you prefer the light or dark side."
-msgstr ""
-
-#: data/comet.appdata.xml.in:38
-msgid ""
-"Configure Comet according to your project, organisation, or personal "
-"preferences."
-msgstr ""
-
-#: data/comet.appdata.xml.in:42
-msgid "Comet supports emoji."
-msgstr ""
-
-#: data/comet.appdata.xml.in:46
-msgid ""
-"Launch the app when you install it and Comet will configure Git for you."
 msgstr ""
