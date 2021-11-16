@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 12:21+0000\n"
+"POT-Creation-Date: 2021-11-16 13:02+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -53,9 +53,10 @@ msgstr ""
 "Bu özgür yazılımdır: değiştirebilirsiniz ve dağıtabilirsiniz.\n"
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 
-#: src/Application.vala:39
-msgid "Helps you write better Git commit messages."
-msgstr "Daha iyi Git işleme mesajları yazmanıza yardımcı olur."
+#: src/Application.vala:39 src/WelcomeWindow.vala:70
+#, fuzzy
+msgid "Write better Git commit messages."
+msgstr "Daha iyi Git işleme mesajları yaz."
 
 #.
 #. Set command-line option handling.
@@ -161,10 +162,6 @@ msgstr "el ile parça düzenleme kipi"
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr "Uyarı: bilinmeyen Git işlem türü ile karşılaşıldi: %s"
 
-#: src/WelcomeWindow.vala:70 data/comet.appdata.xml.in:14
-msgid "Commit in style"
-msgstr "Klaslı işlem yap"
-
 #: src/WelcomeWindow.vala:75
 msgid "Disable Comet"
 msgstr "Comet’i Devre Dışı Bırak"
@@ -229,9 +226,10 @@ msgstr "Ayarlar"
 msgid "Git Commit Message Editor"
 msgstr "Git İşlem Mesaji Düzenleyicisi"
 
-#: data/comet.desktop.in:7
-msgid "Compose Git commit messages"
-msgstr "Git işlem mesajları düzenle"
+#: data/comet.desktop.in:7 data/comet.appdata.xml.in:14
+#, fuzzy
+msgid "Write better Git commit messages"
+msgstr "Daha iyi Git işleme mesajları yazmanıza yardımcı olur."
 
 #: data/comet.desktop.in:10
 msgid "org.small_tech.comet"

@@ -11,7 +11,7 @@
   <content_rating type="oars-1.1" />
   <project_license>GPL-3.0</project_license>
   <name>Comet</name>
-  <summary>Commit in style</summary>
+  <summary>Write better Git commit messages</summary>
   <description>
     <p>A distaction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.</p>
   </description>

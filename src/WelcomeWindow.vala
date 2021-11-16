@@ -67,7 +67,7 @@ namespace Comet {
 
             welcome = new Granite.Widgets.Welcome (
                 "Comet",
-                _("Commit in style")
+                _("Write better Git commit messages.")
             );
 
             int enable_disable_button_index;

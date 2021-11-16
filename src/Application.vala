@@ -36,7 +36,7 @@ namespace Comet {
             + _("License GPLv3+: GNU GPL version 3") + " (http://gnu.org/licenses/gpl.html)"
             + _("This is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.");
 
-            SUMMARY = _("Helps you write better Git commit messages.");
+            SUMMARY = _("Write better Git commit messages.");
         }
 
 

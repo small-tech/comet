@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 12:21+0000\n"
+"POT-Creation-Date: 2021-11-16 13:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,8 +48,8 @@ msgid ""
 "There is NO WARRANTY, to the extent permitted by law."
 msgstr ""
 
-#: src/Application.vala:39
-msgid "Helps you write better Git commit messages."
+#: src/Application.vala:39 src/WelcomeWindow.vala:70
+msgid "Write better Git commit messages."
 msgstr ""
 
 #.
@@ -150,10 +150,6 @@ msgstr ""
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr ""
 
-#: src/WelcomeWindow.vala:70 data/comet.appdata.xml.in:14
-msgid "Commit in style"
-msgstr ""
-
 #: src/WelcomeWindow.vala:75
 msgid "Disable Comet"
 msgstr ""
@@ -218,8 +214,8 @@ msgstr ""
 msgid "Git Commit Message Editor"
 msgstr ""
 
-#: data/comet.desktop.in:7
-msgid "Compose Git commit messages"
+#: data/comet.desktop.in:7 data/comet.appdata.xml.in:14
+msgid "Write better Git commit messages"
 msgstr ""
 
 #: data/comet.desktop.in:10
