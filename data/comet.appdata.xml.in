@@ -20,7 +20,7 @@
   </description>
   <developer_name>Small Technology Foundation</developer_name>
   <launchable type="desktop-id">org.small_tech.comet.desktop</launchable>
-  <!-- <icon type="stock">org.small_tech.comet</icon> -->
+  <icon type="stock">org.small_tech.comet</icon>
   <custom>
     <value key="x-appcenter-color-primary">#a62100</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
@@ -34,17 +34,20 @@
   <update_contact>hello@small-tech.org</update_contact>
   <screenshots>
     <screenshot type="default">
+      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-light-and-dark.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-light-and-dark.png</image>
     </screenshot>
     <screenshot>
+      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-character-limit.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-character-limit.png</image>
     </screenshot>
     <screenshot>
+      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-emoji.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-emoji.png</image>
     </screenshot>
     <screenshot>
-      <image type="source" xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
-      <image type="source">https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
+      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
+      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
     </screenshot>
   </screenshots>
 </component>
