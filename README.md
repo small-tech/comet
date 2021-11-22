@@ -388,6 +388,14 @@ gsettings set org.gnome.desktop.interface text-scaling-factor 1
 
 The only screenshot that requires post-processing is the light/dark screenshot. There is a file in Penpot where you can duplicate an artboard and replace the existing screenshots to achieve this effect.
 
+Finally, remember to install the system dictionary for the language you are taking screenshots of so the words don’t appear as spelling mistakes.
+
+e.g., Before taking the Nederlands screenshots:
+
+```shell
+sudo apt install hunspell-nl
+```
+
 ### VSCodium
 
 You do _not_ need to use [VSCodium](https://vscodium.com) to hack on Comet.
