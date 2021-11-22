@@ -231,6 +231,22 @@ For example, to debug with a standard Git commit message without a body:
 
 If you do not pass an argument (if `"args": []`), Comet will launch in the debugger with the Welcome screen.
 
+### AppCenter preview
+
+To test how the app will look on AppCenter, do the following:
+
+1. Uncomment the `<icon/>` tag in _data/comet.appdata.xml.in_.
+
+2. Build the app:
+    ```shell
+    task/build
+    ```
+
+3. Run AppCenter, asking it to display your local _appdata.xml_:
+    ```shell
+    io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
+    ```
+
 ### Translations
 
 #### Add a new language
@@ -272,7 +288,19 @@ Remember to update the translation files whenever you change localisable strings
 task/update-translations
 ```
 
-__Tip:__ Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
+#### AppCenter preview of translations
+
+To preview the localised strings/screenshots in AppCenter, specify the language while launching AppCenter.
+
+For example, to view how the Turkish localisations will look in the elementary OS AppCenter:
+
+```shell
+LANGUAGE=tr_TR.utf8 io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
+```
+
+#### Developer tips for translations
+
+Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
 
 e.g., if you run `build/org.small_tech.comet --help` from the terminal, you will see a localised summary string. This is how it’s composed as a collection of localisable and non-localisable strings:
 
@@ -330,21 +358,6 @@ msgstr ""
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 ```
 
-### AppCenter Preview
-
-To test how the app will look on AppCenter, do the following:
-
-1. Uncomment the `<icon/>` tag in _data/comet.appdata.xml.in_.
-
-2. Build the app:
-    ```shell
-    task/build
-    ```
-
-3. Run AppCenter, asking it to display your local _appdata.xml_:
-    ```shell
-    io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
-    ```
 
 Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after you’re done previewing your app in AppCenter or your Flatpak builds will fail.
 

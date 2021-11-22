@@ -20,7 +20,12 @@
   </description>
   <developer_name>Small Technology Foundation</developer_name>
   <launchable type="desktop-id">org.small_tech.comet.desktop</launchable>
-  <icon type="stock">org.small_tech.comet</icon>
+  <!--
+    Comment out the icon before making a Flatpak build. The icon
+    is only there so you can preview how the listing will appear in
+    AppCenter locally when working with Meson builds.
+  -->
+  <!-- <icon type="stock">org.small_tech.comet</icon> -->
   <custom>
     <value key="x-appcenter-color-primary">#a62100</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
