@@ -39,18 +39,22 @@
   <update_contact>hello@small-tech.org</update_contact>
   <screenshots>
     <screenshot type="default">
+      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-light-and-dark.png</image>
       <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-light-and-dark.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-light-and-dark.png</image>
     </screenshot>
     <screenshot>
+      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-character-limit.png</image>
       <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-character-limit.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-character-limit.png</image>
     </screenshot>
     <screenshot>
+      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-emoji.png</image>
       <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-emoji.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-emoji.png</image>
     </screenshot>
     <screenshot>
+      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-welcome.png</image>
       <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
       <image>https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
     </screenshot>
