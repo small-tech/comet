@@ -247,6 +247,8 @@ To test how the app will look on AppCenter, do the following:
     io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
     ```
 
+Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after you’re done previewing your app in AppCenter or your Flatpak builds will fail.
+
 ### Translations
 
 #### Add a new language
@@ -304,7 +306,7 @@ For example, to view how the Turkish localisations will look in the elementary O
 LANGUAGE=tr_TR.utf8 io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
 ```
 
-#### Developer tips for translations
+### Developer tip: better translations translations
 
 Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
 
@@ -364,8 +366,27 @@ msgstr ""
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 ```
 
+### Developer tip: creating the localised git comments in AppCenter screenshots
 
-Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after you’re done previewing your app in AppCenter or your Flatpak builds will fail.
+__Translators can skip this section; you do not have to worry about creating screenshots.__
+
+When taking screenshots, you want a consistent, localised comment to display in the interface. Git is already localised but you have to tell it to use a specified language. e.g.,
+
+```shell
+# Make Comet launch with Turkish locale.
+git config --global core.editor "LANGUAGE=tr_TR.utf8 /home/aral/Projects/elementary/comet/build/org.small_tech.comet"
+
+# Launch Git with Turkish locale.
+LANGUAGE=tr_TR.utf8 git commit -a
+```
+
+Also, for screenshots, ensure that the text scaling factor is 1 and that the interface is at its smallest size.
+
+```shell
+gsettings set org.gnome.desktop.interface text-scaling-factor 1
+```
+
+The only screenshot that requires post-processing is the light/dark screenshot. There is a file in Penpot where you can duplicate an artboard and replace the existing screenshots to achieve this effect.
 
 ### VSCodium
 
