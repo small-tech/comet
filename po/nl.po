@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-22 10:58+0000\n"
-"PO-Revision-Date: 2021-11-21 12:17+0100\n"
+"PO-Revision-Date: 2021-11-22 14:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -235,6 +235,10 @@ msgid ""
 "\n"
 "You can change the suggested length in the Settings Menu."
 msgstr ""
+"Dit is de samenvattende regel van je git commit-bericht; zorg ervoor dat het "
+"niet te lang is\n"
+"\n"
+"U kunt de voorgestelde lengte wijzigen in het menu Instellingen."
 
 #. Screenshot showing the Settings Menu with the first line character
 #. limit set to 50 (Dogmatic). In the editor view you can see the message,
@@ -242,7 +246,7 @@ msgstr ""
 #. definition of dogma (n = short for noun in English).
 #: src/Constants/AppCenterCopy.vala:24
 msgid "Dogma (n): a settled opinion, belief, or principle "
-msgstr ""
+msgstr "Dogma (n): een vaste mening, overtuiging of principe "
 
 #. Screenshot showing the emoji picker. The message here is shown in the editor.
 #. Please feel free to use Ctrl as a generic label for Control for translations
@@ -251,7 +255,7 @@ msgstr ""
 #. refered to as Ctrl).
 #: src/Constants/AppCenterCopy.vala:31
 msgid "Press Control + . (period) to insert emoji"
-msgstr ""
+msgstr "Druk op Control + . (punt) om emoji in te voegen"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
