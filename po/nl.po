@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the org.small_tech.comet package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: org.small_tech.comet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-16 19:38+0000\n"
+"PO-Revision-Date: 2021-11-21 12:17+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Language: nl\n"
+
+#: src/Application.vala:30
+msgid ""
+"Made with ♥ by Small Technology Foundation, a tiny, independent not-for-"
+"profit"
+msgstr ""
+"Gemaakt met ♥ door Small Technology Foundation, een kleine, onafhankelijke "
+"non-profitorganisatie"
+
+#: src/Application.vala:32
+msgid ""
+"Small Technology are everyday tools for everyday people designed to increase "
+"human welfare, not corporate profits."
+msgstr ""
+"Small Technology zijn dagelijkse gereedschappen voor gewone mensen die zijn "
+"ontworpen om het menselijk welzijn te vergroten, niet de bedrijfswinsten."
+
+#: src/Application.vala:34
+msgid "Like this? Fund us!"
+msgstr "Vind je dit leuk? Financier ons!"
+
+#: src/Application.vala:35
+msgid "Copyright"
+msgstr "Copyright"
+
+#: src/Application.vala:36
+msgid "License GPLv3+: GNU GPL version 3"
+msgstr "Licentie GPLv3+: GNU GPL versie 3"
+
+#: src/Application.vala:37
+msgid ""
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law."
+msgstr ""
+"Dit is vrije software: je bent vrij om het te veranderen en te "
+"herdistribueren.\n"
+"Er is GEEN GARANTIE, voor zover toegestaan door de wet."
+
+#: src/Application.vala:39 src/WelcomeWindow.vala:70
+msgid "Write better Git commit messages."
+msgstr "Schrijf betere Git commit berichten."
+
+#.
+#. Set command-line option handling.
+#.
+#. The option context parameter string is displayed next to the
+#. list of options on the first line of the --help screen.
+#: src/Application.vala:60
+msgid "<path-to-git-commit-message-file>"
+msgstr "<path-to-git-commit-message-file>"
+
+#: src/Application.vala:75
+msgid "Show version number and exit"
+msgstr "Versienummer weergeven en afsluiten"
+
+#: src/Application.vala:105
+#, c-format
+msgid "Error: Too many files (%d)."
+msgstr "Fout: Te veel bestanden (%d)."
+
+#: src/Application.vala:173
+msgid "Comet can’t read the Git commit message."
+msgstr "Comet kan het Git commit bericht niet lezen."
+
+#: src/Application.vala:174
+msgid ""
+"The Report Error button will take you to a pre-filled issue on GitHub that "
+"you can submit to help improve Comet."
+msgstr ""
+"Met de knop Fout melden gaat u naar een vooraf ingevuld probleem op GitHub "
+"dat u kunt indienen om Comet te helpen verbeteren."
+
+#: src/Application.vala:180
+msgid "Report Error"
+msgstr "Fout melden"
+
+#: src/MainWindow.vala:152
+msgid "Hide tip"
+msgstr "Tip verbergen"
+
+#: src/MainWindow.vala:160 src/MainWindow.vala:196
+msgid "Commit"
+msgstr "Commit"
+
+#: src/MainWindow.vala:161 src/MainWindow.vala:193
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/MainWindow.vala:163
+msgid "Use keyboard shortcuts to improve your workflow."
+msgstr "Gebruik sneltoetsen om uw workflow te verbeteren."
+
+#. TODO: Handle this better.
+#: src/MainWindow.vala:415
+msgid "Could not save commit message."
+msgstr "Kan commit-bericht niet opslaan."
+
+#: src/MainWindow.vala:492
+msgid "No characters left on first line."
+msgstr "Geen tekens meer op de eerste regel."
+
+#. To understand why we’re doing it this way for localisation,
+#. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
+#: src/MainWindow.vala:496
+#, c-format
+msgid "%d character left on first line."
+msgid_plural "%d characters left on first line."
+msgstr[0] "%d karakters over op de eerste regel."
+msgstr[1] "%d tekens op de eerste regel."
+
+#. In case there is no comment for some reason, let’s not go further as this is likely not
+#. a proper Git commit message.
+#: src/Model.vala:86
+#, c-format
+msgid ""
+"Comet: Sorry, this does not look like a valid Git commit message (it’s "
+"missing a comment section):\n"
+"\n"
+"%s"
+msgstr ""
+"Comet: Sorry, dit ziet er niet uit als een geldig Git commit bericht (het "
+"mist een commentaar sectie):\n"
+"\n"
+"%s"
+
+#. Display the branch name
+#: src/Model.vala:150
+#, c-format
+msgid "branch %s"
+msgstr "branch %s"
+
+#. git add -p: edit hunk message
+#: src/Model.vala:159
+msgid "manual hunk edit mode"
+msgstr "handmatige hunk-bewerkingsmodus"
+
+#. This should not happen.
+#. TODO: Ensure this results in the ability to easily report this issue, like
+#. we do with the errors (but without throwing an error as we don’t want to
+#. stop the person from commiting just because we can’t format and display the
+#. commit message in a nice way).
+#: src/Model.vala:177
+#, c-format
+msgid "Warning: unknown Git commit type encountered in %s"
+msgstr "Waarschuwing: onbekend Git commit type aangetroffen in %s"
+
+#: src/WelcomeWindow.vala:75
+msgid "Disable Comet"
+msgstr "Comet uitschakelen"
+
+#: src/WelcomeWindow.vala:75
+msgid "Revert to using your previous editor for Git commit messages."
+msgstr ""
+"Ga terug naar het gebruik van je vorige editor voor Git commit-berichten."
+
+#: src/WelcomeWindow.vala:77
+msgid "Enable Comet"
+msgstr "Comet inschakelen"
+
+#: src/WelcomeWindow.vala:77
+msgid "Use Comet as the default editor for Git commit messages."
+msgstr "Gebruik Comet als de standaardeditor voor Git commit-berichten."
+
+#. Request a specific width so the whole interface does not
+#. jump around when we toggle it.
+#: src/WelcomeWindow.vala:85
+msgid "Help"
+msgstr "Help"
+
+#: src/WelcomeWindow.vala:85
+msgid "Having trouble? Get help and report issues."
+msgstr "Problemen? Verkrijg hulp en meld problemen."
+
+#. Insert the status text into the view.
+#: src/WelcomeWindow.vala:115
+msgid "Comet is enabled as your editor for Git commit messages."
+msgstr "Comet is ingeschakeld als je editor voor Git commit berichten."
+
+#: src/WelcomeWindow.vala:116
+msgid "Comet is disabled."
+msgstr "Comet is uitgeschakeld."
+
+#: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
+#: data/comet.appdata.xml.in:13
+msgid "Comet"
+msgstr "Comet"
+
+#: src/Widgets/HeaderBar.vala:17
+msgid "First line character limit"
+msgstr "Tekenlimiet eerste regel"
+
+#: src/Widgets/HeaderBar.vala:28
+msgid "Dogmatic (50)"
+msgstr "Dogmatisch (50)"
+
+#: src/Widgets/HeaderBar.vala:31
+msgid "GitHub truncation (72)"
+msgstr "GitHub-afkapping (72)"
+
+#: src/Widgets/HeaderBar.vala:34
+msgid "GitLab truncation (100)"
+msgstr "GitLab afkapping (100)"
+
+#: src/Widgets/HeaderBar.vala:63
+msgid "Settings"
+msgstr "Instellingen"
+
+#: data/comet.desktop.in:6
+msgid "Git Commit Message Editor"
+msgstr "Git Commit Bericht Editor"
+
+#: data/comet.desktop.in:7 data/comet.appdata.xml.in:14
+msgid "Write better Git commit messages"
+msgstr "Schrijf betere Git commit berichten"
+
+#: data/comet.desktop.in:10
+msgid "org.small_tech.comet"
+msgstr "org.small_tech.comet"
+
+#: data/comet.desktop.in:12
+msgid "git;commit;message;editor"
+msgstr "git;commit;message;editor"
+
+#: data/comet.appdata.xml.in:16
+msgid ""
+"A distraction-free Git commit message editor with spell-check, first line "
+"character limit warnings, and emoji support."
+msgstr ""
+"Een afleidingsvrije Git commit-berichteditor met spellingcontrole, "
+"waarschuwingen voor tekenlimieten in de eerste regel en emoji-ondersteuning."
+
+#: data/comet.appdata.xml.in:19
+msgid ""
+"Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve "
+"dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
+msgstr ""
+"Een afleidingsvrije Git commit-berichteditor met spellingcontrole, "
+"waarschuwingen voor tekenlimieten in de eerste regel en emoji-ondersteuning."
+
+#: data/comet.appdata.xml.in:21
+msgid "Small Technology Foundation"
+msgstr "Small Technology Foundation"
