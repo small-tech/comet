@@ -288,6 +288,12 @@ Remember to update the translation files whenever you change localisable strings
 task/update-translations
 ```
 
+Also, when you add a new translation, remember to run the installation task to install the new translations before testing via the Meson build. If you’re running the binary with a valid `LANGUAGE` environment variable and it’s not working, it’s most likely because you forgot to do this:
+
+```shell
+task/install
+```
+
 #### AppCenter preview of translations
 
 To preview the localised strings/screenshots in AppCenter, specify the language while launching AppCenter.
