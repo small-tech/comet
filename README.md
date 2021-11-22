@@ -244,6 +244,14 @@ If you do not pass an argument (if `"args": []`), Comet will launch in the debug
 
 _If you want to help translate but don’t want to clone the repository you can contribute using GitHub’s online interface. Please introduce yourself in the  [discussions](https://github.com/small-tech/comet/discussions) and let us know which language you’d like to work on and we can help you get started._
 
+#### Screenshot translations
+
+In addition to the in-app strings, there are some strings that are shown in the localised screenshots on [Comet’s AppCenter page](https://appcenter.elementary.io/org.small_tech.comet). These have been added as constants in the `Constants.AppCenterCopy` namespace and should appear in the translations along with the other strings.
+
+You do not have to take the screenshots yourself but we’ll make use of the translated strings when we take them.
+
+Also, you do not have to worry about translating the Git comments shown in the screenshots as Git is already localised so they will automatically display in the correct language.
+
 #### Testing
 
 To test the native binary with a locale different to your account’s locale (e.g., to test the Turkish translations):

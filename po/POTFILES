@@ -3,5 +3,6 @@ src/MainWindow.vala
 src/Model.vala
 src/WelcomeWindow.vala
 src/Widgets/HeaderBar.vala
+src/Constants/AppCenterCopy.vala
 data/comet.desktop.in
 data/comet.appdata.xml.in
