@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 10:27+0000\n"
+"POT-Creation-Date: 2021-11-22 10:58+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -244,7 +244,9 @@ msgstr ""
 #. definition of dogma (n = short for noun in English).
 #: src/Constants/AppCenterCopy.vala:24
 msgid "Dogma (n): a settled opinion, belief, or principle "
-msgstr "Dogma (i): Doğruluğu sınanmadan benimsenen, bir öğretinin veya ideolojinin temeli yapılan sav, nas, inak"
+msgstr ""
+"Dogma (i): Doğruluğu sınanmadan benimsenen, bir öğretinin veya ideolojinin "
+"temeli yapılan sav, nas, inak"
 
 #. Screenshot showing the emoji picker. The message here is shown in the editor.
 #. Please feel free to use Ctrl as a generic label for Control for translations
