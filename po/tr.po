@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 19:38+0000\n"
+"POT-Creation-Date: 2021-11-22 10:27+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -220,6 +220,40 @@ msgstr "GitLab kesme noktası (100)"
 #: src/Widgets/HeaderBar.vala:63
 msgid "Settings"
 msgstr "Ayarlar"
+
+#. Screenshot showing the main editor in both light and dark
+#. styles. In the English version, the text “too long” goes over the
+#. 72 character limit and is highlighted. It would be nice to try and
+#. keep the same feel in translations if possible.
+#: src/Constants/AppCenterCopy.vala:18
+#, fuzzy
+msgid ""
+"This is the summary line of your git commit message; make sure it isn’t too "
+"long\n"
+"\n"
+"You can change the suggested length in the Settings Menu."
+msgstr ""
+"Bu Git işlem mesajınızın özet satırı olduğu için kısa tutulur; yani çok "
+"fazla utazmayın\n"
+"\n"
+"Tavsiye edilen satır uzunluğunu Ayarlar Menüsü’nden değiştirebilirsiniz."
+
+#. Screenshot showing the Settings Menu with the first line character
+#. limit set to 50 (Dogmatic). In the editor view you can see the message,
+#. partially obscured by the Settings Menu, giving a dictionary-like
+#. definition of dogma (n = short for noun in English).
+#: src/Constants/AppCenterCopy.vala:24
+msgid "Dogma (n): a settled opinion, belief, or principle "
+msgstr "Dogma (i): Doğruluğu sınanmadan benimsenen, bir öğretinin veya ideolojinin temeli yapılan sav, nas, inak"
+
+#. Screenshot showing the emoji picker. The message here is shown in the editor.
+#. Please feel free to use Ctrl as a generic label for Control for translations
+#. unless there is a different ubiquitously used acronym for the Control key in
+#. your language. (In Turkish texts, for example, the key is almost universally
+#. refered to as Ctrl).
+#: src/Constants/AppCenterCopy.vala:31
+msgid "Press Control + . (period) to insert emoji"
+msgstr "Emoji eklemek için Ctrl + . (nokta) tuşlarını kullanın"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
