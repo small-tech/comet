@@ -264,7 +264,11 @@ Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after 
 
 ### Translations
 
-#### Add a new language
+Comet, like all other elementary OS apps, uses [GNU gettext](https://www.gnu.org/software/gettext/manual/gettext.html) for translations.
+
+You can use any editor to edit translation files (`.PO` files) or you can use a visual editor specifically optimised for the task, like [Poedit](https://poedit.net/).
+
+#### Add a new language (editor-agnostic instructions)
 
 1. Add the language code to the [po/LINGUAS](https://github.com/small-tech/comet/blob/main/po/LINGUAS) file.
 2. Update translations:
@@ -273,7 +277,27 @@ Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after 
     task/update-translations
     ```
 
+3. Open the new `.PO` file in your favourite editor and start translating. (e.g., if you added `tr` in the `po/LINGUAS` file, you’ll find the strings to be translated in `po/tr.po`).
+
 _If you want to help translate but don’t want to clone the repository you can contribute using GitHub’s online interface. Please introduce yourself in the  [discussions](https://github.com/small-tech/comet/discussions) and let us know which language you’d like to work on and we can help you get started._
+
+You can also use a tool like Poedit to add a language.
+
+#### Add a new language (using Poedit)
+
+To translate the app with Poedit:
+
+  - Add the language code to the `po/LINGUAS` file.
+  - Open Poedit.
+  - On the launch screen select _Create new…_ to create a new translation from the POT file (the ‘T’ stands for ‘template’).
+  - Select the `po/org.small_tech.comet.pot` template.
+  - In the resulting pop-up, select your target language.
+
+A pre-translation feature is available for a paid license. It works reasonably well but still must be reviewed by a human for errors.
+
+Poedit also generates the related binary `.mo` file. This isn't used and should _not_ be checked into the repository.
+
+_[Poedit instructions](https://github.com/small-tech/comet/issues/16)_ are courtesy of [Martijn de Boer](https://github.com/sexybiggetje)._
 
 #### Screenshot translations
 
