@@ -1,0 +1,11 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   this/is/a/file/that/has/a/very/long/path/and/we/do/not/want/it/to/make/the/window/appear/ridiculously/long/so/we/should/be/wrapping/it/a.txt
+#

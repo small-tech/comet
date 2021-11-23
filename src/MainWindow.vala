@@ -177,6 +177,7 @@ namespace Comet {
 
             // Create simple text view for comment.
             comment_view = new Gtk.TextView ();
+            comment_view.wrap_mode = Gtk.WrapMode.WORD_CHAR;
             comment_view.margin = 12;
             comment_view.buffer = model.comment_buffer;
             comment_view_buffer = comment_view.get_buffer ();
