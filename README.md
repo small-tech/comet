@@ -10,6 +10,17 @@ A distraction-free Git commit message editor with spell-check, first line charac
 
 [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
+## Features
+
+| <center>Light and dark style support</center>    | <center>Configurable first line character limit</center>    |
+| --- | --- |
+| ![Screenshot of the editor with one half displaying in light style and the other in dark style. The first line of the message reads: “This is the summary line of your Git commit message; make sure it isn’t too long” with the words “too long” highlighted in yellow. The second line of the message reads “You can change the suggested length in the Settings Menu. The Git comment for an initial commit with a new file called a.txt to be committed is displayed in a separate area. There is a Cancel and Commit button on the window.”](https://small-tech.org/downloads/comet/screenshots/en/comet-light-and-dark.png) | ![Screenshot of the editor with the Settings Menu open. A numeric stepper control inside it with the label “First line character limit” is set to 50. Underneath it, there are three buttons, labelled “Dogmatic (50)”, “GitHub truncation (72)”, and “GitLab truncation (100)”. In the editor, the message, partly obscured by the Settings Menu, reads “Dogma (n): A settled opinion”. The Git comment for an initial commit with a new file called a.txt to be committed is displayed in a separate area. There is a Cancel and Commit button on the window.](https://small-tech.org/downloads/comet/screenshots/en/comet-character-limit.png) |
+
+| <center>Emoji support</center>    | <center>Launch to automatically configure Git</center>    |
+| --- | --- |
+| ![Screenshot of editor with the message “Press Control + . (period) to insert emoji” and the emoji picker popover showing. The Git comment for an initial commit with a new file called a.txt to be committed is partially visible in a separate area. There is a Cancel button (partially visible) and a Commit button on the window.](https://small-tech.org/downloads/comet/screenshots/en/comet-emoji.png) | ![Screenshot of Welcome Screen. Screen contents: Text: “Comet: Write better Git commit messages.” Button (selected) with greyed-out comet icon and label that reads “Disable Comet: Revert to using your previous editor for Git commit messages.” Button with question mark in speech bubble icon and label that reads “Help. Having trouble? Get help and report issues.” Status message at bottom has green check mark and the text “Comet is enabled as your editor for Git commit messages.](https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png) |
+
+
 ## Get the wallpaper
 
 Just like [Catts](https://github.com/small-tech/catts) and [Watson](https://github.com/small-tech/watson), Comet also has a lovely wallpaper designed by [Margo de Weerdt](https://www.margodeweerdt.com/) that you can download below (just right-click or long-tap and save it to your machine).
