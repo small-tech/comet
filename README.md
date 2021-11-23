@@ -6,7 +6,7 @@ _Write better Git commit messages._
 
 A distraction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.
 
-__Status:__ Not submitted to the elementary OS AppCenter yet. You can install and use it from this repository but consider it pre-release until published there.
+> __Status:__ Not submitted to the elementary OS AppCenter yet. You can install and use it from this repository but consider it pre-release until published there.
 
 [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
 
