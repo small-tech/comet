@@ -29,4 +29,10 @@ namespace Constants.AppCenterCopy {
     // your language. (In Turkish texts, for example, the key is almost universally
     // refered to as Ctrl).
     public const string EMOJI_PICKER_INSTRUCTIONS = _("Press Control + . (period) to insert emoji");
+
+    // Screenshot showing the spell check feature. The message here is shown in the
+    // editor. The words “spelling mistake” are misspelled on purpose. In the
+    // screenshot, the context menu is open on the word “mstake”, with the
+    // suggestion for “mistake” highlighted.
+    public const string HIGHLIGHTS_SPELLING_MISTAKES = _("Highlights splling mstakes");
 }
