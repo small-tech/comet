@@ -15,7 +15,7 @@ namespace Constants.AppCenterCopy {
     // styles. In the English version, the text “too long” goes over the
     // 72 character limit and is highlighted. It would be nice to try and
     // keep the same feel in translations if possible.
-    public const string DEMONSTRATION_OF_LINE_LIMIT = _("This is the summary line of your git commit message; make sure it isn’t too long\n\nYou can change the suggested length in the Settings Menu.");
+    public const string DEMONSTRATION_OF_LINE_LIMIT = _("This is the summary line of your Git commit message; make sure it isn’t too long\n\nYou can change the suggested length in the Settings Menu.");
 
     // Screenshot showing the Settings Menu with the first line character
     // limit set to 50 (Dogmatic). In the editor view you can see the message,

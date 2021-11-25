@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 10:58+0000\n"
+"POT-Creation-Date: 2021-11-23 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,11 +88,11 @@ msgstr ""
 msgid "Hide tip"
 msgstr ""
 
-#: src/MainWindow.vala:160 src/MainWindow.vala:196
+#: src/MainWindow.vala:160 src/MainWindow.vala:197
 msgid "Commit"
 msgstr ""
 
-#: src/MainWindow.vala:161 src/MainWindow.vala:193
+#: src/MainWindow.vala:161 src/MainWindow.vala:194
 msgid "Cancel"
 msgstr ""
 
@@ -101,17 +101,17 @@ msgid "Use keyboard shortcuts to improve your workflow."
 msgstr ""
 
 #. TODO: Handle this better.
-#: src/MainWindow.vala:415
+#: src/MainWindow.vala:416
 msgid "Could not save commit message."
 msgstr ""
 
-#: src/MainWindow.vala:492
+#: src/MainWindow.vala:493
 msgid "No characters left on first line."
 msgstr ""
 
 #. To understand why we’re doing it this way for localisation,
 #. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
-#: src/MainWindow.vala:496
+#: src/MainWindow.vala:497
 #, c-format
 msgid "%d character left on first line."
 msgid_plural "%d characters left on first line."
@@ -216,7 +216,7 @@ msgstr ""
 #. keep the same feel in translations if possible.
 #: src/Constants/AppCenterCopy.vala:18
 msgid ""
-"This is the summary line of your git commit message; make sure it isn’t too "
+"This is the summary line of your Git commit message; make sure it isn’t too "
 "long\n"
 "\n"
 "You can change the suggested length in the Settings Menu."

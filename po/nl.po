@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 10:58+0000\n"
+"POT-Creation-Date: 2021-11-23 12:09+0000\n"
 "PO-Revision-Date: 2021-11-22 14:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -97,11 +97,11 @@ msgstr "Fout melden"
 msgid "Hide tip"
 msgstr "Tip verbergen"
 
-#: src/MainWindow.vala:160 src/MainWindow.vala:196
+#: src/MainWindow.vala:160 src/MainWindow.vala:197
 msgid "Commit"
 msgstr "Commit"
 
-#: src/MainWindow.vala:161 src/MainWindow.vala:193
+#: src/MainWindow.vala:161 src/MainWindow.vala:194
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -110,17 +110,17 @@ msgid "Use keyboard shortcuts to improve your workflow."
 msgstr "Gebruik sneltoetsen om uw workflow te verbeteren."
 
 #. TODO: Handle this better.
-#: src/MainWindow.vala:415
+#: src/MainWindow.vala:416
 msgid "Could not save commit message."
 msgstr "Kan commit-bericht niet opslaan."
 
-#: src/MainWindow.vala:492
+#: src/MainWindow.vala:493
 msgid "No characters left on first line."
 msgstr "Geen tekens meer op de eerste regel."
 
 #. To understand why we’re doing it this way for localisation,
 #. please read https://wiki.gnome.org/TranslationProject/DevGuidelines/Plurals
-#: src/MainWindow.vala:496
+#: src/MainWindow.vala:497
 #, c-format
 msgid "%d character left on first line."
 msgid_plural "%d characters left on first line."
@@ -230,12 +230,12 @@ msgstr "Instellingen"
 #. keep the same feel in translations if possible.
 #: src/Constants/AppCenterCopy.vala:18
 msgid ""
-"This is the summary line of your git commit message; make sure it isn’t too "
+"This is the summary line of your Git commit message; make sure it isn’t too "
 "long\n"
 "\n"
 "You can change the suggested length in the Settings Menu."
 msgstr ""
-"Dit is de samenvattende regel van je git commit-bericht; zorg ervoor dat het "
+"Dit is de samenvattende regel van je Git commit-bericht; zorg ervoor dat het "
 "niet te lang is\n"
 "\n"
 "U kunt de voorgestelde lengte wijzigen in het menu Instellingen."
