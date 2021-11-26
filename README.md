@@ -305,7 +305,7 @@ In addition to the in-app strings, there are some strings that are shown in the 
 
 You do not have to take the screenshots yourself but we’ll make use of the translated strings when we take them.
 
-Also, you do not have to worry about translating the Git comments shown in the screenshots as Git is already localised so they will automatically display in the correct language.
+Also, you do not have to worry about translating the Git comments shown in the screenshots as Git [is already localised](https://github.com/git/git/tree/master/po) so they will automatically display in the correct language. For languages that are not yet localised in Git, the Git comment will display in English (this is fine).
 
 #### Testing
 
@@ -403,6 +403,35 @@ msgstr ""
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 ```
 
+### Localised AppCenter screenshots
+
+The `task/take-screenshots` task will take localised screenshots for the elementary OS AppCenter.
+
+This is currently only a task run by the primary author so you likely do not have to worry about it.
+
+#### Project setup:
+
+```
+  Projects
+     ├ comet             (github.com/small-tech/comet)
+     ╰ comet-screenshots (github.com/small-tech/comet-screenshots)
+```
+
+#### System setup:
+
+  - Ensure first monitor is at 1920×1080 resolution.
+  - Make sure you have no other apps open on your first monitor.
+  - [Install all dictionaries for supported localisations](#about-spell-check).
+  - Ensure you’ve pulled the latest changes from the [comet-screenshots](https://github.com/small-tech/comet-screenshots) repository.
+
+#### Run:
+
+```shell
+task/take-screenshots
+```
+
+This will take the required AppCenter screenshots in all supported localisations and place them in the _comet-screenshots_ repository. It will also update the metadata in _data/comet.appdata.xml.in_ accordingly.
+
 ### Developer tip: creating the localised git comments in AppCenter screenshots
 
 __Translators can skip this section; you do not have to worry about creating screenshots.__
@@ -410,10 +439,8 @@ __Translators can skip this section; you do not have to worry about creating scr
 When taking screenshots, you want a consistent, localised comment to display in the interface. Git is already localised but you have to tell it to use a specified language. e.g.,
 
 ```shell
-# Make Comet launch with Turkish locale.
-git config --global core.editor "LANGUAGE=tr_TR.utf8 /home/aral/Projects/elementary/comet/build/org.small_tech.comet"
-
 # Launch Git with Turkish locale.
+# This will also launch Comet with the same locale.
 LANGUAGE=tr_TR.utf8 git commit -a
 ```
 
