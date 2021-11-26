@@ -1,5 +1,8 @@
 namespace Comet.Widgets {
     public class HeaderBar : Hdy.HeaderBar {
+
+        private Gtk.MenuButton app_menu;
+
         public HeaderBar () {
             Object (
                 title: _("Comet"),
@@ -58,7 +61,7 @@ namespace Comet.Widgets {
             var menu = new Gtk.Popover (null);
             menu.add (menu_grid);
 
-            var app_menu = new Gtk.MenuButton ();
+            app_menu = new Gtk.MenuButton ();
             app_menu.image = new Gtk.Image.from_icon_name ("emblem-system", Gtk.IconSize.SMALL_TOOLBAR);
             app_menu.tooltip_text = _("Settings");
             app_menu.popover = menu;
@@ -66,6 +69,10 @@ namespace Comet.Widgets {
             pack_end(app_menu);
 
             show_all ();
+        }
+
+        public void show_settings () {
+            app_menu.clicked ();
         }
     }
 }

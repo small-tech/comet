@@ -10,6 +10,7 @@ namespace Comet {
         private const string ACTION_PREFIX = "win.";
         private const string ACTION_FULLSCREEN = "action_fullscreen";
         private const string ACTION_QUIT = "action_quit";
+        private const string ACTION_SETTINGS = "action_settings";
 
         private SimpleActionGroup actions { get; set; }
         protected Gee.MultiMap<string, string> action_accelerators = new Gee.HashMultiMap<string, string> ();
@@ -22,6 +23,7 @@ namespace Comet {
 
         protected ActionEntry[] _ACTION_ENTRIES = {
             { ACTION_FULLSCREEN, action_fullscreen },
+            { ACTION_SETTINGS, action_settings},
             { ACTION_QUIT, action_quit }
         };
 
@@ -30,12 +32,14 @@ namespace Comet {
         protected void _define_action_accelerators () {
             // Define action accelerators (keyboard shortcuts).
             action_accelerators.set (ACTION_FULLSCREEN, "F11");
+            action_accelerators.set (ACTION_SETTINGS, "<Control>comma");
             action_accelerators.set (ACTION_QUIT, "<Control>q");
 
             // Template hook method.
             define_action_accelerators ();
         }
 
+        // Used by concrete subclasses.
         protected virtual void define_action_accelerators () {
             // no-op
         }
@@ -200,6 +204,11 @@ namespace Comet {
             } else {
                 fullscreen ();
             }
+        }
+
+        private void action_settings () {
+            // Fire off a signal that anyone can listen for.
+           toolbar.show_settings ();
         }
 
         private void action_quit () {
