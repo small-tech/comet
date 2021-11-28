@@ -260,7 +260,7 @@ msgstr "Emoji eklemek için Ctrl + . (nokta) tuşlarını kullanın"
 #. suggestion for “mistake” highlighted.
 #: src/Constants/AppCenterCopy.vala:37
 msgid "Highlights splling mstakes"
-msgstr ""
+msgstr "Yazm htalarını vurgular"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
