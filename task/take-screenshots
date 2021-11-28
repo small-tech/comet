@@ -91,7 +91,6 @@ for language in ${languages[*]}; do
 
     echo "${localised_demonstration_of_line_limit}"
 
-
     localised_definition_of_dogma=$(LANGUAGE=$language gettext org.small_tech.comet "${definition_of_dogma}")
 
     localised_emoji_picker_instructions=$(LANGUAGE=$language gettext org.small_tech.comet "${emoji_picker_instructions}")
@@ -105,13 +104,6 @@ for language in ${languages[*]}; do
     # # echo -e "1:" "${localised_demonstration_of_line_limit}\n"
     # # echo -e "2:" "${localised_definition_of_dogma}\n"
     # # echo -e "3:" "${localised_emoji_picker_instructions}\n"
-
-    # # Welcome screen (displays when Comet is launched without any arguments)
-    # echo -e "  - Welcome screen\n"
-    # build/org.small_tech.comet &
-    # xdotool search --onlyvisible --class comet windowactivate
-    # gnome-screenshot --window --include-border --file "${language_directory}/comet-welcome.png"
-    # xdotool key Escape
 
     ################################################################################
     #
@@ -211,9 +203,61 @@ for language in ${languages[*]}; do
     sleep 1
     xdotool key Ctrl+q
 
-    echo '  - Welcome screen'
-    echo '  - Spell check'
+    ################################################################################
+    #
+    # Screenshot 3: Emoji support
+    #
+    ################################################################################
+
     echo '  - Emoji support'
+
+    # Set the character limit to 72.
+    gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
+
+    pushd "${temporary_git_repository}"
+    LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
+    popd
+    sleep 1
+    xdotool search --onlyvisible --class comet windowactivate
+    xdotoolified_string="$(printf "${localised_emoji_picker_instructions}")"
+    xdotool type --delay=0 "${xdotoolified_string}"
+
+    # Display the emoji picker towards the middle of the window.
+    xdotool key Home
+    for ((i = 0; i < "${emoji_picker_location_for_language[$language]}"; i++)); do
+    xdotool key Ctrl+Right
+    done
+    xdotool key Ctrl+period
+    sleep 1
+
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-emoji.png"
+    sleep 1
+    xdotool key Ctrl+q
+
+    ################################################################################
+    #
+    # Screenshot 4: Spell check
+    #
+    ################################################################################
+
+    echo '  - Spell check'
+
+    # TODO
+
+    ################################################################################
+    #
+    # Screenshot 5: Welcome screen
+    #
+    ################################################################################
+
+    echo '  - Welcome screen'
+
+    # Welcome screen (displays when Comet is launched without any arguments)
+    echo -e "  - Welcome screen\n"
+    build/org.small_tech.comet &
+    xdotool search --onlyvisible --class comet windowactivate
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-welcome.png"
+    xdotool key Ctrl+q
 
 done;
 
