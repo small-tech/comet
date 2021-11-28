@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 12:09+0000\n"
+"POT-Creation-Date: 2021-11-28 18:54+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -196,28 +196,28 @@ msgstr "Comet öntanımlı Git işlem düzenleyiciniz olarak etkinleştirildi."
 msgid "Comet is disabled."
 msgstr "Comet devre dışı bırakıldı."
 
-#: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
+#: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
 msgid "Comet"
 msgstr "Comet"
 
-#: src/Widgets/HeaderBar.vala:17
+#: src/Widgets/HeaderBar.vala:20
 msgid "First line character limit"
 msgstr "İlk satır karakter sınırı"
 
-#: src/Widgets/HeaderBar.vala:28
+#: src/Widgets/HeaderBar.vala:31
 msgid "Dogmatic (50)"
 msgstr "Dogmatik (50)"
 
-#: src/Widgets/HeaderBar.vala:31
+#: src/Widgets/HeaderBar.vala:34
 msgid "GitHub truncation (72)"
 msgstr "GitHub kesme noktası (72)"
 
-#: src/Widgets/HeaderBar.vala:34
+#: src/Widgets/HeaderBar.vala:37
 msgid "GitLab truncation (100)"
 msgstr "GitLab kesme noktası (100)"
 
-#: src/Widgets/HeaderBar.vala:63
+#: src/Widgets/HeaderBar.vala:66
 msgid "Settings"
 msgstr "Ayarlar"
 
@@ -243,8 +243,7 @@ msgstr ""
 #. definition of dogma (n = short for noun in English).
 #: src/Constants/AppCenterCopy.vala:24
 msgid "Dogma (n): a settled opinion, belief, or principle "
-msgstr ""
-"Dogma (i): Doğruluğu sınanmadan benimsenen bir öğreti"
+msgstr "Dogma (i): Doğruluğu sınanmadan benimsenen bir öğreti"
 
 #. Screenshot showing the emoji picker. The message here is shown in the editor.
 #. Please feel free to use Ctrl as a generic label for Control for translations
@@ -254,6 +253,14 @@ msgstr ""
 #: src/Constants/AppCenterCopy.vala:31
 msgid "Press Control + . (period) to insert emoji"
 msgstr "Emoji eklemek için Ctrl + . (nokta) tuşlarını kullanın"
+
+#. Screenshot showing the spell check feature. The message here is shown in the
+#. editor. The words “spelling mistake” are misspelled on purpose. In the
+#. screenshot, the context menu is open on the word “mstake”, with the
+#. suggestion for “mistake” highlighted.
+#: src/Constants/AppCenterCopy.vala:37
+msgid "Highlights splling mstakes"
+msgstr ""
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"

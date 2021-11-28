@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 12:09+0000\n"
+"POT-Creation-Date: 2021-11-28 18:54+0000\n"
 "PO-Revision-Date: 2021-11-22 14:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -199,28 +199,28 @@ msgstr "Comet is ingeschakeld als je editor voor Git commit berichten."
 msgid "Comet is disabled."
 msgstr "Comet is uitgeschakeld."
 
-#: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
+#: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
 msgid "Comet"
 msgstr "Comet"
 
-#: src/Widgets/HeaderBar.vala:17
+#: src/Widgets/HeaderBar.vala:20
 msgid "First line character limit"
 msgstr "Tekenlimiet eerste regel"
 
-#: src/Widgets/HeaderBar.vala:28
+#: src/Widgets/HeaderBar.vala:31
 msgid "Dogmatic (50)"
 msgstr "Dogmatisch (50)"
 
-#: src/Widgets/HeaderBar.vala:31
+#: src/Widgets/HeaderBar.vala:34
 msgid "GitHub truncation (72)"
 msgstr "GitHub-afkapping (72)"
 
-#: src/Widgets/HeaderBar.vala:34
+#: src/Widgets/HeaderBar.vala:37
 msgid "GitLab truncation (100)"
 msgstr "GitLab afkapping (100)"
 
-#: src/Widgets/HeaderBar.vala:63
+#: src/Widgets/HeaderBar.vala:66
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -256,6 +256,14 @@ msgstr "Dogma (n): een vaste mening, overtuiging of principe "
 #: src/Constants/AppCenterCopy.vala:31
 msgid "Press Control + . (period) to insert emoji"
 msgstr "Druk op Control + . (punt) om emoji in te voegen"
+
+#. Screenshot showing the spell check feature. The message here is shown in the
+#. editor. The words “spelling mistake” are misspelled on purpose. In the
+#. screenshot, the context menu is open on the word “mstake”, with the
+#. suggestion for “mistake” highlighted.
+#: src/Constants/AppCenterCopy.vala:37
+msgid "Highlights splling mstakes"
+msgstr ""
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"

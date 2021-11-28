@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 12:09+0000\n"
+"POT-Creation-Date: 2021-11-28 18:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,28 +185,28 @@ msgstr ""
 msgid "Comet is disabled."
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:5 data/comet.desktop.in:5
+#: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
 msgid "Comet"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:17
+#: src/Widgets/HeaderBar.vala:20
 msgid "First line character limit"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:28
+#: src/Widgets/HeaderBar.vala:31
 msgid "Dogmatic (50)"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:31
+#: src/Widgets/HeaderBar.vala:34
 msgid "GitHub truncation (72)"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:34
+#: src/Widgets/HeaderBar.vala:37
 msgid "GitLab truncation (100)"
 msgstr ""
 
-#: src/Widgets/HeaderBar.vala:63
+#: src/Widgets/HeaderBar.vala:66
 msgid "Settings"
 msgstr ""
 
@@ -237,6 +237,14 @@ msgstr ""
 #. refered to as Ctrl).
 #: src/Constants/AppCenterCopy.vala:31
 msgid "Press Control + . (period) to insert emoji"
+msgstr ""
+
+#. Screenshot showing the spell check feature. The message here is shown in the
+#. editor. The words “spelling mistake” are misspelled on purpose. In the
+#. screenshot, the context menu is open on the word “mstake”, with the
+#. suggestion for “mistake” highlighted.
+#: src/Constants/AppCenterCopy.vala:37
+msgid "Highlights splling mstakes"
 msgstr ""
 
 #: data/comet.desktop.in:6
