@@ -99,10 +99,24 @@ for language in ${languages[*]}; do
     # gnome-screenshot --window --include-border --file "${language_directory}/comet-welcome.png"
     # xdotool key Escape
 
-    # Demonstation of character limit
-    echo -e "  - Demonstration of character limit\n"
+    ################################################################################
+    #
+    # Take screenshots of basic usage demonstrating the line limit warning
+    # in both light and dark modes and create a montage of the two.
+    #
+    ################################################################################
+
+    echo -e "  - Basic usage (light and dark)\n"
+
+    # Set light mode
+    io.elementary.switchboard &
+    sleep 1
+    xdotool search --onlyvisible --class switchboard windowactivate && xdotool type --delay=0 "dark" && xdotool key Down && sleep 1 && xdotool key Return && sleep 1 && xdotool key Left && xdotool key Left && sleep 1 && xdotool key Ctrl+q
+
+    # Take light screenshot
+    echo "  - Light"
     pushd "${temporary_git_repository}"
-    git commit &
+    LANGUAGE="${language}" git commit &
     popd
     sleep 1
     xdotool search --onlyvisible --class comet windowactivate
@@ -111,17 +125,50 @@ for language in ${languages[*]}; do
     # In order for xdotool to type the characters correctly, the correcy keyboard map
     # for the language must also be set.
     keyboard_map="${languages_to_keyboard_layouts[$language]}"
-
-    echo ">>>>${keyboard_map}"
-
     setxkbmap "${keyboard_map}"
 
     xdotool type --delay=0 "${xdotoolified_string}"
-    sleep 3
-    gnome-screenshot --window --include-border --file "${language_directory}/comet-character-limit.png"
+    sleep 1
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-light.png"
     sleep 1
     xdotool key Escape
     sleep 1
+
+    # Set dark mode
+    io.elementary.switchboard &
+    sleep 1
+    xdotool search --onlyvisible --class switchboard windowactivate && xdotool type --delay=0 "dark" && xdotool key Down && sleep 1 && xdotool key Return && sleep 3 && xdotool key Left && xdotool key Up && xdotool key Right && sleep 1 && xdotool key Ctrl+q
+
+    # Take dark screenshot
+    # TODO: Refactor to remove redundancy.
+    echo "  - Dark"
+
+    pushd "${temporary_git_repository}"
+    LANGUAGE="${language}" git commit &
+    popd
+    sleep 1
+    xdotool search --onlyvisible --class comet windowactivate
+    xdotoolified_string="$(printf "${localised_demonstration_of_line_limit}")"
+
+    # In order for xdotool to type the characters correctly, the correcy keyboard map
+    # for the language must also be set.
+    keyboard_map="${languages_to_keyboard_layouts[$language]}"
+    setxkbmap "${keyboard_map}"
+
+    xdotool type --delay=0 "${xdotoolified_string}"
+    sleep 1
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-dark.png"
+    sleep 1
+    xdotool key Escape
+    sleep 1
+
+    # Create montage of light and dark mode using a slanted split-screen effect
+    # based on the golden mean and maintaining the original soft drop shadow.
+    magick \
+    \( "${language_directory}/comet-basic-light.png" +write mpr:comet-basic-light \) \
+    \( "${language_directory}/comet-basic-dark.png" mpr:comet-basic-light \( -size 1278x952 xc:white -draw "stroke None fill Black path 'M %[fx:w/1.618],0 L %[fx:w-w/1.618],%[fx:h] L %[fx:w],%[fx:h] L %[fx:w],0 Z'" \) -alpha Off -composite +write mpr:montage \) \
+    \( mpr:montage \( mpr:comet-basic-light -alpha extract \) -compose CopyOpacity -composite +write "${language_directory}/comet-basic-usage.png" \) \
+    null:
 
 echo '  - Welcome screen'
 echo '  - Spell check'
