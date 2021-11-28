@@ -244,8 +244,7 @@ msgstr ""
 #: src/Constants/AppCenterCopy.vala:24
 msgid "Dogma (n): a settled opinion, belief, or principle "
 msgstr ""
-"Dogma (i): Doğruluğu sınanmadan benimsenen, bir öğretinin veya ideolojinin "
-"temeli yapılan sav, nas, inak"
+"Dogma (i): Doğruluğu sınanmadan benimsenen bir öğreti"
 
 #. Screenshot showing the emoji picker. The message here is shown in the editor.
 #. Please feel free to use Ctrl as a generic label for Control for translations
