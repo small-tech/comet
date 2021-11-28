@@ -30,9 +30,17 @@ echo 'small-web.org' > what-is-the-small-web
 git add --all
 popd
 
+#
+# Initialise Comet app settings
+#
+
+# ~ Center window on 1920x1080 first screen.
+gsettings set org.small_tech.comet.saved-state window-position "(206,79)"
+gsettings set org.small_tech.comet.saved-state window-size "(540,378)"
+
 # Map of languges to keyboard maps (used by setxkbmap to set the keyboard map
 # before xdotool types in a localised string).
-declare -A languages_to_keyboard_layouts=( ["en"]="us" ["tr"]="tr" ["nl"]="nl" )
+declare -A languages_to_keyboard_layouts=( ["en"]="us" ["tr"]="tr(alt)" ["nl"]="nl" )
 
 # Save the current keyboard layout as we will be changing it in the script
 # to get xdotool to type in the localised strings properly.
@@ -84,9 +92,15 @@ for language in ${languages[*]}; do
     echo "${localised_demonstration_of_line_limit}"
 
 
-    # localised_definition_of_dogma=$(LANGUAGE=$language gettext org.small_tech.comet "${definition_of_dogma}")
+    localised_definition_of_dogma=$(LANGUAGE=$language gettext org.small_tech.comet "${definition_of_dogma}")
 
-    # localised_emoji_picker_instructions=$(LANGUAGE=$language gettext org.small_tech.comet "${emoji_picker_instructions}")
+    localised_emoji_picker_instructions=$(LANGUAGE=$language gettext org.small_tech.comet "${emoji_picker_instructions}")
+
+    # In order for xdotool to type the characters correctly, the correcy keyboard map
+    # for the language must also be set.
+    keyboard_map="${languages_to_keyboard_layouts[$language]}"
+    setxkbmap "${keyboard_map}"
+
 
     # # echo -e "1:" "${localised_demonstration_of_line_limit}\n"
     # # echo -e "2:" "${localised_definition_of_dogma}\n"
@@ -101,12 +115,17 @@ for language in ${languages[*]}; do
 
     ################################################################################
     #
+    # Screenshot 1: Basic Usage (light and dark style montage)
+    #
     # Take screenshots of basic usage demonstrating the line limit warning
     # in both light and dark modes and create a montage of the two.
     #
     ################################################################################
 
     echo -e "  - Basic usage (light and dark)\n"
+
+    # Set the character limit to 72.
+    gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
 
     # Set light mode
     io.elementary.switchboard &
@@ -116,7 +135,7 @@ for language in ${languages[*]}; do
     # Take light screenshot
     echo "  - Light"
     pushd "${temporary_git_repository}"
-    LANGUAGE="${language}" git commit &
+    LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
     popd
     sleep 1
     xdotool search --onlyvisible --class comet windowactivate
@@ -131,7 +150,7 @@ for language in ${languages[*]}; do
     sleep 1
     gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-light.png"
     sleep 1
-    xdotool key Escape
+    xdotool key Ctrl+q
     sleep 1
 
     # Set dark mode
@@ -144,22 +163,18 @@ for language in ${languages[*]}; do
     echo "  - Dark"
 
     pushd "${temporary_git_repository}"
-    LANGUAGE="${language}" git commit &
+    LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
     popd
     sleep 1
     xdotool search --onlyvisible --class comet windowactivate
     xdotoolified_string="$(printf "${localised_demonstration_of_line_limit}")"
 
-    # In order for xdotool to type the characters correctly, the correcy keyboard map
-    # for the language must also be set.
-    keyboard_map="${languages_to_keyboard_layouts[$language]}"
-    setxkbmap "${keyboard_map}"
 
     xdotool type --delay=0 "${xdotoolified_string}"
     sleep 1
     gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-dark.png"
     sleep 1
-    xdotool key Escape
+    xdotool key Ctrl+q
     sleep 1
 
     # Create montage of light and dark mode using a slanted split-screen effect
@@ -170,10 +185,35 @@ for language in ${languages[*]}; do
     \( mpr:montage \( mpr:comet-basic-light -alpha extract \) -compose CopyOpacity -composite +write "${language_directory}/comet-basic-usage.png" \) \
     null:
 
-echo '  - Welcome screen'
-echo '  - Spell check'
-echo '  - Emoji support'
-echo '  - Basic usage (light and dark style)'
+    ################################################################################
+    #
+    # Screenshot 2: Settings Menu
+    #
+    ################################################################################
+
+    echo "  - Settings screenshot"
+
+    # Set the character limit to 50.
+    gsettings set org.small_tech.comet.saved-state first-line-character-limit 50
+
+    pushd "${temporary_git_repository}"
+    LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
+    popd
+    sleep 1
+    xdotool search --onlyvisible --class comet windowactivate
+    xdotoolified_string="$(printf "${localised_definition_of_dogma}")"
+    xdotool type --delay=0 "${xdotoolified_string}"
+    xdotool key Ctrl+comma
+    sleep 1
+    xdotool key Tab
+    sleep 1
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-settings.png"
+    sleep 1
+    xdotool key Ctrl+q
+
+    echo '  - Welcome screen'
+    echo '  - Spell check'
+    echo '  - Emoji support'
 
 done;
 
