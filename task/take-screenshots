@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+########################################################################################
+#
+# task/screenshots
+#
+# Take localised screenshots of the app for the elementary OS AppCenter.
+#
+# Copyright ⓒ 2021-present Aral Balkan, Small Technology Foundation.
+# Released under GNU GPL version 3.0.
+#
+########################################################################################
+
+echo -e '\nTaking screenshots, please do not touch the system until complete.\n'
+
 #
 # Setup.
 #
@@ -8,9 +21,13 @@ temporary_git_repository="/tmp/org.small-tech.comet-screenshots"
 
 # Make sure we have a current build of Comet and that the transations
 # are installed.
+
 # task/install
 
-# Ensure consistent screenshot size by controlling text scaling factor.
+# Back up the current text scaling factor so we can restore it at the end.
+initial_text_scaling_factor=$(gsettings get org.gnome.desktop.interface text-scaling-factor)
+
+# Set the text scaling factor to ensure consistent screenshot size.
 gsettings set org.gnome.desktop.interface text-scaling-factor 1
 
 # Back up the existing wallpaper and set the chroma key (green screen)
@@ -40,20 +57,45 @@ gsettings set org.small_tech.comet.saved-state window-size "(540,378)"
 
 # Map of languges to keyboard maps (used by setxkbmap to set the keyboard map
 # before xdotool types in a localised string).
-declare -A languages_to_keyboard_layouts=( ["en"]="us" ["tr"]="tr(alt)" ["nl"]="nl" )
+declare -A languages_to_keyboard_layouts=( ["en"]="us(mac)" ["tr"]="tr(alt)" ["nl"]="nl" )
+
+# Map of languages to full language codes (without the full codes, the correct dictionary
+# is loaded for some languages. For example, when launched with LANGUAGE=tr git commit -a, the
+# Turkish dictionary is not picked up. However, when launched with LANGUAGE=tr_TR.utf8 commit -a,
+# it is. To check what you should map the language code to here, look in /usr/share/hunspell/ and
+# map it to the exact name of the file that exists for the language.
+declare -A languages_to_full_language_codes=( ["en"]="en" ["tr"]="tr_TR.utf8" ["nl"]="nl" )
+
+# This is the number of times we should press Ctrl+right-arrow to get to the position
+# we want the emoji picker to display for the emoji screenshot in a given language.
+declare -A emoji_picker_location_for_language=( ["en"]="3" ["tr"]="5" ["nl"]="4" )
+
+# This is the number of times we should press Ctrl+right-arrow to get to the position
+# where the localised misspelled word “mistake” is in the given language.
+declare -A location_of_spelling_mistake=( ["en"]="3" ["tr"]="2" ["nl"]="3" )
+
+# This is the location of the correct spelling in the list of spelling suggestions
+# that we have to arrow-down to get to for each localisation.
+declare -A location_of_correct_spelling=( ["en"]="1" ["tr"]="1" ["nl"]="1" )
 
 # Save the current keyboard layout as we will be changing it in the script
 # to get xdotool to type in the localised strings properly.
 initial_keyboard_map="$(setxkbmap -print | grep xkb_symbols | awk -F"+" '{print $2}')"
 
 # Get original English string constants from app source.
+
 demonstration_of_line_limit=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string DEMONSTRATION_OF_LINE_LIMIT = _\("(.*?)"\);/\1/p')
+
 definition_of_dogma=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string DEFINITION_OF_DOGMA = _\("(.*?)"\);/\1/p')
+
 emoji_picker_instructions=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string EMOJI_PICKER_INSTRUCTIONS = _\("(.*?)"\);/\1/p')
 
-echo "${demonstration_of_line_limit}"
-echo "${definition_of_dogma}"
-echo "${emoji_picker_instructions}"
+highlights_spelling_mistakes=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string HIGHLIGHTS_SPELLING_MISTAKES = _\("(.*?)"\);/\1/p')
+
+# echo "${demonstration_of_line_limit}"
+# echo "${definition_of_dogma}"
+# echo "${emoji_picker_instructions}"
+# echo "${highlights_spelling_mistakes}"
 
 # Get list of localisation languages from app data.
 languages=("en")
@@ -67,19 +109,20 @@ for language_file_name in $(ls po); do
     }
 done;
 
-echo "${languages[*]}"
+# echo "${languages[*]}"
 
 #
 # Take localised screenshots.
 #
 
-echo -e 'Taking screenshots, please do not touch the system until complete…\n'
-
 for language in ${languages[*]}; do
-    echo -e "\n[[[" "${language}" "]]]\n"
+    echo -e "\n${language}"
+    echo -e "==\n"
+
+    echo "  • Initialising (getting localised strings, keyboard map, etc.) "
 
     # Ensure the directory for the language exists and is empty.
-    language_directory="comet-screenshots/${language}"
+    language_directory="../comet-screenshots/${language}"
     rm -rf "${language_directory}"
     mkdir -p "${language_directory}"
 
@@ -95,15 +138,12 @@ for language in ${languages[*]}; do
 
     localised_emoji_picker_instructions=$(LANGUAGE=$language gettext org.small_tech.comet "${emoji_picker_instructions}")
 
+    localised_highlights_spelling_mistakes=$(LANGUAGE=$language gettext org.small_tech.comet "${highlights_spelling_mistakes}")
+
     # In order for xdotool to type the characters correctly, the correcy keyboard map
     # for the language must also be set.
     keyboard_map="${languages_to_keyboard_layouts[$language]}"
     setxkbmap "${keyboard_map}"
-
-
-    # # echo -e "1:" "${localised_demonstration_of_line_limit}\n"
-    # # echo -e "2:" "${localised_definition_of_dogma}\n"
-    # # echo -e "3:" "${localised_emoji_picker_instructions}\n"
 
     ################################################################################
     #
@@ -114,7 +154,11 @@ for language in ${languages[*]}; do
     #
     ################################################################################
 
-    echo -e "  - Basic usage (light and dark)\n"
+    echo -e "  • Screenshot: Basic usage (light and dark style)\n"
+
+    echo -e "      › Light style"
+
+    echo -e "          » Switching system to light colour scheme."
 
     # Set the character limit to 72.
     gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
@@ -125,7 +169,9 @@ for language in ${languages[*]}; do
     xdotool search --onlyvisible --class switchboard windowactivate && xdotool type --delay=0 "dark" && xdotool key Down && sleep 1 && xdotool key Return && sleep 1 && xdotool key Left && xdotool key Left && sleep 1 && xdotool key Ctrl+q
 
     # Take light screenshot
-    echo "  - Light"
+
+    echo -e "          » Dressing app for screenshot."
+
     pushd "${temporary_git_repository}"
     LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
     popd
@@ -140,10 +186,20 @@ for language in ${languages[*]}; do
 
     xdotool type --delay=0 "${xdotoolified_string}"
     sleep 1
+
+    echo -e "          » Taking screenshot."
+
     gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-light.png"
     sleep 1
+
+    echo -e "          » Quitting app."
+
     xdotool key Ctrl+q
     sleep 1
+
+    echo -e "      › Dark style"
+
+    echo -e "          » Switching system to dark colour scheme."
 
     # Set dark mode
     io.elementary.switchboard &
@@ -152,7 +208,8 @@ for language in ${languages[*]}; do
 
     # Take dark screenshot
     # TODO: Refactor to remove redundancy.
-    echo "  - Dark"
+
+    echo -e "          » Dressing app for screenshot."
 
     pushd "${temporary_git_repository}"
     LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
@@ -160,14 +217,20 @@ for language in ${languages[*]}; do
     sleep 1
     xdotool search --onlyvisible --class comet windowactivate
     xdotoolified_string="$(printf "${localised_demonstration_of_line_limit}")"
-
-
     xdotool type --delay=0 "${xdotoolified_string}"
     sleep 1
+
+    echo -e "          » Taking screenshot."
+
     gnome-screenshot --window --include-border --file "${language_directory}/comet-basic-dark.png"
     sleep 1
+
+    echo -e "          » Quitting app."
+
     xdotool key Ctrl+q
     sleep 1
+
+    echo -e "      › Creating montage of light and dark style."
 
     # Create montage of light and dark mode using a slanted split-screen effect
     # based on the golden mean and maintaining the original soft drop shadow.
@@ -177,13 +240,18 @@ for language in ${languages[*]}; do
     \( mpr:montage \( mpr:comet-basic-light -alpha extract \) -compose CopyOpacity -composite +write "${language_directory}/comet-basic-usage.png" \) \
     null:
 
+    echo -e "      › Done."
+
+
     ################################################################################
     #
     # Screenshot 2: Settings Menu
     #
     ################################################################################
 
-    echo "  - Settings screenshot"
+    echo -e "  • Screenshot: Settings\n"
+
+    echo -e "      › Dressing app for screenshot."
 
     # Set the character limit to 50.
     gsettings set org.small_tech.comet.saved-state first-line-character-limit 50
@@ -199,9 +267,19 @@ for language in ${languages[*]}; do
     sleep 1
     xdotool key Tab
     sleep 1
+
+    echo -e "      › Taking screenshot."
+
     gnome-screenshot --window --include-border --file "${language_directory}/comet-settings.png"
     sleep 1
+
+    echo -e "      › Quitting app."
+
     xdotool key Ctrl+q
+    sleep 1
+
+    echo -e "      › Done."
+
 
     ################################################################################
     #
@@ -209,7 +287,9 @@ for language in ${languages[*]}; do
     #
     ################################################################################
 
-    echo '  - Emoji support'
+    echo -e "  • Screenshot: Emoji\n"
+
+    echo -e "      › Dressing app for screenshot."
 
     # Set the character limit to 72.
     gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
@@ -230,9 +310,18 @@ for language in ${languages[*]}; do
     xdotool key Ctrl+period
     sleep 1
 
+    echo -e "      › Taking screenshot."
+
     gnome-screenshot --window --include-border --file "${language_directory}/comet-emoji.png"
     sleep 1
+
+    echo -e "      › Quitting app."
+
     xdotool key Ctrl+q
+    sleep 1
+
+    echo -e "      › Done."
+
 
     ################################################################################
     #
@@ -240,9 +329,61 @@ for language in ${languages[*]}; do
     #
     ################################################################################
 
-    echo '  - Spell check'
+    echo -e "  • Screenshot: Spell check\n"
 
-    # TODO
+    echo -e "      › Dressing app for screenshot."
+
+    # Set the character limit to 72.
+    gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
+
+    pushd "${temporary_git_repository}"
+    LANGUAGE="${languages_to_full_language_codes[$language]}" git commit &
+    popd
+    sleep 1
+    xdotool search --onlyvisible --class comet windowactivate
+    xdotoolified_string="$(printf "${localised_highlights_spelling_mistakes}")"
+    xdotool type --delay=0 "${xdotoolified_string}"
+
+    xdotool key Home
+    for ((i = 0; i < "${location_of_spelling_mistake[$language]}"; i++)); do
+        xdotool key Ctrl+Right
+    done
+
+    xdotool key Menu
+    sleep 1
+    xdotool key Right
+    sleep 1
+
+    for ((i = 0; i < "${location_of_correct_spelling[$language]}"; i++)); do
+        xdotool key Down
+    done
+
+    sleep 1
+
+    echo -e "      › Taking screenshot."
+
+    # Screenshot the window on the green screen background.
+    # We have to use xdotool as gnome-screenshot does not allow
+    # you to specify the coordinates via its command-line interface.
+    spell_check_screenshot_path="${language_directory}/comet_spell_check.png"
+    gnome-screenshot --file "${spell_check_screenshot_path}"
+    sleep 1
+
+    echo -e "      › Quitting app."
+
+    xdotool key Escape
+    xdotool key Ctrl+q
+
+    echo -e "      › Applying chroma key."
+
+    # Crop, trim, and apply a chroma key to the image to extract a screenshot
+    # with soft shadows.
+    magick "${spell_check_screenshot_path}" -crop 1600x970+300+70 +repage -trim +write mpr:crop \
+        \( mpr:crop -channel alpha -fx "1.0*b - 1.0*g + 1.0" -channel RGB -alpha extract +write mpr:mask \) \
+        \( mpr:crop mpr:mask -alpha Off -fx "v==0 ? 0 : u/v - #00ff00/v + #00ff00" mpr:mask -compose Copy_Opacity -composite +write "${spell_check_screenshot_path}" \) \
+    null:
+
+    echo -e "      › Done."
 
     ################################################################################
     #
@@ -250,18 +391,30 @@ for language in ${languages[*]}; do
     #
     ################################################################################
 
-    echo '  - Welcome screen'
+    echo -e "  • Screenshot: Spell check\n"
+
+    echo -e "      › Launching welcome screen."
 
     # Welcome screen (displays when Comet is launched without any arguments)
-    echo -e "  - Welcome screen\n"
     build/org.small_tech.comet &
     xdotool search --onlyvisible --class comet windowactivate
-    gnome-screenshot --window --include-border --file "${language_directory}/comet-welcome.png"
-    xdotool key Ctrl+q
 
+    echo -e "      › Taking screenshot."
+
+    gnome-screenshot --window --include-border --file "${language_directory}/comet-welcome.png"
+    sleep 1
+
+    echo -e "      › Quitting app."
+
+    xdotool key Ctrl+q
+    sleep 1
+
+    echo -e "      › Done."
 done;
+
+echo -e "\n• Restoring initial keyboard map.\n"
 
 # Restore the initial keyboard map.
 setxkbmap "${initial_keyboard_map}"
 
-echo -e '\nDone!\n\nYou can find the screenshots in ~/Pictures/Screenshots'
+echo -e 'Done!\n\nYou can find the screenshots in ../comet-screenshots'
