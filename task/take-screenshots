@@ -271,6 +271,11 @@ for language in ${languages[*]}; do
     \( mpr:montage \( mpr:comet-basic-light -alpha extract \) -compose CopyOpacity -composite +write "${language_directory}/comet-basic-usage.png" \) \
     null:
 
+    echo -e "      › Cleaning up original screenshots."
+
+    rm "${language_directory}/comet-basic-light.png"
+    rm "${language_directory}/comet-basic-dark.png"
+
     echo -e "      › Done."
 
 
