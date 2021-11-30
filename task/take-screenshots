@@ -233,8 +233,8 @@ for language in ${languages[*]}; do
     sleep 1
 
     # Switch the colour scheme to dark (the one on the right).
-    xdotool key Left
-    xdotool key Left
+    xdotool key Right
+    xdotool key Right
     sleep 1
 
     # Exit Settings.
