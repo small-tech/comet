@@ -233,9 +233,9 @@ msgid ""
 "You can change the suggested length in the Settings Menu."
 msgstr ""
 "Bu Git işlem mesajınızın özet satırı olduğu için kısa tutulur; yani çok "
-"fazla utazmayın\n"
+"fazla uzatılmaz\n"
 "\n"
-"Tavsiye edilen satır uzunluğunu Ayarlar Menüsü’nden değiştirebilirsiniz."
+"Tavsiye edilen satır uzunluğunu Ayarlar Menüsünden değiştirebilirsiniz."
 
 #. Screenshot showing the Settings Menu with the first line character
 #. limit set to 50 (Dogmatic). In the editor view you can see the message,
