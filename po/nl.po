@@ -263,7 +263,7 @@ msgstr "Druk op Control + . (punt) om emoji in te voegen"
 #. suggestion for “mistake” highlighted.
 #: src/Constants/AppCenterCopy.vala:37
 msgid "Highlights splling mstakes"
-msgstr ""
+msgstr "Markeert splfouten"
 
 #: data/comet.desktop.in:6
 msgid "Git Commit Message Editor"
