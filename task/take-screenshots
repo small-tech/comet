@@ -122,7 +122,6 @@ for language in ${languages[*]}; do
 
     # Ensure the directory for the language exists and is empty.
     language_directory="../comet-screenshots/${language}"
-    rm -rf "${language_directory}"
     mkdir -p "${language_directory}"
 
     # Note that while there are newlines (\n) in this string, we do not use gettext’s -e option to expand
