@@ -163,12 +163,29 @@ for language in ${languages[*]}; do
     # Set the character limit to 72.
     gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
 
-    # Set light mode
+    # Set light scheme.
+
+    # Open Settings.
     io.elementary.switchboard &
     sleep 1
-    xdotool search --onlyvisible --class switchboard windowactivate && xdotool type --delay=0 "dark" && xdotool key Down && sleep 1 && xdotool key Return && sleep 1 && xdotool key Left && xdotool key Left && sleep 1 && xdotool key Ctrl+q
 
-    # Take light screenshot
+    # Search for “dark” and select the first result.
+    xdotool search --onlyvisible --class switchboard windowactivate
+    xdotool type --delay=0 "dark"
+    xdotool key Down
+    sleep 1
+    xdotool key Return
+    sleep 1
+
+    # Switch the colour scheme to light (the one on the left).
+    xdotool key Left
+    xdotool key Left
+    sleep 1
+
+    # Exit Settings.
+    xdotool key Ctrl+q
+
+    # Take light screenshot.
 
     echo -e "          » Dressing app for screenshot."
 
@@ -201,13 +218,29 @@ for language in ${languages[*]}; do
 
     echo -e "          » Switching system to dark colour scheme."
 
-    # Set dark mode
+    # Set dark scheme.
+
+    # Open settings.
     io.elementary.switchboard &
     sleep 1
-    xdotool search --onlyvisible --class switchboard windowactivate && xdotool type --delay=0 "dark" && xdotool key Down && sleep 1 && xdotool key Return && sleep 3 && xdotool key Left && xdotool key Up && xdotool key Right && sleep 1 && xdotool key Ctrl+q
+
+    # Search for “dark” and select the first result.
+    xdotool search --onlyvisible --class switchboard windowactivate
+    xdotool type --delay=0 "dark"
+    xdotool key Down
+    sleep 1
+    xdotool key Return
+    sleep 1
+
+    # Switch the colour scheme to dark (the one on the right).
+    xdotool key Left
+    xdotool key Left
+    sleep 1
+
+    # Exit Settings.
+    xdotool key Ctrl+q
 
     # Take dark screenshot
-    # TODO: Refactor to remove redundancy.
 
     echo -e "          » Dressing app for screenshot."
 
@@ -396,7 +429,8 @@ for language in ${languages[*]}; do
     echo -e "      › Launching welcome screen."
 
     # Welcome screen (displays when Comet is launched without any arguments)
-    build/org.small_tech.comet &
+    build/org.small_tech.comet
+    sleep 1
     xdotool search --onlyvisible --class comet windowactivate
 
     echo -e "      › Taking screenshot."
