@@ -21,8 +21,7 @@ temporary_git_repository="/tmp/org.small-tech.comet-screenshots"
 
 # Make sure we have a current build of Comet and that the transations
 # are installed.
-
-# task/install
+task/install
 
 # Back up the current text scaling factor so we can restore it at the end.
 initial_text_scaling_factor=$(gsettings get org.gnome.desktop.interface text-scaling-factor)
@@ -72,11 +71,11 @@ declare -A emoji_picker_location_for_language=( ["en"]="3" ["tr"]="5" ["nl"]="4"
 
 # This is the number of times we should press Ctrl+right-arrow to get to the position
 # where the localised misspelled word “mistake” is in the given language.
-declare -A location_of_spelling_mistake=( ["en"]="3" ["tr"]="2" ["nl"]="3" )
+declare -A location_of_spelling_mistake=( ["en"]="3" ["tr"]="2" ["nl"]="2" )
 
 # This is the location of the correct spelling in the list of spelling suggestions
 # that we have to arrow-down to get to for each localisation.
-declare -A location_of_correct_spelling=( ["en"]="1" ["tr"]="1" ["nl"]="1" )
+declare -A location_of_correct_spelling=( ["en"]="1" ["tr"]="1" ["nl"]="0" )
 
 # Save the current keyboard layout as we will be changing it in the script
 # to get xdotool to type in the localised strings properly.
