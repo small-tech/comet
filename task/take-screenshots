@@ -429,7 +429,7 @@ for language in ${languages[*]}; do
     echo -e "      › Launching welcome screen."
 
     # Welcome screen (displays when Comet is launched without any arguments)
-    build/org.small_tech.comet
+    build/org.small_tech.comet &
     sleep 1
     xdotool search --onlyvisible --class comet windowactivate
 
