@@ -261,7 +261,7 @@ for language in ${languages[*]}; do
     xdotool key Ctrl+q
     sleep 1
 
-    echo -e "      › Creating montage of light and dark style."
+    echo -e "      › (Background task) Creating montage of light and dark style."
 
     # Create montage of light and dark mode using a slanted split-screen effect
     # based on the golden mean and maintaining the original soft drop shadow.
@@ -269,7 +269,7 @@ for language in ${languages[*]}; do
     \( "${language_directory}/comet-basic-light.png" +write mpr:comet-basic-light \) \
     \( "${language_directory}/comet-basic-dark.png" mpr:comet-basic-light \( -size 1278x952 xc:white -draw "stroke None fill Black path 'M %[fx:w/1.618],0 L %[fx:w-w/1.618],%[fx:h] L %[fx:w],%[fx:h] L %[fx:w],0 Z'" \) -alpha Off -composite +write mpr:montage \) \
     \( mpr:montage \( mpr:comet-basic-light -alpha extract \) -compose CopyOpacity -composite +write "${language_directory}/comet-basic-usage.png" \) \
-    null:
+    null: &
 
     echo -e "      › Cleaning up original screenshots."
 
@@ -410,14 +410,14 @@ for language in ${languages[*]}; do
     xdotool key Escape
     xdotool key Ctrl+q
 
-    echo -e "      › Applying chroma key."
+    echo -e "      › (Background task) Applying chroma key."
 
     # Crop, trim, and apply a chroma key to the image to extract a screenshot
     # with soft shadows.
     magick "${spell_check_screenshot_path}" -crop 1600x970+300+70 +repage -trim +write mpr:crop \
         \( mpr:crop -channel alpha -fx "1.0*b - 1.0*g + 1.0" -channel RGB -alpha extract +write mpr:mask \) \
         \( mpr:crop mpr:mask -alpha Off -fx "v==0 ? 0 : u/v - #00ff00/v + #00ff00" mpr:mask -compose Copy_Opacity -composite +write "${spell_check_screenshot_path}" \) \
-    null:
+    null: &
 
     echo -e "      › Done."
 
