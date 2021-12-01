@@ -357,7 +357,7 @@ for language in ${languages[*]}; do
     # Screenshot the window on the green screen background.
     # We have to use xdotool as gnome-screenshot does not allow
     # you to specify the coordinates via its command-line interface.
-    spell_check_screenshot_path="${language_directory}/comet_spell_check.png"
+    spell_check_screenshot_path="${language_directory}/comet-spell-check.png"
     gnome-screenshot --file "${spell_check_screenshot_path}"
     sleep 1
 
