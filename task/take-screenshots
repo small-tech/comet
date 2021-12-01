@@ -154,36 +154,14 @@ for language in ${languages[*]}; do
 
     echo -e "  • Screenshot: Basic usage (light and dark style)\n"
 
+    # Set the character limit to 72.
+    gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
+
     echo -e "      › Light style"
 
     echo -e "          » Switching system to light colour scheme."
 
-    # Set the character limit to 72.
-    gsettings set org.small_tech.comet.saved-state first-line-character-limit 72
-
-    # Set light scheme.
-
-    # Open Settings.
-    io.elementary.switchboard &
-    sleep 1
-
-    # Search for “dark” and select the first result.
-    xdotool search --onlyvisible --class switchboard windowactivate
-    xdotool type --delay=0 "dark"
-    xdotool key Down
-    sleep 1
-    xdotool key Return
-    sleep 1
-
-    # Switch the colour scheme to light (the one on the left).
-    xdotool key Left
-    xdotool key Left
-    sleep 1
-
-    # Exit Settings.
-    xdotool key Ctrl+q
-
-    # Take light screenshot.
+    busctl set-property org.freedesktop.Accounts /org/freedesktop/Accounts/User1000 io.elementary.pantheon.AccountsService PrefersColorScheme i 0
 
     echo -e "          » Dressing app for screenshot."
 
@@ -216,29 +194,7 @@ for language in ${languages[*]}; do
 
     echo -e "          » Switching system to dark colour scheme."
 
-    # Set dark scheme.
-
-    # Open settings.
-    io.elementary.switchboard &
-    sleep 1
-
-    # Search for “dark” and select the first result.
-    xdotool search --onlyvisible --class switchboard windowactivate
-    xdotool type --delay=0 "dark"
-    xdotool key Down
-    sleep 1
-    xdotool key Return
-    sleep 1
-
-    # Switch the colour scheme to dark (the one on the right).
-    xdotool key Right
-    xdotool key Right
-    sleep 1
-
-    # Exit Settings.
-    xdotool key Ctrl+q
-
-    # Take dark screenshot
+    busctl set-property org.freedesktop.Accounts /org/freedesktop/Accounts/User1000 io.elementary.pantheon.AccountsService PrefersColorScheme i 1
 
     echo -e "          » Dressing app for screenshot."
 
