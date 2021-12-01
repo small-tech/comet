@@ -431,7 +431,7 @@ namespace Comet {
         private void set_highlight_colour () {
             // Always highlight with bright banana yellow on dark text,
             // regardless of the colour scheme.
-            highlight_background_tag.background = Constants.Colours.BANANA_500;
+            highlight_background_tag.background = is_dark_mode ? Constants.Colours.BANANA_500 : Constants.Colours.BANANA_100;
             highlight_background_tag.foreground = is_dark_mode ? message_background_colour : message_foreground_colour;
         }
 
