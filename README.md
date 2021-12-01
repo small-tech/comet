@@ -420,6 +420,7 @@ This is currently only a task run by the primary author so you likely do not hav
 #### System setup:
 
   - Ensure first monitor is at 1920×1080 resolution.
+  - Set your wallpaper to an image that is pure green (#00ff00).
   - Make sure you have no other apps open on your first monitor.
   - [Install all dictionaries for supported localisations](#about-spell-check).
   - Ensure you’ve pulled the latest changes from the [comet-screenshots](https://github.com/small-tech/comet-screenshots) repository.
