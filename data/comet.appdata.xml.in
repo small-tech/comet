@@ -27,7 +27,7 @@
     <value key="x-appcenter-color-primary">#0d52bf</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
     <value key="x-appcenter-suggested-price">5</value>
-    <value key="x-appcenter-stripe">pk_live_CYYwSVoh2kC4XcTPCudVIocg005StHQ47e</value>
+    <value key="x-appcenter-stripe">pk_live_51K2FpsCJXil40DsyeKv9FAyICXmrk98761IzZpSEcYyTUYILXBO7le2gSKEtUG3O86p90ynyYONoYjZYnJWXvnEK00S1tXorJf</value>
   </custom>
   <url type="homepage">https://github.com/small-tech/comet</url>
   <url type="bugtracker">https://github.com/small-tech/comet/issues</url>
