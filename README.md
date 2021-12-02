@@ -177,7 +177,7 @@ task/run-package
 
 There are two different ways to test Comet, as there are two ways to build it.
 
-#### Quick testing
+#### Quick testing (Meson and Ninja)
 
 The quickest way to build and test Comet is by using Meson and Ninja and creating a native binary:
 
@@ -333,14 +333,42 @@ Also, when you add a new translation, remember to run the installation task to i
 task/install
 ```
 
-#### AppCenter preview of translations
+### Taking localised AppCenter screenshots
 
-To preview the localised strings/screenshots in AppCenter, specify the language while launching AppCenter.
+The `task/take-screenshots` task will take localised screenshots for the elementary OS AppCenter.
+
+It assumes that your [Comet](github.com/small-tech/comet) and [Comet Screenshots](github.com/small-tech/comet-screenshots) projects exist in the same directory, as shown below:
+
+```
+  Projects
+     ├ comet             (github.com/small-tech/comet)
+     ╰ comet-screenshots (github.com/small-tech/comet-screenshots)
+```
+
+#### Prerequisites
+
+The task does a lot for you, including automatically installing the green screen wallpaper (and restoring yours afterwards), installing necessary dictionaries, etc., but there are a few of things you need to check manually before running it:
+
+  - Ensure you’ve pulled the latest changes from the [comet-screenshots](https://github.com/small-tech/comet-screenshots) repository.
+  - Make sure you have no other apps open on your first monitor.
+  - Don’t forget to update the metadata in _data/comet.appdata.xml.in_ if you add new localisations.
+
+#### Run:
+
+```shell
+task/take-screenshots
+```
+
+This will take the required AppCenter screenshots in all supported localisations and place them in the _comet-screenshots_ repository.
+
+### AppCenter preview
+
+To preview how the app will look on the elementary OS AppCenter with its icon, localised strings, and localised screenshots, run `task/preview-in-appcenter` and, optionally, specify the locale as its argument (the default locale is `en`):
 
 For example, to view how the Turkish localisations will look in the elementary OS AppCenter:
 
 ```shell
-LANGUAGE=tr_TR.utf8 io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
+task/preview-in-appcenter tr_TR
 ```
 
 ### Developer tip: better translations translations
@@ -402,34 +430,6 @@ msgstr ""
 "Bu özgür yazılımdır: değiştirebilirsiniz ve dağıtabilirsiniz.\n"
 "Yasaların izin verdiği kapsamda hiçbir garanti içermez."
 ```
-
-### Localised AppCenter screenshots
-
-The `task/take-screenshots` task will take localised screenshots for the elementary OS AppCenter.
-
-It assumes that your [Comet](github.com/small-tech/comet) and [Comet Screenshots](github.com/small-tech/comet-screenshots) projects exist in the same directory, as shown below:
-
-```
-  Projects
-     ├ comet             (github.com/small-tech/comet)
-     ╰ comet-screenshots (github.com/small-tech/comet-screenshots)
-```
-
-#### Prerequisites
-
-The task does a lot for you, including automatically installing the green screen wallpaper (and restoring yours afterwards), installing necessary dictionaries, etc., but there are a few of things you need to check manually before running it:
-
-  - Ensure you’ve pulled the latest changes from the [comet-screenshots](https://github.com/small-tech/comet-screenshots) repository.
-  - Make sure you have no other apps open on your first monitor.
-  - Don’t forget to update the metadata in _data/comet.appdata.xml.in_ if you add new localisations.
-
-#### Run:
-
-```shell
-task/take-screenshots
-```
-
-This will take the required AppCenter screenshots in all supported localisations and place them in the _comet-screenshots_ repository.
 
 ### VSCodium
 
