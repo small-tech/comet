@@ -15,9 +15,6 @@
   <description>
     <p>A distraction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.</p>
   </description>
-  <description xml:lang="tr">
-    <p>Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi.</p>
-  </description>
   <developer_name>Small Technology Foundation</developer_name>
   <launchable type="desktop-id">org.small_tech.comet.desktop</launchable>
   <!--
@@ -27,7 +24,7 @@
   -->
   <!-- <icon type="stock">org.small_tech.comet</icon> -->
   <custom>
-    <value key="x-appcenter-color-primary">#a62100</value>
+    <value key="x-appcenter-color-primary">#0d52bf</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
     <value key="x-appcenter-suggested-price">5</value>
     <value key="x-appcenter-stripe">pk_live_CYYwSVoh2kC4XcTPCudVIocg005StHQ47e</value>
@@ -39,24 +36,29 @@
   <update_contact>hello@small-tech.org</update_contact>
   <screenshots>
     <screenshot type="default">
-      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-light-and-dark.png</image>
-      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-light-and-dark.png</image>
-      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-light-and-dark.png</image>
+      <image xml:lang="nl">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/nl/comet-basic-usage.png</image>
+      <image xml:lang="tr">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/tr/comet-basic-usage.png</image>
+      <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-basic-usage.png</image>
     </screenshot>
     <screenshot>
-      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-character-limit.png</image>
-      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-character-limit.png</image>
-      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-character-limit.png</image>
+      <image xml:lang="nl">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/nl/comet-spell-check.png</image>
+      <image xml:lang="tr">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/tr/comet-spell-check.png</image>
+      <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-spell-check.png</image>
     </screenshot>
     <screenshot>
-      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-emoji.png</image>
-      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-emoji.png</image>
-      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-emoji.png</image>
+      <image xml:lang="nl">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/nl/comet-emoji.png</image>
+      <image xml:lang="tr">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/tr/comet-emoji.png</image>
+      <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-emoji.png</image>
     </screenshot>
     <screenshot>
-      <image xml:lang="nl">https://small-tech.org/downloads/comet/screenshots/nl/comet-welcome.png</image>
-      <image xml:lang="tr">https://small-tech.org/downloads/comet/screenshots/tr/comet-welcome.png</image>
-      <image>https://small-tech.org/downloads/comet/screenshots/en/comet-welcome.png</image>
+      <image xml:lang="nl">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/nl/comet-settings.png</image>
+      <image xml:lang="tr">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/tr/comet-settings.png</image>
+      <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-settings.png</image>
+    </screenshot>
+    <screenshot>
+      <image xml:lang="nl">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/nl/comet-welcome.png</image>
+      <image xml:lang="tr">https://raw.githubusercontent.com/small-tech/comet-screenshots/main/tr/comet-welcome.png</image>
+      <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-welcome.png</image>
     </screenshot>
   </screenshots>
 </component>

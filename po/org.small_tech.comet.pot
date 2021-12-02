@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-28 18:54+0000\n"
+"POT-Creation-Date: 2021-12-01 15:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,12 +269,6 @@ msgid ""
 "character limit warnings, and emoji support."
 msgstr ""
 
-#: data/comet.appdata.xml.in:19
-msgid ""
-"Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve "
-"dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
-msgstr ""
-
-#: data/comet.appdata.xml.in:21
+#: data/comet.appdata.xml.in:18
 msgid "Small Technology Foundation"
 msgstr ""

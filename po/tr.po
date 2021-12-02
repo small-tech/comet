@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-28 18:54+0000\n"
+"POT-Creation-Date: 2021-12-01 15:37+0000\n"
 "PO-Revision-Date: 2021-11-16 12:21+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -279,7 +279,6 @@ msgid "git;commit;message;editor"
 msgstr "git;işlem;mesaj;düzenleyici"
 
 #: data/comet.appdata.xml.in:16
-#, fuzzy
 msgid ""
 "A distraction-free Git commit message editor with spell-check, first line "
 "character limit warnings, and emoji support."
@@ -287,12 +286,6 @@ msgstr ""
 "Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve "
 "dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
 
-#: data/comet.appdata.xml.in:19
-msgid ""
-"Yazım denetimi, ilk satır karakter sınırı uyarısı, ve emoji desteği olan ve "
-"dikkat dağıtmayan bir Git işleme mesajı düzenleyicisi."
-msgstr ""
-
-#: data/comet.appdata.xml.in:21
+#: data/comet.appdata.xml.in:18
 msgid "Small Technology Foundation"
 msgstr "Küçüĸ Teknoloji Vakfı"
