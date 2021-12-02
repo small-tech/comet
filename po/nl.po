@@ -86,7 +86,7 @@ msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
-"Met de knop Fout melden gaat u naar een vooraf ingevuld probleem op GitHub "
+"Met de knop 'Fout melden' gaat u naar een vooraf ingevuld issue op GitHub "
 "dat u kunt indienen om Comet te helpen verbeteren."
 
 #: src/Application.vala:180
@@ -124,8 +124,8 @@ msgstr "Geen tekens meer op de eerste regel."
 #, c-format
 msgid "%d character left on first line."
 msgid_plural "%d characters left on first line."
-msgstr[0] "%d karakters over op de eerste regel."
-msgstr[1] "%d tekens op de eerste regel."
+msgstr[0] "%d teken over op de eerste regel."
+msgstr[1] "%d tekens over op de eerste regel."
 
 #. In case there is no comment for some reason, let’s not go further as this is likely not
 #. a proper Git commit message.
