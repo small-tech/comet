@@ -407,9 +407,7 @@ msgstr ""
 
 The `task/take-screenshots` task will take localised screenshots for the elementary OS AppCenter.
 
-This is currently only a task run by the primary author so you likely do not have to worry about it.
-
-#### Project setup:
+It assumes that your [Comet](github.com/small-tech/comet) and [Comet Screenshots](github.com/small-tech/comet-screenshots) projects exist in the same directory, as shown below:
 
 ```
   Projects
@@ -417,13 +415,13 @@ This is currently only a task run by the primary author so you likely do not hav
      ╰ comet-screenshots (github.com/small-tech/comet-screenshots)
 ```
 
-#### System setup:
+#### Prerequisites
 
-  - Ensure first monitor is at 1920×1080 resolution.
-  - Set your wallpaper to an image that is pure green (#00ff00).
-  - Make sure you have no other apps open on your first monitor.
-  - [Install all dictionaries for supported localisations](#about-spell-check).
+The task does a lot for you, including automatically installing the green screen wallpaper (and restoring yours afterwards), installing necessary dictionaries, etc., but there are a few of things you need to check manually before running it:
+
   - Ensure you’ve pulled the latest changes from the [comet-screenshots](https://github.com/small-tech/comet-screenshots) repository.
+  - Make sure you have no other apps open on your first monitor.
+  - Don’t forget to update the metadata in _data/comet.appdata.xml.in_ if you add new localisations.
 
 #### Run:
 
@@ -431,35 +429,7 @@ This is currently only a task run by the primary author so you likely do not hav
 task/take-screenshots
 ```
 
-This will take the required AppCenter screenshots in all supported localisations and place them in the _comet-screenshots_ repository. It will also update the metadata in _data/comet.appdata.xml.in_ accordingly.
-
-### Developer tip: creating the localised git comments in AppCenter screenshots
-
-__Translators can skip this section; you do not have to worry about creating screenshots.__
-
-When taking screenshots, you want a consistent, localised comment to display in the interface. Git is already localised but you have to tell it to use a specified language. e.g.,
-
-```shell
-# Launch Git with Turkish locale.
-# This will also launch Comet with the same locale.
-LANGUAGE=tr_TR.utf8 git commit -a
-```
-
-Also, for screenshots, ensure that the text scaling factor is 1 and that the interface is at its smallest size.
-
-```shell
-gsettings set org.gnome.desktop.interface text-scaling-factor 1
-```
-
-The only screenshot that requires post-processing is the light/dark screenshot. There is a file in Penpot where you can duplicate an artboard and replace the existing screenshots to achieve this effect.
-
-Finally, remember to install the system dictionary for the language you are taking screenshots of so the words don’t appear as spelling mistakes.
-
-e.g., Before taking the Nederlands screenshots:
-
-```shell
-sudo apt install hunspell-nl
-```
+This will take the required AppCenter screenshots in all supported localisations and place them in the _comet-screenshots_ repository.
 
 ### VSCodium
 
