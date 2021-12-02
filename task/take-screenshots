@@ -11,54 +11,7 @@
 #
 ########################################################################################
 
-echo -e '\nTaking screenshots, please do not touch the system until complete.\n'
-
-#
-# Setup.
-#
-
-temporary_git_repository="/tmp/org.small-tech.comet-screenshots"
-
-# Back up the current text scaling factor so we can restore it at the end.
-initial_text_scaling_factor=$(gsettings get org.gnome.desktop.interface text-scaling-factor)
-
-# We’re going to replace the wallpaper with our green screen to chroma key
-# the spell check screenshot which requires a screenshot of the screen as
-# X11 cannot screenshot context menus in app screenshots so we store the
-# existing values here so we can restore them when we’re done.
-initial_wallpaper_options=$(gsettings get org.gnome.desktop.background picture-options)
-initial_wallpaper_uri=$(gsettings get org.gnome.desktop.background picture-uri)
-
-# Set the green screen wallpaper.
-gsettings set org.gnome.desktop.background picture-options "spanned"
-gsettings set org.gnome.desktop.background picture-uri "$(pwd)/task/resources/green-screen.png"
-
-# Set the text scaling factor to ensure consistent screenshot size.
-gsettings set org.gnome.desktop.interface text-scaling-factor 1
-
-# Ensure local dictionaries for all supported locales are installed.
-# TODO
-
-# Make sure we have a current build of Comet and that the transations
-# are installed.
-task/install
-
-# Initialise a new Git working copy.
-rm -rf "${temporary_git_repository}"
-mkdir "${temporary_git_repository}"
-pushd "${temporary_git_repository}"
-git init
-echo 'small-web.org' > what-is-the-small-web
-git add --all
-popd
-
-#
-# Initialise Comet app settings
-#
-
-# ~ Center window on 1920x1080 first screen.
-gsettings set org.small_tech.comet.saved-state window-position "(206,79)"
-gsettings set org.small_tech.comet.saved-state window-size "(540,378)"
+# Configuration.
 
 # Map of languges to keyboard maps (used by setxkbmap to set the keyboard map
 # before xdotool types in a localised string).
@@ -83,9 +36,79 @@ declare -A location_of_spelling_mistake=( ["en"]="3" ["tr"]="2" ["nl"]="2" )
 # that we have to arrow-down to get to for each localisation.
 declare -A location_of_correct_spelling=( ["en"]="1" ["tr"]="1" ["nl"]="0" )
 
+temporary_git_repository="/tmp/org.small-tech.comet-screenshots"
+
+#
+# Setup.
+#
+
+echo -e "\n• Building and installing app (will require sudo password)."
+
+# Make sure we have a current build of Comet and that the transations
+# are installed.
+task/install
+
+echo -e "• Backing up text scaling factor."
+
+# Back up the current text scaling factor so we can restore it at the end.
+initial_text_scaling_factor=$(gsettings get org.gnome.desktop.interface text-scaling-factor)
+
+echo -e "• Backing up wallpaper and wallpaper options."
+
+# We’re going to replace the wallpaper with our green screen to chroma key
+# the spell check screenshot which requires a screenshot of the screen as
+# X11 cannot screenshot context menus in app screenshots so we store the
+# existing values here so we can restore them when we’re done.
+initial_wallpaper_options=$(gsettings get org.gnome.desktop.background picture-options)
+initial_wallpaper_uri=$(gsettings get org.gnome.desktop.background picture-uri)
+
+# Log them just in case we crash so the person doesn’t have to go
+# hunting for their wallpaper image.
+echo -e "  • Wallpaper: ${initial_wallpaper_uri}"
+echo -e "  • Wallpaper options: ${initial_wallpaper_options}"
+
+echo -e "• Backing up initial keyboard map."
+
 # Save the current keyboard layout as we will be changing it in the script
 # to get xdotool to type in the localised strings properly.
 initial_keyboard_map="$(setxkbmap -print | grep xkb_symbols | awk -F"+" '{print $2}')"
+
+echo -e "  • Keyboard map: ${initial_keyboard_map}"
+
+# Ensure local dictionaries for all supported locales are installed.
+
+echo -e "• Ensuring local dictionaries for all supported locales are installed."
+
+# English
+echo -e "    • English"
+if [[ ! -f "/usr/share/hunspell/en_GB.dic" ]]; then
+    sudo apt install hunspell-en-gb
+fi
+
+# Turkish
+echo -e "    • Turkish"
+if [[ ! -f "/usr/share/hunspell/tr_TR.dic" ]]; then
+    sudo apt install hunspell-tr
+fi
+
+# Nederlands
+echo -e "    • Nederlands"
+if [[ ! -f "/usr/share/hunspell/nl.dic" ]]; then
+    sudo apt install hunspell-nl
+fi
+
+echo -e "• Creating temporary git repository for use in launching app."
+
+# Initialise a new Git working copy.
+rm -rf "${temporary_git_repository}"
+mkdir "${temporary_git_repository}"
+pushd "${temporary_git_repository}"
+git init
+echo 'small-web.org' > what-is-the-small-web
+git add --all
+popd
+
+echo -e "• Loading localisation data."
 
 # Get original English string constants from app source.
 
@@ -96,11 +119,6 @@ definition_of_dogma=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?publ
 emoji_picker_instructions=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string EMOJI_PICKER_INSTRUCTIONS = _\("(.*?)"\);/\1/p')
 
 highlights_spelling_mistakes=$(cat src/Constants/AppCenterCopy.vala | sed -rn 's/\s*?public const string HIGHLIGHTS_SPELLING_MISTAKES = _\("(.*?)"\);/\1/p')
-
-# echo "${demonstration_of_line_limit}"
-# echo "${definition_of_dogma}"
-# echo "${emoji_picker_instructions}"
-# echo "${highlights_spelling_mistakes}"
 
 # Get list of localisation languages from app data.
 languages=("en")
@@ -114,15 +132,34 @@ for language_file_name in $(ls po); do
     }
 done;
 
-# echo "${languages[*]}"
+echo -e "• Setting green-screen wallpaper."
+
+# Set the green screen wallpaper.
+gsettings set org.gnome.desktop.background picture-options "spanned"
+gsettings set org.gnome.desktop.background picture-uri "$(pwd)/task/resources/green-screen.png"
+
+echo -e "• Setting text scaling factor to 1."
+
+# Set the text scaling factor to ensure consistent screenshot size.
+gsettings set org.gnome.desktop.interface text-scaling-factor 1
+
+echo -e "• Setting size and position settings for app."
+
+# ~ Center window on 1920x1080 first screen.
+gsettings set org.small_tech.comet.saved-state window-position "(206,79)"
+gsettings set org.small_tech.comet.saved-state window-size "(540,378)"
+
+echo -e "\n╭────────────────────────────────────────────────────────────────────╮"
+echo -e "│ Taking screenshots… PLEASE DO NOT TOUCH THE SYSTEM UNTIL COMPLETE. │"
+echo -e "╰────────────────────────────────────────────────────────────────────╯\n"
 
 #
 # Take localised screenshots.
 #
 
 for language in ${languages[*]}; do
-    echo -e "\n${language}"
-    echo -e "==\n"
+    echo -e "\n• ${language}"
+    echo -e "  ==\n"
 
     echo "  • Initialising (getting localised strings, keyboard map, etc.) "
 
