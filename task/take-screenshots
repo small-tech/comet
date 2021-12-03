@@ -48,6 +48,10 @@ echo -e "\n• Building and installing app (will require sudo password)."
 # are installed.
 task/install
 
+echo -e "• Backing up current Git commit message editor."
+
+initial_git_commit_message_editor=$(git config --global core.editor)
+
 echo -e "• Backing up text scaling factor."
 
 # Back up the current text scaling factor so we can restore it at the end.
@@ -131,6 +135,10 @@ for language_file_name in $(ls po); do
     languages+=("${language_file_name::2}")
     }
 done;
+
+echo -e "• Setting latest build of Comet (non-Flatpak) as the Git commit message editor."
+
+git config --global core.editor "$(pwd)/build/org.small_tech.comet"
 
 echo -e "• Setting green-screen wallpaper."
 
@@ -448,15 +456,19 @@ for language in ${languages[*]}; do
     echo -e "      › Done."
 done;
 
-echo -e "\n• Restoring initial keyboard map.\n"
+echo -e "\n• Restoring initial Git commit message editor."
+
+git config --global core.editor "${initial_git_commit_message_editor}"
+
+echo -e "• Restoring initial keyboard map."
 
 # Restore the initial keyboard map.
 setxkbmap "${initial_keyboard_map}"
 
-echo -e "\n• Restoring wallpaper.\n"
+echo -e "• Restoring wallpaper."
 
 # Restore wallpaper.
 gsettings set org.gnome.desktop.background picture-options "${initial_wallpaper_options}"
 gsettings set org.gnome.desktop.background picture-uri "${initial_wallpaper_uri}"
 
-echo -e 'Done!\n\nYou can find the screenshots in ../comet-screenshots'
+echo -e "\nDone!\n\nYou can find the screenshots in ../comet-screenshots"
