@@ -17,12 +17,14 @@
   </description>
   <developer_name>Small Technology Foundation</developer_name>
   <launchable type="desktop-id">org.small_tech.comet.desktop</launchable>
+
   <!--
-    Comment out the icon before making a Flatpak build. The icon
-    is only there so you can preview how the listing will appear in
-    AppCenter locally when working with Meson builds.
+    Do not uncomment the icon line, below. It is automatically uncommented and
+    re-commented-out by the preview-in-appcenter task as necessary.
+    If you uncomment this manually, your Flatpak package attempts will fail.
   -->
   <!-- <icon type="stock">org.small_tech.comet</icon> -->
+
   <custom>
     <value key="x-appcenter-color-primary">#0d52bf</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
