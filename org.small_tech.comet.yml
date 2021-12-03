@@ -14,12 +14,48 @@ finish-args:
   # Needed to read prefer-color-scheme with Granite.Settings
   - '--system-talk-name=org.freedesktop.Accounts'
 
+  #
   # Needed to read commit message files.
+  #
+
+  # The app uses host permissions instead of home permissions to support projects
+  # mounted as external drives and network shares. As mount points can (and do)
+  # differ, it makes sense to use host permissions to ensure that all such projects
+  # work instead of attempting to compile a list of all popular mount points to
+  # support.
+  #
+  # In terms of security, what matters is whether an app has home permissions or not
+  # since, once an app has home permissions, it can easily escape the sandbox and
+  # run arbitrary code and even escalate its own Flatpak permissions (as the settings
+  # file is kept within the person’s home directory).
+  #
+  # As the threat model here assumes that either that the app author is malicious
+  # or that the app’s source repository has been compromised and modified by
+  # a malicious actor, the use of granular filesystem permissions on an app that
+  # already has home permissions is security theatre.
+  #
+  # In this scenario, the real security in the system is not provided by the
+  # Flatpak sandbox but by the following two properties of the system:
+  #
+  # 1. The app being free and open source.
+  #
+  # 2. The extent to which the automated and manual reviews of the source code, as
+  #    carried out by the elementary OS app review team, can catch malicious behaviour.
+  #
+  # Sources:
+  #
+  #   - https://flatkill.org/2020/
+  #   - https://github.com/flatpak/flatpak/issues/3637
+
+  # Host permissions are necessary as this is a developer tool and people
+  # can mount external drives and network shares in a plethora of different locations.
   - '--filesystem=host'
+
+  # For use if a developer clones an app into the /tmp folder and attempts to
+  # make a commit.
   - '--filesystem=/tmp'
 
-  # Necessary to configure Git from the welcome screen
-  # using flatpak-spawn --host.
+  # Necessary to configure Git from the welcome screen using flatpak-spawn --host.
   - '--talk-name=org.freedesktop.Flatpak'
 
 modules:
