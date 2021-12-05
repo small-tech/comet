@@ -173,6 +173,16 @@ Creates and runs a Flatpak package.
 task/run-package
 ```
 
+#### Preview in AppCenter
+
+Launches app locally in AppCenter so you can preview how it will look when published.
+
+Optionally, you can specify a language code (e.g., `tr_TR`) to preview a specific localisation.
+
+```shell
+task/preview-in-appcenter <language-code>
+```
+
 ### Testing
 
 There are two different ways to test Comet, as there are two ways to build it.
@@ -243,24 +253,6 @@ For example, to debug with a standard Git commit message without a body:
 ```
 
 If you do not pass an argument (if `"args": []`), Comet will launch in the debugger with the Welcome screen.
-
-### AppCenter preview
-
-To test how the app will look on AppCenter, do the following:
-
-1. Uncomment the `<icon/>` tag in _data/comet.appdata.xml.in_.
-
-2. Build the app:
-    ```shell
-    task/build
-    ```
-
-3. Run AppCenter, asking it to display your local _appdata.xml_:
-    ```shell
-    io.elementary.appcenter --load-local build/org.small_tech.comet.appdata.xml
-    ```
-
-Remember to comment out the `<icon />` tag in _data/comet.appdata.xml.in_ after you’re done previewing your app in AppCenter or your Flatpak builds will fail.
 
 ### Translations
 
