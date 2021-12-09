@@ -141,20 +141,25 @@ namespace Comet {
         private void ask_permission_to_enable_comet () {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
                 _("Set Comet as your Git commit message editor?"),
-                _("Comet is currently not set as your Git commit message editor. Would you like it to be?"),
+                _("Comet is currently not your Git commit message editor.\n\nWould you like it to be?"),
                 "dialog-question",
-                Gtk.ButtonsType.CLOSE
+                Gtk.ButtonsType.NONE
             );
             message_dialog.badge_icon = new ThemedIcon("comet-128");
 
+            var no_button = new Gtk.Button.with_label (_("No"));
+            message_dialog.add_action_widget (no_button, Gtk.ResponseType.NO);
+
             var yes_button = new Gtk.Button.with_label (_("Yes"));
             yes_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-            message_dialog.add_action_widget (yes_button, Gtk.ResponseType.ACCEPT);
-            //  message_dialog.show_error_details (@"git config --global core.editor \"flatpak run org.small_tech.comet\"");
+            yes_button.can_default = true;
+            yes_button.grab_default ();
+            message_dialog.add_action_widget (yes_button, Gtk.ResponseType.YES);
+
             message_dialog.show_all ();
 
             message_dialog.response.connect ((response_id) => {
-                if (response_id == Gtk.ResponseType.ACCEPT) {
+                if (response_id == Gtk.ResponseType.YES) {
                     enable_comet ();
                     message_dialog.close ();
                 } else {
