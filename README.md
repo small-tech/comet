@@ -16,7 +16,7 @@ A distraction-free Git commit message editor with spell-check, first line charac
 | --- | --- |
 | ![Screenshot of the editor with one half displaying in light style and the other in dark style. The first line of the message reads: “This is the summary line of your Git commit message; make sure it isn’t too long” with the words “too long” highlighted in yellow. The second line of the message reads “You can change the suggested length in the Settings Menu. The Git comment for an initial commit with a new file called a.txt to be committed is displayed in a separate area. There is a Cancel and Commit button on the window.”](https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-spell-check.png) | ![Screenshot of editor with the message “Press Control + . (period) to insert emoji” and the emoji picker popover showing. The Git comment for an initial commit with a new file called a.txt to be committed is partially visible in a separate area. There is a Cancel button (partially visible) and a Commit button on the window.](https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-emoji.png) |
 
-| <center>Configurable first line character limit</center>    | <center>Launch to automatically configure Git</center>    |
+| <center>Configurable first line character limit</center>    | <center>Can update your Git configuration for you</center>    |
 | --- | --- |
 |  ![Screenshot of the editor with the Settings Menu open. A numeric stepper control inside it with the label “First line character limit” is set to 50. Underneath it, there are three buttons, labelled “Dogmatic (50)”, “GitHub truncation (72)”, and “GitLab truncation (100)”. In the editor, the message, partly obscured by the Settings Menu, reads “Dogma (n): A settled opinion”. The Git comment for an initial commit with a new file called a.txt to be committed is displayed in a separate area. There is a Cancel and Commit button on the window.](https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-settings.png) | ![Screenshot of Welcome Screen. Screen contents: Text: “Comet: Write better Git commit messages.” Button (selected) with greyed-out comet icon and label that reads “Disable Comet: Revert to using your previous editor for Git commit messages.” Button with question mark in speech bubble icon and label that reads “Help. Having trouble? Get help and report issues.” Status message at bottom has green check mark and the text “Comet is enabled as your editor for Git commit messages.](https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-welcome.png) |
 
@@ -40,9 +40,9 @@ _Comet is designed specifically for elementary OS 6. If you want a similar app f
 1. Install Comet from AppCenter.
 2. Launch Comet from the _Applications Menu_.
 
-When launched from the _Applications Menu_, Comet displays the Welcome Screen and automatically sets itself as your default Git commit message editor.
+When launched from the _Applications Menu_, Comet will ask you if you want to enable it as your Git commit message editor. If you choose to do so, it will configure Git on your system for you. You can disable (and re-enable) Comet at anytime from the Welcome Screen.
 
-Comet remembers your previous editor and restores it should you disable it in the future.
+Comet remembers your previous editor and restores it for you automatically if you disable it.
 
 When Comet is enabled as your default Git commit message editor, it launches automatically whenever you make a Git commit.
 
