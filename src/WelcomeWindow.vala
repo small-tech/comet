@@ -48,15 +48,9 @@ namespace Comet {
             comet_is_enabled = is_comet_enabled ();
 
             if (welcome == null) {
-                // This is the first time the view is being created. Enable
-                // Comet if it’s not enabled to save the person some work.
+                // This is the first time this view is being shown.
                 if (!comet_is_enabled) {
-                    // If Comet is not enabled, enable it so the person does not
-                    // have to do this manually (reduce effort).
-                    if (enable_comet ()) {
-                        // Enabled Comet.
-                        comet_is_enabled = true;
-                    }
+                    ask_permission_to_enable_comet ();
                 }
             } else {
                 // This is not the first time the view is being created.
@@ -144,6 +138,35 @@ namespace Comet {
         }
 
 
+        private void ask_permission_to_enable_comet () {
+            var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                _("Set Comet as your Git commit message editor?"),
+                _("Comet is currently not set as your Git commit message editor. Would you like it to be?"),
+                "dialog-question",
+                Gtk.ButtonsType.CLOSE
+            );
+            message_dialog.badge_icon = new ThemedIcon("comet-128");
+
+            var yes_button = new Gtk.Button.with_label (_("Yes"));
+            yes_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+            message_dialog.add_action_widget (yes_button, Gtk.ResponseType.ACCEPT);
+            //  message_dialog.show_error_details (@"git config --global core.editor \"flatpak run org.small_tech.comet\"");
+            message_dialog.show_all ();
+
+            message_dialog.response.connect ((response_id) => {
+                if (response_id == Gtk.ResponseType.ACCEPT) {
+                    enable_comet ();
+                    message_dialog.close ();
+                } else {
+                    message_dialog.close ();
+                }
+            });
+
+            message_dialog.run ();
+        }
+
+
+
         private bool is_comet_enabled () {
             var comet_path = Application.is_running_as_flatpak ?
                 @"$(FLATPAK_RUN) $(Application.flatpak_id)" :
@@ -178,7 +201,7 @@ namespace Comet {
             Comet.saved_state.get ("previous-editor", "s", out previous_editor);
 
             var command = Application.is_running_as_flatpak ?
-                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) org.small_tech.Gnomit\""
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) \"$(previous_editor)\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(previous_editor)\"";
 
             var result = Posix.system (command);
