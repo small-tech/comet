@@ -200,21 +200,20 @@ msgid "Comet is disabled."
 msgstr "Comet is uitgeschakeld."
 
 #: src/WelcomeWindow.vala:143
-#, fuzzy
 msgid "Use Comet as your Git commit message editor?"
-msgstr "Gebruik Comet als de standaardeditor voor Git commit-berichten."
+msgstr "Wil je Comet gebruiken als je Git commit-berichteditor?"
 
 #: src/WelcomeWindow.vala:144
 msgid "This will update your Git configuration for you."
-msgstr ""
+msgstr "Hiermee wordt je Git-configuratie voor je bijgewerkt."
 
 #: src/WelcomeWindow.vala:150
 msgid "No"
-msgstr ""
+msgstr "Nee"
 
 #: src/WelcomeWindow.vala:153
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
