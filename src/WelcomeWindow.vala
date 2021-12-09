@@ -201,7 +201,7 @@ namespace Comet {
             Comet.saved_state.get ("previous-editor", "s", out previous_editor);
 
             var command = Application.is_running_as_flatpak ?
-                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) \"$(previous_editor)\""
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(previous_editor)\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(previous_editor)\"";
 
             var result = Posix.system (command);
