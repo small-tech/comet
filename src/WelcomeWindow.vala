@@ -140,8 +140,8 @@ namespace Comet {
 
         private void ask_permission_to_enable_comet () {
             var message_dialog = new Granite.MessageDialog.with_image_from_icon_name (
-                _("Set Comet as your Git commit message editor?"),
-                _("Comet is currently not your Git commit message editor.\n\nWould you like it to be?"),
+                _("Use Comet as your Git commit message editor?"),
+                _("This will update your Git configuration for you."),
                 "dialog-question",
                 Gtk.ButtonsType.NONE
             );
@@ -152,9 +152,9 @@ namespace Comet {
 
             var yes_button = new Gtk.Button.with_label (_("Yes"));
             yes_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+            message_dialog.add_action_widget (yes_button, Gtk.ResponseType.YES);
             yes_button.can_default = true;
             yes_button.grab_default ();
-            message_dialog.add_action_widget (yes_button, Gtk.ResponseType.YES);
 
             message_dialog.show_all ();
 
