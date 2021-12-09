@@ -197,21 +197,20 @@ msgid "Comet is disabled."
 msgstr "Comet devre dışı bırakıldı."
 
 #: src/WelcomeWindow.vala:143
-#, fuzzy
 msgid "Use Comet as your Git commit message editor?"
-msgstr "Comet’i öntanımlı Git işlem mesajı düzenleyicin olarak kullan."
+msgstr "Comet’i Git işlem mesajı düzenleyicin olarak kullanmak istiyor musun?"
 
 #: src/WelcomeWindow.vala:144
 msgid "This will update your Git configuration for you."
-msgstr ""
+msgstr "Bu Git konfigürasyonunuzu güncelleştirir."
 
 #: src/WelcomeWindow.vala:150
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
 #: src/WelcomeWindow.vala:153
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 #: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
