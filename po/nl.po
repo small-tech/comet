@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.small_tech.comet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-01 15:37+0000\n"
+"POT-Creation-Date: 2021-12-09 16:25+0000\n"
 "PO-Revision-Date: 2021-11-22 14:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -55,7 +55,7 @@ msgstr ""
 "herdistribueren.\n"
 "Er is GEEN GARANTIE, voor zover toegestaan door de wet."
 
-#: src/Application.vala:39 src/WelcomeWindow.vala:70
+#: src/Application.vala:39 src/WelcomeWindow.vala:64
 msgid "Write better Git commit messages."
 msgstr "Schrijf betere Git commit berichten."
 
@@ -86,8 +86,8 @@ msgid ""
 "The Report Error button will take you to a pre-filled issue on GitHub that "
 "you can submit to help improve Comet."
 msgstr ""
-"Met de knop Fout Melden gaat u naar een vooraf ingevuld issue op GitHub "
-"dat u kunt indienen om Comet te helpen verbeteren."
+"Met de knop Fout Melden gaat u naar een vooraf ingevuld issue op GitHub dat "
+"u kunt indienen om Comet te helpen verbeteren."
 
 #: src/Application.vala:180
 msgid "Report Error"
@@ -163,41 +163,58 @@ msgstr "handmatige hunk-bewerkingsmodus"
 msgid "Warning: unknown Git commit type encountered in %s"
 msgstr "Waarschuwing: onbekend Git commit type aangetroffen in %s"
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:69
 msgid "Disable Comet"
 msgstr "Comet uitschakelen"
 
-#: src/WelcomeWindow.vala:75
+#: src/WelcomeWindow.vala:69
 msgid "Revert to using your previous editor for Git commit messages."
 msgstr ""
 "Ga terug naar het gebruik van je vorige editor voor Git commit-berichten."
 
-#: src/WelcomeWindow.vala:77
+#: src/WelcomeWindow.vala:71
 msgid "Enable Comet"
 msgstr "Comet inschakelen"
 
-#: src/WelcomeWindow.vala:77
+#: src/WelcomeWindow.vala:71
 msgid "Use Comet as the default editor for Git commit messages."
 msgstr "Gebruik Comet als de standaardeditor voor Git commit-berichten."
 
 #. Request a specific width so the whole interface does not
 #. jump around when we toggle it.
-#: src/WelcomeWindow.vala:85
+#: src/WelcomeWindow.vala:79
 msgid "Help"
 msgstr "Help"
 
-#: src/WelcomeWindow.vala:85
+#: src/WelcomeWindow.vala:79
 msgid "Having trouble? Get help and report issues."
 msgstr "Problemen? Verkrijg hulp en meld problemen."
 
 #. Insert the status text into the view.
-#: src/WelcomeWindow.vala:115
+#: src/WelcomeWindow.vala:109
 msgid "Comet is enabled as your editor for Git commit messages."
 msgstr "Comet is ingeschakeld als je editor voor Git commit berichten."
 
-#: src/WelcomeWindow.vala:116
+#: src/WelcomeWindow.vala:110
 msgid "Comet is disabled."
 msgstr "Comet is uitgeschakeld."
+
+#: src/WelcomeWindow.vala:143
+#, fuzzy
+msgid "Use Comet as your Git commit message editor?"
+msgstr "Gebruik Comet als de standaardeditor voor Git commit-berichten."
+
+#: src/WelcomeWindow.vala:144
+msgid "This will update your Git configuration for you."
+msgstr ""
+
+#: src/WelcomeWindow.vala:150
+msgid "No"
+msgstr ""
+
+#: src/WelcomeWindow.vala:153
+msgid "Yes"
+msgstr ""
 
 #: src/Widgets/HeaderBar.vala:8 data/comet.desktop.in:5
 #: data/comet.appdata.xml.in:13
