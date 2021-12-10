@@ -205,7 +205,7 @@ msgstr "Wil je Comet gebruiken als je Git commit-berichteditor?"
 
 #: src/WelcomeWindow.vala:144
 msgid "This will update your Git configuration for you."
-msgstr "Hiermee wordt je Git-configuratie voor je bijgewerkt."
+msgstr "Hiermee zal je Git-configuratie voor je worden bijgewerkt."
 
 #: src/WelcomeWindow.vala:150
 msgid "No"
