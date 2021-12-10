@@ -175,6 +175,11 @@ namespace Comet {
                 grid_vertical_position++;
             }
 
+
+            var comment_scrolled_window = new Gtk.ScrolledWindow (null, null);
+            comment_scrolled_window.vexpand = true;
+
+
             // Create simple text view for comment.
             comment_view = new Gtk.TextView ();
             comment_view.wrap_mode = Gtk.WrapMode.WORD_CHAR;
@@ -185,7 +190,15 @@ namespace Comet {
             // Mark the comment area as non-editable.
             comment_view.editable = false;
 
-            grid.attach (comment_view, 0, grid_vertical_position);
+            // TODO: Only create scrolled window if the message is > N
+            // amount of lines. Otherwise, keep the old behaviour, which is
+            // less effort to see the full comment for most cases where
+            // changes will not be huge during everyday development.
+            comment_scrolled_window.add (comment_view);
+            comment_scrolled_window.set_size_request (540, 150);
+
+            grid.attach (comment_scrolled_window, 0, grid_vertical_position);
+
             grid_vertical_position++;
 
             // Add the action buttons.
