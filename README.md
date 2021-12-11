@@ -6,9 +6,9 @@ _Write better Git commit messages._
 
 A distraction-free Git commit message editor with spell-check, first line character limit warnings, and emoji support.
 
-> __Status:__ _(Dec 2, 2021)_ Submitted to the elementary OS AppCenter for review. You can install and use it from this repository but consider it pre-release until published there.
+## [Get it from comet.small-web.org](https://comet.small-web.org)
 
-[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/org.small_tech.comet)
+_Comet is currently not available on the elementary OS AppCenter as [apps that require Flatpak `home` permissions – in other words, apps that are not sandboxed – are currently not being accepted on AppCenter](https://github.com/elementary/appcenter-reviews/pull/225#issuecomment-991261230). The elementary OS team will be working to improve the policies around this so we have some clarity if this means that developer tools like Comet will not be allowed on the AppCenter or whether there will be a more nuanced policy._
 
 ## Features
 
