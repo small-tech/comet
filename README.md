@@ -10,6 +10,8 @@ A distraction-free Git commit message editor with spell-check, first line charac
 
 _Comet is currently not available on the elementary OS AppCenter as [apps that require Flatpak `home` permissions – in other words, apps that are not sandboxed – are currently not being accepted on AppCenter](https://github.com/elementary/appcenter-reviews/pull/225#issuecomment-991261230). The elementary OS team will be working to improve the policies around this so we have some clarity if this means that developer tools like Comet will not be allowed on the AppCenter or whether there will be a more nuanced policy._
 
+Thanks to the decentralised nature of Flatpak, you can [install Comet from comet.small-web.org](https://comet.small-web.org) and you will get updates through AppCenter.
+
 ## Features
 
 | <center>Spell check</center>    | <center>Emoji support</center>    |
