@@ -39,7 +39,7 @@ _Comet is designed specifically for elementary OS 6. If you want a similar app f
 
 ## Installation and usage
 
-1. Install Comet from AppCenter.
+1. Install from [comet.small-web.org](https://comet.small-web.org)
 2. Launch Comet from the _Applications Menu_.
 
 When launched from the _Applications Menu_, Comet will ask you if you want to enable it as your Git commit message editor. If you choose to do so, it will configure Git on your system for you. You can disable (and re-enable) Comet at anytime from the Welcome Screen.
