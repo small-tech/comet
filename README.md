@@ -220,7 +220,7 @@ Testing with the Flatpak build is slower but you can be sure that you’re seein
 2. Either carry out a `git commit` or, to run Comet using one of the test messages:
 
     ```shell
-    flatpak run org.small_tech.comet tests/<name of test message>
+    flatpak run --file-forwarding org.small_tech.comet tests/<name of test message>
     ```
 
 To test the Welcome screen, either launch Comet from the Applications Menu or, via Terminal, run the Comet flatpak without passing it any arguments:

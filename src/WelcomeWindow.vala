@@ -9,7 +9,7 @@ namespace Comet {
 
         private string GIT_CONFIG_GLOBAL_CORE_EDITOR = "git config --global core.editor";
         private string FLATPAK_SPAWN_HOST = "flatpak-spawn --host";
-        private string FLATPAK_RUN = "flatpak run";
+        private string FLATPAK_RUN = "flatpak run --file-forwarding";
 
         private string? current_editor {
             owned get {
@@ -174,7 +174,7 @@ namespace Comet {
 
         private bool is_comet_enabled () {
             var comet_path = Application.is_running_as_flatpak ?
-                @"$(FLATPAK_RUN) $(Application.flatpak_id)" :
+                @"$(FLATPAK_RUN) $(Application.flatpak_id) @@" :
                 Application.binary_path;
 
             return current_editor == comet_path;
@@ -185,7 +185,7 @@ namespace Comet {
             Comet.saved_state.set("previous-editor", "s", current_editor);
 
             var command = Application.is_running_as_flatpak ?
-                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(Application.flatpak_id)\""
+                @"$(FLATPAK_SPAWN_HOST) $(GIT_CONFIG_GLOBAL_CORE_EDITOR) \"$(FLATPAK_RUN) $(Application.flatpak_id) @@\""
                 : @"$(GIT_CONFIG_GLOBAL_CORE_EDITOR) $(Application.binary_path)";
 
             var result = Posix.system (command);

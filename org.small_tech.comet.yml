@@ -47,14 +47,6 @@ finish-args:
   #   - https://flatkill.org/2020/
   #   - https://github.com/flatpak/flatpak/issues/3637
 
-  # Host permissions are necessary as this is a developer tool and people
-  # can mount external drives and network shares in a plethora of different locations.
-  - '--filesystem=host'
-
-  # For use if a developer clones an app into the /tmp folder and attempts to
-  # make a commit.
-  - '--filesystem=/tmp'
-
   # Necessary to configure Git from the welcome screen using flatpak-spawn --host.
   - '--talk-name=org.freedesktop.Flatpak'
 
