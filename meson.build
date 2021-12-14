@@ -2,7 +2,7 @@ project(
     'org.small_tech.comet',
     'vala',
     'c',
-    version: '1.1.0'
+    version: '1.1.1'
 )
 
 i18n = import('i18n')

@@ -63,4 +63,28 @@
       <image>https://raw.githubusercontent.com/small-tech/comet-screenshots/main/en/comet-welcome.png</image>
     </screenshot>
   </screenshots>
+
+  <releases>
+    <release version="1.1.1" date="2021-12-14">
+      <description>
+        <p>Please release me, let me go.</p>
+        <ul>
+          <li>Internal fix: adds releases section to application metadata.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.0" date="2021-12-14">
+      <description>
+        <p>Lies, damned lies, and sandboxes.</p>
+        <ul>
+          <li>Remove Flatpak file system permissions.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.0" date="2021-12-11">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
 </component>
