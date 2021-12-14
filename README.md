@@ -365,6 +365,24 @@ For example, to view how the Turkish localisations will look in the elementary O
 task/preview-in-appcenter tr_TR
 ```
 
+### Publishing the Flatpak repository
+
+[The Comet web site](https://comet.small-web.org) is expected to exist at `../comet-site`.
+
+To update the repository with the latest version (including static deltas):
+
+```shell
+flatpak build-update-repo ../comet-site/repo --gpg-sign=51A737AB191E356663DC70E539D50F711494540C --gpg-homedir=/home/aral/.small-tech.org/watson/org.small_tech.comet/gpg --generate-static-deltas
+```
+
+Then sync to the live site using [Site.js](https://sitejs.org):
+
+```shell
+site --sync-to=site@comet.small-web.org:public
+```
+
+The update should now show in the elementary OS AppCenter the next time it checks for them.
+
 ### Developer tip: better translations translations
 
 Break up long strings into compositions of smaller ones. This is especially useful when some parts of a string should be localised but others shouldn’t. This will lead to fewer errors cropping in through translations forgetting template placeholders, etc.
