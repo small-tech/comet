@@ -29,7 +29,7 @@
     <value key="x-appcenter-color-primary">#0d52bf</value>
     <value key="x-appcenter-color-primary-text">#fafafa</value>
     <value key="x-appcenter-suggested-price">5</value>
-    <value key="x-appcenter-stripe">pk_live_51K2FpsCJXil40DsyeKv9FAyICXmrk98761IzZpSEcYyTUYILXBO7le2gSKEtUG3O86p90ynyYONoYjZYnJWXvnEK00S1tXorJf</value>
+    <value key="x-appcenter-stripe">pk_live_51K2FpsCJXil40Dsybzp2Kf9LYGufjj0Y2JI0pYmQ9dweB5T96aGV8dj0qhsIeuEDfLaf8c1c6b0QOMaxBzadVswy00sDgwnTDw</value>
   </custom>
   <url type="homepage">https://github.com/small-tech/comet</url>
   <url type="bugtracker">https://github.com/small-tech/comet/issues</url>
@@ -65,6 +65,14 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.2" date="2021-12-15">
+      <description>
+        <p>The key to happiness is.</p>
+        <ul>
+          <li>Internal fix: adds correct Stripe key for AppCenter.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2021-12-14">
       <description>
         <p>Please release me, let me go.</p>
