@@ -369,23 +369,17 @@ task/preview-in-appcenter tr_TR
 
 [The Comet web site](https://comet.small-web.org) is expected to exist at `../comet-site`.
 
-1. Export the build to the Flatpak repository:
+Run:
 
-    ```shell
-    flatpak build-export --gpg-sign=51A737AB191E356663DC70E539D50F711494540C --gpg-homedir=/home/aral/.small-tech.org/watson/org.small_tech.comet/gpg ../comet-site/repo build stable
-    ```
+```shell
+task/publish
+```
 
-2. Update the Flatpak repository to include static deltas:
+This will:
 
-    ```shell
-    flatpak build-update-repo ../comet-site/repo --gpg-sign=51A737AB191E356663DC70E539D50F711494540C --gpg-homedir=/home/aral/.small-tech.org/watson/org.small_tech.comet/gpg --generate-static-deltas
-    ```
-
-3. Sync to live site using [Site.js](https://sitejs.org):
-
-    ```shell
-    site --sync-to=site@comet.small-web.org:public
-    ```
+  - Export the Flatpak repository.
+  - Create the static deltas.
+  - Sync the latest updates to the Comet web site using [Site.js](https://sitejs.org)
 
 The update should now show in the elementary OS AppCenter the next time it checks for them.
 
