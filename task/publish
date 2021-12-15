@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+echo -e "\n - Exporting repository.\n"
+
+flatpak build-export --gpg-sign=51A737AB191E356663DC70E539D50F711494540C --gpg-homedir=/home/aral/.small-tech.org/watson/org.small_tech.comet/gpg ../comet-site/repo build stable
+
+echo -e "\n - Creating static deltas.\n"
+
+flatpak build-update-repo ../comet-site/repo --gpg-sign=51A737AB191E356663DC70E539D50F711494540C --gpg-homedir=/home/aral/.small-tech.org/watson/org.small_tech.comet/gpg --generate-static-deltas
+
+echo -e "\n - Syncing to site.\n"
+
+pushd ../comet-site
+site --sync-to=site@comet.small-web.org:public
+popd
+
+echo -e "\nDone.\n"
