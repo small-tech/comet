@@ -377,8 +377,9 @@ task/publish
 
 This will:
 
-  - Export the Flatpak repository.
-  - Create the static deltas.
+  - Create the Flatpak package.
+  - Export the Flatpak package to the repository.
+  - Create the [static deltas](https://docs.flatpak.org/en/latest/hosting-a-repository.html) for the repository.
   - Sync the latest updates to the Comet web site using [Site.js](https://sitejs.org)
 
 The update should now show in the elementary OS AppCenter the next time it checks for them.
